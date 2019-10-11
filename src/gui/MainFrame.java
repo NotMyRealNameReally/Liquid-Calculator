@@ -11,7 +11,7 @@ public class MainFrame extends JFrame {
     private RecipeCatalogPanel recipeCatalogPanel = new RecipeCatalogPanel();
     private JSplitPane splitPane;
 
-   public MainFrame() {
+    public MainFrame() {
         super("Liquid Calculator");
 
         setLayout(new BorderLayout());
@@ -25,5 +25,13 @@ public class MainFrame extends JFrame {
         setSize(800, 1000);
         setMinimumSize(new Dimension(400, 500));
         setVisible(true);
+    }
+
+    public RecipeCreationPanel getRecipeCreationPanel() {
+        return recipeCreationPanel;
+    }
+
+    public RecipeCatalogPanel getRecipeCatalogPanel() {
+        return recipeCatalogPanel;
     }
 }

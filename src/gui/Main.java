@@ -1,7 +1,8 @@
 package gui;
 
 import com.bulenkov.darcula.DarculaLaf;
-import gui.MainFrame;
+import controller.RecipeCreationController;
+import controller.SupervisingController;
 
 import javax.swing.*;
 
@@ -12,6 +13,6 @@ public class Main {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        new MainFrame();
+        new SupervisingController(new MainFrame());
     }
 }

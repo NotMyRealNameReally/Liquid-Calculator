@@ -1,6 +1,6 @@
 package gui;
 
 public interface ConcentrateTableListener {
-    public void rowDeleted(int row);
-    public void percentageChanged(double percentage);
+    void rowDeleted(int row);
+    void percentageChanged(double percentage);
 }

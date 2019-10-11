@@ -33,6 +33,12 @@ public class RecipeCreationPanel extends JPanel {
     private JCheckBox maxGlycerineCheckBox;
     private JTextField nameField;
 
+    public void setListener(RecipeCreationListener listener) {
+        this.listener = listener;
+    }
+
+    private RecipeCreationListener listener;
+
     public RecipeCreationPanel() {
         setupComponents();
         setNameFieldFont();
@@ -43,6 +49,7 @@ public class RecipeCreationPanel extends JPanel {
         database.add(truskawka);
         database.add(malina);
         concentrateTablePanel.setDatabase(database);
+        addSpinnerListeners();
 
         layoutComponents();
         concentrateTablePanel.refresh();
@@ -83,9 +90,10 @@ public class RecipeCreationPanel extends JPanel {
     private SpinnerNumberModel setDefaultModel() {
         return new SpinnerNumberModel(0, 0, 999, 1);
     }
-    private void setNameFieldFont(){
+
+    private void setNameFieldFont() {
         Font defaultFont = nameField.getFont();
-        Font newFont = defaultFont.deriveFont(Font.BOLD, (float)20.0);
+        Font newFont = defaultFont.deriveFont(Font.BOLD, (float) 20.0);
         nameField.setFont(newFont);
     }
 
@@ -233,7 +241,70 @@ public class RecipeCreationPanel extends JPanel {
         add(new JLabel("dni"), gc);
 
     }
-    public void setConcentrateTableListener(ConcentrateTableListener tableListener){
+
+    public void setConcentrateTableListener(ConcentrateTableListener tableListener) {
         concentrateTablePanel.setTableListener(tableListener);
+    }
+
+    private void addSpinnerListeners() {
+        volumeSpinner.addChangeListener(e -> {
+            if (listener != null) {
+                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.volume);
+                listener.eventOccurred(recipeEvent);
+            }
+        });
+        desiredStrengthSpinner.addChangeListener(e -> {
+            if (listener != null) {
+                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.desiredStrength);
+                listener.eventOccurred(recipeEvent);
+            }
+
+        });
+        desiredGlycolSpinner.addChangeListener(e -> {
+            if (listener != null) {
+                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.desiredGlycol);
+                listener.eventOccurred(recipeEvent);
+            }
+
+        });
+        desiredGlycerineSpinner.addChangeListener(e -> {
+            if (listener != null) {
+                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.desiredGlycerine);
+                listener.eventOccurred(recipeEvent);
+            }
+
+        });
+        nicStrengthSpinner.addChangeListener(e -> {
+            if (listener != null) {
+                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.nicStrength);
+                listener.eventOccurred(recipeEvent);
+            }
+
+        });
+        nicGlycolSpinner.addChangeListener(e -> {
+            if (listener != null) {
+                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.nicGlycol);
+                listener.eventOccurred(recipeEvent);
+            }
+
+        });
+        nicGlycerineSpinner.addChangeListener(e -> {
+            if (listener != null) {
+                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.nicGlycerine);
+                listener.eventOccurred(recipeEvent);
+            }
+
+        });
+        steepTimeSpinner.addChangeListener(e -> {
+            if (listener != null) {
+                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.steepTime);
+                listener.eventOccurred(recipeEvent);
+            }
+
+        });
+    }
+
+    public void setSummaryValues(String strength, String ratio, String concentrate) {
+        summaryPanel.setSummaryValues(strength, ratio, concentrate);
     }
 }

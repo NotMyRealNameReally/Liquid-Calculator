@@ -35,4 +35,10 @@ public class SummaryPanel extends JPanel {
         add(new JLabel("Ilość aromatów:"));
         add(concentrateTotalField);
     }
+
+    void setSummaryValues(String strength, String ratio, String concentrate) {
+        strengthField.setText(strength);
+        ratioField.setText(ratio);
+        concentrateTotalField.setText(concentrate);
+    }
 }
