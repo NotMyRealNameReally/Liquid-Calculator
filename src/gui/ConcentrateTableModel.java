@@ -10,15 +10,6 @@ public class ConcentrateTableModel extends AbstractTableModel {
     private double volume = 10;
     private static final int dropsInMl = 20;
 
-
-    public void setVolume(int volume) {
-        this.volume = (double) volume;
-    }
-
-    public void setVolume(double volume) {
-        this.volume = volume;
-    }
-
     private String[] colNames = {"Aromat", "%", "krople", "ml"};
 
     @Override
@@ -60,20 +51,33 @@ public class ConcentrateTableModel extends AbstractTableModel {
         }
     }
 
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        if (columnIndex == 1) {
+            database.get(rowIndex).setPercentage((double) aValue);
+            fireTableRowsUpdated(rowIndex, rowIndex);
+        }
+    }
+
     private double getMl(double volume, double percentage) {
         return (volume * percentage / 100);
     }
 
     private int getDrops(double volume, double percentage) {
         double ml = getMl(volume, percentage);
-        return (int)Math.round(ml * dropsInMl);
+        return (int) Math.round(ml * dropsInMl);
     }
 
-    public void setDatabase(List<ConcentrateInRecipe> database) {
+    void setDatabase(List<ConcentrateInRecipe> database) {
         this.database = database;
     }
 
-    public void setConcentratePercentage(int row, double percentage) {
-        database.get(row).setPercentage(percentage);
+    void setVolume(int volume) {
+        this.volume = (double) volume;
+        fireTableDataChanged();
+    }
+
+    public void setVolume(double volume) {
+        this.volume = volume;
     }
 }

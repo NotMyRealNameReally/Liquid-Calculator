@@ -1,6 +1,5 @@
 package controller;
 
-import gui.MainFrame;
 import gui.RecipeCreationPanel;
 import gui.SpinnerType;
 
@@ -23,30 +22,30 @@ public class RecipeCreationController {
                     volumeChanged(sourceSpinner);
                     break;
                 case desiredStrength:
-                    desiredStrengthChanged(sourceSpinner);
+                    //desiredStrengthChanged(sourceSpinner);
                     break;
                 case desiredGlycol:
-                    desiredGlycolChanged(sourceSpinner);
+                    //desiredGlycolChanged(sourceSpinner);
                     break;
                 case desiredGlycerine:
-                    desiredGlycerineChanged(sourceSpinner);
+                    //desiredGlycerineChanged(sourceSpinner);
                     break;
                 case nicStrength:
-                    nicStrengthChanged(sourceSpinner);
+                    //nicStrengthChanged(sourceSpinner);
                     break;
                 case nicGlycol:
-                    nicGlycolChanged(sourceSpinner);
+                    //nicGlycolChanged(sourceSpinner);
                     break;
                 case nicGlycerine:
-                    nicGlycerineChanged(sourceSpinner);
+                    //nicGlycerineChanged(sourceSpinner);
                     break;
                 case steepTime:
-                    steepTimeChanged(sourceSpinner);
+                    //steepTimeChanged(sourceSpinner);
             }
         });
     }
 
     private void volumeChanged(JSpinner spinner) {
-
+recipeCreationPanel.updateVolume((int)spinner.getValue());
     }
 }

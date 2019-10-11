@@ -1,16 +1,18 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
 
-public class SpinnerCellEditor extends AbstractCellEditor implements TableCellEditor {
-   JSpinner spinner;
+public class SpinnerCellEditor extends AbstractCellEditor implements TableCellEditor, ChangeListener {
+   private SpinnerCellRenderer spinner;
 
-    public SpinnerCellEditor(){
-        spinner = new JSpinner();
+    SpinnerCellEditor(){
+        spinner = new SpinnerCellRenderer();
+        spinner.addChangeListener(this);
     }
-
 
     @Override
     public Object getCellEditorValue() {
@@ -22,13 +24,12 @@ public class SpinnerCellEditor extends AbstractCellEditor implements TableCellEd
         spinner.setValue(value);
         return spinner;
     }
-    public void setDropsModel(){
-        spinner.setModel(new SpinnerNumberModel(0, 0, 999, 1));
-    }
-    public void setPercentModel(){
+    void setPercentModel(){
         spinner.setModel(new SpinnerNumberModel(0, 0, 100, 0.1));
     }
-    public void setMlModel(){
-        spinner.setModel(new SpinnerNumberModel(0, 0, 999, 0.1));
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        this.fireEditingStopped();
     }
 }

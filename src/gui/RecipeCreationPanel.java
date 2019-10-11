@@ -33,13 +33,9 @@ public class RecipeCreationPanel extends JPanel {
     private JCheckBox maxGlycerineCheckBox;
     private JTextField nameField;
 
-    public void setListener(RecipeCreationListener listener) {
-        this.listener = listener;
-    }
-
     private RecipeCreationListener listener;
 
-    public RecipeCreationPanel() {
+    RecipeCreationPanel() {
         setupComponents();
         setNameFieldFont();
 
@@ -242,10 +238,6 @@ public class RecipeCreationPanel extends JPanel {
 
     }
 
-    public void setConcentrateTableListener(ConcentrateTableListener tableListener) {
-        concentrateTablePanel.setTableListener(tableListener);
-    }
-
     private void addSpinnerListeners() {
         volumeSpinner.addChangeListener(e -> {
             if (listener != null) {
@@ -304,7 +296,15 @@ public class RecipeCreationPanel extends JPanel {
         });
     }
 
+    public void setListener(RecipeCreationListener listener) {
+        this.listener = listener;
+    }
+
     public void setSummaryValues(String strength, String ratio, String concentrate) {
         summaryPanel.setSummaryValues(strength, ratio, concentrate);
+    }
+
+    public void updateVolume(int volume) {
+        concentrateTablePanel.updateVolume(volume);
     }
 }

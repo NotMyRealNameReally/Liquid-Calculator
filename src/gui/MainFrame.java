@@ -7,14 +7,17 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
 
-    private RecipeCreationPanel recipeCreationPanel = new RecipeCreationPanel();
-    private RecipeCatalogPanel recipeCatalogPanel = new RecipeCatalogPanel();
+    private RecipeCreationPanel recipeCreationPanel;
+    private RecipeCatalogPanel recipeCatalogPanel ;
     private JSplitPane splitPane;
 
     public MainFrame() {
         super("Liquid Calculator");
 
         setLayout(new BorderLayout());
+
+        recipeCreationPanel = new RecipeCreationPanel();
+        recipeCatalogPanel = new RecipeCatalogPanel();
 
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, recipeCatalogPanel, recipeCreationPanel);
 
