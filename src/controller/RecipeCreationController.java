@@ -1,12 +1,10 @@
 package controller;
 
-import gui.ConcentrateTableListener;
 import gui.RecipeCreationPanel;
 import gui.SpinnerType;
 import model.ConcentrateInRecipe;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +14,7 @@ public class RecipeCreationController {
     private double volume;
     private double strength;
     private double nicStrength;
-    private double totalConcentrateVolume;
+    private double totalConcentratePercentage;
     private double pgVgRatio;
     private double nicPgVgRatio;
     private ArrayList<ConcentrateInRecipe> concentrates;
@@ -31,52 +29,51 @@ public class RecipeCreationController {
         recipeCreationPanel.setListener(e -> {
             SpinnerType spinnerType = e.getSpinnerType();
             JSpinner sourceSpinner = (JSpinner) e.getSource();
+            int value = (int) sourceSpinner.getValue();
 
             switch (spinnerType) {
                 case volume:
-                    volumeChanged(sourceSpinner);
+                    volumeChanged(value);
                     break;
                 case desiredStrength:
-                    desiredStrengthChanged(sourceSpinner);
+                    desiredStrengthChanged(value);
                     break;
                 case desiredGlycol:
-                    int glycol = (int) sourceSpinner.getValue();
-                    ratioChanged(glycol);
+                    ratioChanged(value);
                     break;
                 case desiredGlycerine:
-                    int glycerine = (int) sourceSpinner.getValue();
-                    ratioChanged(100 - glycerine);
+                    ratioChanged(100 - value);
                     break;
                 case nicStrength:
-                    nicStrengthChanged(sourceSpinner);
+                    nicStrengthChanged(value);
                     break;
                 case nicGlycol:
-                    int nicGlycol = (int) sourceSpinner.getValue();
-                    nicRatioChanged(nicGlycol);
+                    nicRatioChanged(value);
                     break;
                 case nicGlycerine:
-                    int nicGlycerine = (int) sourceSpinner.getValue();
-                    nicRatioChanged(100 - nicGlycerine);
+                    nicRatioChanged(100 - value);
                     break;
                 case steepTime:
-                    steepTimeChanged(sourceSpinner);
+                    steepTimeChanged(value);
             }
+            calculateSummary();
         });
     }
 
     private void setConcentrateTableListener() {
         recipeCreationPanel.setConcentrateTableListener(percentage -> {
-            totalConcentrateVolume = percentage;
-            System.out.println(percentage);
+            totalConcentratePercentage = percentage;
+            calculateSummary();
         });
     }
 
-    private void volumeChanged(JSpinner spinner) {
-        recipeCreationPanel.updateVolume((int) spinner.getValue());
+    private void volumeChanged(int value) {
+        this.volume = value;
+        recipeCreationPanel.updateVolume(value);
     }
 
-    private void desiredStrengthChanged(JSpinner sourceSpinner) {
-        this.strength = (int) sourceSpinner.getValue();
+    private void desiredStrengthChanged(int value) {
+        this.strength = value;
     }
 
     private void ratioChanged(int glycol) {
@@ -84,8 +81,8 @@ public class RecipeCreationController {
         recipeCreationPanel.setRatioSpinners(glycol);
     }
 
-    private void nicStrengthChanged(JSpinner sourceSpinner) {
-        this.nicStrength = (int) sourceSpinner.getValue();
+    private void nicStrengthChanged(int value) {
+        this.nicStrength = value;
     }
 
     private void nicRatioChanged(int glycol) {
@@ -94,8 +91,32 @@ public class RecipeCreationController {
 
     }
 
-    private void steepTimeChanged(JSpinner sourceSpinner) {
+    private void steepTimeChanged(int value) {
     }
 
+    private void calculateSummary() {
+        double nicAmount = (volume * strength) / nicStrength;
+        System.out.println(nicAmount);
+        double glycolFromNic = (nicAmount * nicPgVgRatio) / 100;
+        double concentrateVolume = (volume * totalConcentratePercentage) / 100; // concentrate treated as 100% glycol
+        double desiredGlycol = (volume * pgVgRatio) / 100;
+        //System.out.println(pgVgRatio);
+        double glycolToAdd = desiredGlycol - glycolFromNic - concentrateVolume;
+        double glycerineToAdd = volume - desiredGlycol;
+
+        setSummaryValues(nicAmount, glycolToAdd, glycerineToAdd);
+    }
+
+    private void setSummaryValues(double nicAmount, double glycolToAdd, double glycerineToAdd) {
+        String strengthSummary = strength + " mg";
+        String ratio = "";
+        String concentrateTotal = totalConcentratePercentage + " %";
+
+        String nicAmountSummary = nicAmount + " ml";
+        String glycolToAddSummary = glycolToAdd + " ml";
+        String glycerineToAddSummary = glycerineToAdd + "ml";
+
+        recipeCreationPanel.setSummaryValues(strengthSummary, ratio, concentrateTotal, nicAmountSummary, glycolToAddSummary, glycerineToAddSummary);
+    }
 
 }
