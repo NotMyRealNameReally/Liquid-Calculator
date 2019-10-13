@@ -39,12 +39,12 @@ public class RecipeCreationPanel extends JPanel {
         setupComponents();
         setNameFieldFont();
 
-        ArrayList<ConcentrateInRecipe> database = new ArrayList<>();
+        ArrayList<ConcentrateInRecipe> concentrates = new ArrayList<>();
         ConcentrateInRecipe truskawka = new ConcentrateInRecipe(new Concentrate("Truskawka", "Inawera", "Truskawka"));
         ConcentrateInRecipe malina = new ConcentrateInRecipe(new Concentrate("Malina", "Inawera", "Malina"));
-        database.add(truskawka);
-        database.add(malina);
-        concentrateTablePanel.setDatabase(database);
+        concentrates.add(truskawka);
+        concentrates.add(malina);
+        concentrateTablePanel.setConcentrates(concentrates);
         addSpinnerListeners();
 
         layoutComponents();
@@ -300,11 +300,26 @@ public class RecipeCreationPanel extends JPanel {
         this.listener = listener;
     }
 
-    public void setSummaryValues(String strength, String ratio, String concentrate) {
-        summaryPanel.setSummaryValues(strength, ratio, concentrate);
+    public void setSummaryValues(String strength, String ratio, String concentrate, String nicVolume, String glycolVolume, String glycerineVolume) {
+        summaryPanel.setSummaryValues(strength, ratio, concentrate, nicVolume, glycolVolume, glycerineVolume);
     }
 
     public void updateVolume(int volume) {
         concentrateTablePanel.updateVolume(volume);
+    }
+
+    public void setRatioSpinners(int glycol){
+        desiredGlycolSpinner.setValue(glycol);
+        desiredGlycerineSpinner.setValue(100 - glycol);
+    }
+    public void setNicRatioSpinners(int glycol){
+        nicGlycolSpinner.setValue(glycol);
+        nicGlycerineSpinner.setValue(100 - glycol);
+    }
+    public ArrayList<ConcentrateInRecipe> getConcentrates(){
+        return concentrateTablePanel.getConcentrates();
+    }
+   public void setConcentrateTableListener(ConcentrateTableListener listener){
+concentrateTablePanel.setTableListener(listener);
     }
 }

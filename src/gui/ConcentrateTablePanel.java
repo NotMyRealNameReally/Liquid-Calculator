@@ -3,17 +3,19 @@ package gui;
 import model.ConcentrateInRecipe;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
-import java.util.List;
+import java.util.ArrayList;
 
- class ConcentrateTablePanel extends JPanel {
+class ConcentrateTablePanel extends JPanel {
     private JTable table;
     private ConcentrateTableModel tableModel;
     private JButton addConcentrateBtn;
 
-     ConcentrateTablePanel() {
+    ConcentrateTablePanel() {
 
         setupTable();
 
@@ -26,10 +28,6 @@ import java.util.List;
         addConcentrateBtn.addActionListener(e -> refresh());
     }
 
-    void setDatabase(List<ConcentrateInRecipe> database) {
-        tableModel.setDatabase(database);
-    }
-
     void refresh() {
         tableModel.fireTableDataChanged();
     }
@@ -38,7 +36,7 @@ import java.util.List;
         tableModel = new ConcentrateTableModel();
         table = new JTable(tableModel);
         table.setRowHeight(30);
-        table.putClientProperty("terminateEditOnFocusLost", true);
+        //table.putClientProperty("terminateEditOnFocusLost", true);
 
         TableColumnModel tcm = table.getColumnModel();
         TableColumn column = tcm.getColumn(1);
@@ -48,7 +46,26 @@ import java.util.List;
         column.setCellEditor(percentEditor);
         column.setCellRenderer(new SpinnerCellRenderer());
     }
-    void updateVolume(int volume){
+
+    void updateVolume(int volume) {
         tableModel.setVolume(volume);
     }
+
+    void setConcentrates(ArrayList<ConcentrateInRecipe> concentrates) {
+        tableModel.setConcentrates(concentrates);
+    }
+
+    ArrayList<ConcentrateInRecipe> getConcentrates() {
+        return tableModel.getConcentrates();
+    }
+
+    public double getConcentrateTotal() {
+        return tableModel.getConcentrateTotal();
+    }
+
+    void setTableListener(ConcentrateTableListener listener) {
+        tableModel.setListener(listener);
+        System.out.println("added");
+    }
+
 }

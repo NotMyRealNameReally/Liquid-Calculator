@@ -5,6 +5,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
+import java.text.ParseException;
 
 public class SpinnerCellEditor extends AbstractCellEditor implements TableCellEditor, ChangeListener {
    private SpinnerCellRenderer spinner;
@@ -16,6 +17,12 @@ public class SpinnerCellEditor extends AbstractCellEditor implements TableCellEd
 
     @Override
     public Object getCellEditorValue() {
+       double value = (double)spinner.getValue();
+           try {
+               spinner.commitEdit();
+           } catch (ParseException e) {
+               fireEditingCanceled();
+       }
         return spinner.getValue();
     }
 

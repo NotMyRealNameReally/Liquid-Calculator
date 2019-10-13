@@ -3,12 +3,15 @@ package gui;
 import model.ConcentrateInRecipe;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.List;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ConcentrateTableModel extends AbstractTableModel {
-    private List<ConcentrateInRecipe> database;
+    private ArrayList<ConcentrateInRecipe> concentrates;
     private double volume = 10;
     private static final int dropsInMl = 20;
+    private double concentrateTotal;
+    private ConcentrateTableListener listener;
 
     private String[] colNames = {"Aromat", "%", "krople", "ml"};
 
@@ -24,7 +27,7 @@ public class ConcentrateTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return database.size();
+        return concentrates.size();
     }
 
     @Override
@@ -34,7 +37,7 @@ public class ConcentrateTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        ConcentrateInRecipe concentrate = database.get(rowIndex);
+        ConcentrateInRecipe concentrate = concentrates.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
@@ -54,8 +57,13 @@ public class ConcentrateTableModel extends AbstractTableModel {
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         if (columnIndex == 1) {
-            database.get(rowIndex).setPercentage((double) aValue);
+            concentrates.get(rowIndex).setPercentage((double) aValue);
             fireTableRowsUpdated(rowIndex, rowIndex);
+            setConcentrateTotal();
+
+            if (listener != null){
+                listener.percentageChanged(concentrateTotal);
+            }
         }
     }
 
@@ -68,8 +76,8 @@ public class ConcentrateTableModel extends AbstractTableModel {
         return (int) Math.round(ml * dropsInMl);
     }
 
-    void setDatabase(List<ConcentrateInRecipe> database) {
-        this.database = database;
+    void setConcentrates(ArrayList<ConcentrateInRecipe> concentrates) {
+        this.concentrates = concentrates;
     }
 
     void setVolume(int volume) {
@@ -79,5 +87,22 @@ public class ConcentrateTableModel extends AbstractTableModel {
 
     public void setVolume(double volume) {
         this.volume = volume;
+    }
+    ArrayList<ConcentrateInRecipe> getConcentrates(){
+        return concentrates;
+    }
+    private void setConcentrateTotal(){
+        double total = 0;
+        for (ConcentrateInRecipe concentrate: concentrates) {
+            total += concentrate.getPercentage();
+            this.concentrateTotal = total;
+        }
+    }
+    double getConcentrateTotal(){
+        return concentrateTotal;
+    }
+
+     void setListener(ConcentrateTableListener listener) {
+        this.listener = listener;
     }
 }
