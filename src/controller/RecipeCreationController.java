@@ -5,18 +5,20 @@ import gui.SpinnerType;
 import model.ConcentrateInRecipe;
 
 import javax.swing.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class RecipeCreationController {
     private RecipeCreationPanel recipeCreationPanel;
 
-    private double volume;
-    private double strength;
-    private double nicStrength;
-    private double totalConcentratePercentage;
-    private double pgVgRatio;
-    private double nicPgVgRatio;
+    private double volume = 10;
+    private double desiredStrength = 0;
+    private double realStrength;
+    private double nicStrength = 18;
+    private double totalConcentratePercentage = 0;
+    private double desiredPgVgRatio = 50;
+    private double realPgVgRatio;
+    private double nicPgVgRatio = 50;
     private ArrayList<ConcentrateInRecipe> concentrates;
 
     public RecipeCreationController(RecipeCreationPanel recipeCreationPanel) {
@@ -73,11 +75,11 @@ public class RecipeCreationController {
     }
 
     private void desiredStrengthChanged(int value) {
-        this.strength = value;
+        this.desiredStrength = value;
     }
 
     private void ratioChanged(int glycol) {
-        this.pgVgRatio = glycol;
+        this.desiredPgVgRatio = glycol;
         recipeCreationPanel.setRatioSpinners(glycol);
     }
 
@@ -95,26 +97,57 @@ public class RecipeCreationController {
     }
 
     private void calculateSummary() {
-        double nicAmount = (volume * strength) / nicStrength;
-        System.out.println(nicAmount);
-        double glycolFromNic = (nicAmount * nicPgVgRatio) / 100;
+        realStrength = desiredStrength;
+        realPgVgRatio = desiredPgVgRatio;
         double concentrateVolume = (volume * totalConcentratePercentage) / 100; // concentrate treated as 100% glycol
-        double desiredGlycol = (volume * pgVgRatio) / 100;
-        //System.out.println(pgVgRatio);
-        double glycolToAdd = desiredGlycol - glycolFromNic - concentrateVolume;
-        double glycerineToAdd = volume - desiredGlycol;
+        double nicAmount = (volume * desiredStrength) / nicStrength;
 
-        setSummaryValues(nicAmount, glycolToAdd, glycerineToAdd);
+        if (nicAmount >= volume){
+            nicAmount = volume - concentrateVolume;
+            realStrength = (nicAmount * nicStrength) / volume;
+            double glycolFromNic = (nicAmount * nicPgVgRatio) / 100;
+            double totalGlycol = glycolFromNic + concentrateVolume;
+            realPgVgRatio = (totalGlycol / volume) * 100;
+            setSummaryValues(nicAmount, 0, 0);
+        }else {
+            double glycolFromNic = (nicAmount * nicPgVgRatio) / 100;
+            double desiredGlycol = (volume * desiredPgVgRatio) / 100;
+            //System.out.println(pgVgRatio);
+            double glycolToAdd = desiredGlycol - glycolFromNic - concentrateVolume;
+
+
+            if (glycolToAdd < 0){
+                glycolToAdd = 0;
+                double totalGlycol = glycolFromNic + concentrateVolume;
+                realPgVgRatio = (totalGlycol/volume) * 100;
+            }
+            double glycerineToAdd = volume - nicAmount - glycolToAdd - concentrateVolume;
+
+            if (glycerineToAdd < 0){
+                glycerineToAdd = 0;
+                double totalGlycol = glycolFromNic + concentrateVolume + glycolToAdd;
+                realPgVgRatio = (totalGlycol/volume) * 100;
+            }
+
+            if ((glycolToAdd + nicAmount + concentrateVolume) > volume){
+                glycolToAdd = volume - nicAmount - concentrateVolume;
+                double totalGlycol = glycolFromNic + concentrateVolume + glycolToAdd;
+                realPgVgRatio = (totalGlycol/volume) * 100;
+            }
+
+            setSummaryValues(nicAmount, glycolToAdd, glycerineToAdd);
+        }
     }
 
     private void setSummaryValues(double nicAmount, double glycolToAdd, double glycerineToAdd) {
-        String strengthSummary = strength + " mg";
-        String ratio = "";
-        String concentrateTotal = totalConcentratePercentage + " %";
+        DecimalFormat df = new DecimalFormat("###0.0");
+        String strengthSummary = df.format(realStrength) + " mg";
+        String ratio = df.format(realPgVgRatio) + "/" + df.format(100 - realPgVgRatio);
+        String concentrateTotal = df.format(totalConcentratePercentage) + " %";
 
-        String nicAmountSummary = nicAmount + " ml";
-        String glycolToAddSummary = glycolToAdd + " ml";
-        String glycerineToAddSummary = glycerineToAdd + "ml";
+        String nicAmountSummary = df.format(nicAmount) + " ml";
+        String glycolToAddSummary = df.format(glycolToAdd) + " ml";
+        String glycerineToAddSummary = df.format(glycerineToAdd) + "ml";
 
         recipeCreationPanel.setSummaryValues(strengthSummary, ratio, concentrateTotal, nicAmountSummary, glycolToAddSummary, glycerineToAddSummary);
     }

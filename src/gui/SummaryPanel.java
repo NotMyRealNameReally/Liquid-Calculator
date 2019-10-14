@@ -49,7 +49,7 @@ public class SummaryPanel extends JPanel {
         add(new JLabel("                   Ilość PG:"));
         add(glycolVolume);
 
-        add(new JLabel("        Ilość aromatów:"));
+        add(new JLabel("                   Objętość:"));
         add(concentrateTotalField);
 
         add(new JLabel("                   Ilość VG:"));
