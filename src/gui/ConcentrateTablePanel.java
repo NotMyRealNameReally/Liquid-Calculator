@@ -3,8 +3,6 @@ package gui;
 import model.ConcentrateInRecipe;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
@@ -47,7 +45,7 @@ class ConcentrateTablePanel extends JPanel {
         column.setCellRenderer(new SpinnerCellRenderer());
     }
 
-    void updateVolume(int volume) {
+    void updateVolume(double volume) {
         tableModel.setVolume(volume);
     }
 
@@ -65,7 +63,6 @@ class ConcentrateTablePanel extends JPanel {
 
     void setTableListener(ConcentrateTableListener listener) {
         tableModel.setListener(listener);
-        System.out.println("added");
     }
 
 }

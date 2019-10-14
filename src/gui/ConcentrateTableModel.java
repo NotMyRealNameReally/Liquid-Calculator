@@ -3,7 +3,7 @@ package gui;
 import model.ConcentrateInRecipe;
 
 import javax.swing.table.AbstractTableModel;
-import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ConcentrateTableModel extends AbstractTableModel {
@@ -12,6 +12,7 @@ public class ConcentrateTableModel extends AbstractTableModel {
     private static final int dropsInMl = 20;
     private double concentrateTotal;
     private ConcentrateTableListener listener;
+    private DecimalFormat decimalFormat = new DecimalFormat("###0.00");
 
     private String[] colNames = {"Aromat", "%", "krople", "ml"};
 
@@ -47,7 +48,7 @@ public class ConcentrateTableModel extends AbstractTableModel {
             case 2:
                 return getDrops(volume, concentrate.getPercentage());
             case 3:
-                return getMl(volume, concentrate.getPercentage());
+                return decimalFormat.format(getMl(volume, concentrate.getPercentage()));
             default:
                 return null;
 
@@ -87,6 +88,7 @@ public class ConcentrateTableModel extends AbstractTableModel {
 
     public void setVolume(double volume) {
         this.volume = volume;
+        fireTableDataChanged();
     }
     ArrayList<ConcentrateInRecipe> getConcentrates(){
         return concentrates;

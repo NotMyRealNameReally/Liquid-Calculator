@@ -66,11 +66,11 @@ public class RecipeCreationPanel extends JPanel {
         nicGlycerineLabel = new JLabel("Zawartość VG w bazie:");
         steepTimeLabel = new JLabel("Czas przegryzania:");
 
-        volumeSpinner = new JSpinner(setDefaultModel());
-        desiredStrengthSpinner = new JSpinner(setDefaultModel());
+        volumeSpinner = new JSpinner(setDecimalModel());
+        desiredStrengthSpinner = new JSpinner(setDecimalModel());
         desiredGlycolSpinner = new JSpinner(setPercentModel());
         desiredGlycerineSpinner = new JSpinner(setPercentModel());
-        nicStrengthSpinner = new JSpinner(setDefaultModel());
+        nicStrengthSpinner = new JSpinner(setDecimalModel());
         nicGlycolSpinner = new JSpinner(setPercentModel());
         nicGlycerineSpinner = new JSpinner(setPercentModel());
         steepTimeSpinner = new JSpinner(setDefaultModel());
@@ -80,11 +80,15 @@ public class RecipeCreationPanel extends JPanel {
     }
 
     private SpinnerNumberModel setPercentModel() {
-        return new SpinnerNumberModel(50, 0, 100, 1);
+        return new SpinnerNumberModel(50, 0, 100, 1.0);
     }
 
     private SpinnerNumberModel setDefaultModel() {
-        return new SpinnerNumberModel(0, 0, 999, 1);
+        return new SpinnerNumberModel(0, 0, 999, 1.0);
+    }
+
+    private SpinnerNumberModel setDecimalModel() {
+        return new SpinnerNumberModel(0, 0, 999, 0.1);
     }
 
     private void setNameFieldFont() {
@@ -304,15 +308,15 @@ public class RecipeCreationPanel extends JPanel {
         summaryPanel.setSummaryValues(strength, ratio, concentrate, nicVolume, glycolVolume, glycerineVolume);
     }
 
-    public void updateVolume(int volume) {
+    public void updateVolume(double volume) {
         concentrateTablePanel.updateVolume(volume);
     }
 
-    public void setRatioSpinners(int glycol){
+    public void setRatioSpinners(double glycol){
         desiredGlycolSpinner.setValue(glycol);
         desiredGlycerineSpinner.setValue(100 - glycol);
     }
-    public void setNicRatioSpinners(int glycol){
+    public void setNicRatioSpinners(double glycol){
         nicGlycolSpinner.setValue(glycol);
         nicGlycerineSpinner.setValue(100 - glycol);
     }

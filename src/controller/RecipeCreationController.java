@@ -31,7 +31,7 @@ public class RecipeCreationController {
         recipeCreationPanel.setListener(e -> {
             SpinnerType spinnerType = e.getSpinnerType();
             JSpinner sourceSpinner = (JSpinner) e.getSource();
-            int value = (int) sourceSpinner.getValue();
+            double value = (double) sourceSpinner.getValue();
 
             switch (spinnerType) {
                 case volume:
@@ -69,31 +69,31 @@ public class RecipeCreationController {
         });
     }
 
-    private void volumeChanged(int value) {
+    private void volumeChanged(double value) {
         this.volume = value;
         recipeCreationPanel.updateVolume(value);
     }
 
-    private void desiredStrengthChanged(int value) {
+    private void desiredStrengthChanged(double value) {
         this.desiredStrength = value;
     }
 
-    private void ratioChanged(int glycol) {
+    private void ratioChanged(double glycol) {
         this.desiredPgVgRatio = glycol;
         recipeCreationPanel.setRatioSpinners(glycol);
     }
 
-    private void nicStrengthChanged(int value) {
+    private void nicStrengthChanged(double value) {
         this.nicStrength = value;
     }
 
-    private void nicRatioChanged(int glycol) {
+    private void nicRatioChanged(double glycol) {
         this.nicPgVgRatio = glycol;
         recipeCreationPanel.setNicRatioSpinners(glycol);
 
     }
 
-    private void steepTimeChanged(int value) {
+    private void steepTimeChanged(double value) {
     }
 
     private void calculateSummary() {
@@ -111,28 +111,26 @@ public class RecipeCreationController {
             setSummaryValues(nicAmount, 0, 0);
         }else {
             double glycolFromNic = (nicAmount * nicPgVgRatio) / 100;
-            double desiredGlycol = (volume * desiredPgVgRatio) / 100;
-            double glycolToAdd = desiredGlycol - glycolFromNic - concentrateVolume;
+            double glycerineFromNic = (nicAmount * (100 - nicPgVgRatio)) / 100;
 
-            if ((glycolToAdd + nicAmount + concentrateVolume) > volume){
-                glycolToAdd = volume - nicAmount - concentrateVolume;
-                double totalGlycol = glycolFromNic + concentrateVolume + glycolToAdd;
-                realPgVgRatio = (totalGlycol/volume) * 100;
-            }
+            double desiredGlycol = (volume * desiredPgVgRatio) / 100;
+            double desiredGlycerine = (volume * (100 - desiredPgVgRatio)) / 100;
+
+            double glycolToAdd = desiredGlycol - glycolFromNic - concentrateVolume;
+            double glycerineToAdd = desiredGlycerine - glycerineFromNic;
 
             if (glycolToAdd < 0){
+                glycerineToAdd = volume - nicAmount - concentrateVolume;
                 glycolToAdd = 0;
                 double totalGlycol = glycolFromNic + concentrateVolume;
                 realPgVgRatio = (totalGlycol/volume) * 100;
             }
-            double glycerineToAdd = volume - nicAmount - glycolToAdd - concentrateVolume;
-
             if (glycerineToAdd < 0){
+                glycolToAdd = volume - nicAmount - concentrateVolume;
                 glycerineToAdd = 0;
                 double totalGlycol = glycolFromNic + concentrateVolume + glycolToAdd;
                 realPgVgRatio = (totalGlycol/volume) * 100;
             }
-
             setSummaryValues(nicAmount, glycolToAdd, glycerineToAdd);
         }
     }
