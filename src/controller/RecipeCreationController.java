@@ -102,7 +102,7 @@ public class RecipeCreationController {
         double concentrateVolume = (volume * totalConcentratePercentage) / 100; // concentrate treated as 100% glycol
         double nicAmount = (volume * desiredStrength) / nicStrength;
 
-        if (nicAmount >= volume){
+        if (nicAmount >= (volume - concentrateVolume)){
             nicAmount = volume - concentrateVolume;
             realStrength = (nicAmount * nicStrength) / volume;
             double glycolFromNic = (nicAmount * nicPgVgRatio) / 100;
@@ -112,9 +112,13 @@ public class RecipeCreationController {
         }else {
             double glycolFromNic = (nicAmount * nicPgVgRatio) / 100;
             double desiredGlycol = (volume * desiredPgVgRatio) / 100;
-            //System.out.println(pgVgRatio);
             double glycolToAdd = desiredGlycol - glycolFromNic - concentrateVolume;
 
+            if ((glycolToAdd + nicAmount + concentrateVolume) > volume){
+                glycolToAdd = volume - nicAmount - concentrateVolume;
+                double totalGlycol = glycolFromNic + concentrateVolume + glycolToAdd;
+                realPgVgRatio = (totalGlycol/volume) * 100;
+            }
 
             if (glycolToAdd < 0){
                 glycolToAdd = 0;
@@ -125,12 +129,6 @@ public class RecipeCreationController {
 
             if (glycerineToAdd < 0){
                 glycerineToAdd = 0;
-                double totalGlycol = glycolFromNic + concentrateVolume + glycolToAdd;
-                realPgVgRatio = (totalGlycol/volume) * 100;
-            }
-
-            if ((glycolToAdd + nicAmount + concentrateVolume) > volume){
-                glycolToAdd = volume - nicAmount - concentrateVolume;
                 double totalGlycol = glycolFromNic + concentrateVolume + glycolToAdd;
                 realPgVgRatio = (totalGlycol/volume) * 100;
             }
