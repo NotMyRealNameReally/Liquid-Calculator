@@ -11,19 +11,19 @@ import java.util.ArrayList;
 class ConcentrateTablePanel extends JPanel {
     private JTable table;
     private ConcentrateTableModel tableModel;
-    private JButton addConcentrateBtn;
+    private ButtonPanel btnPanel;
 
     ConcentrateTablePanel() {
-
+        btnPanel = new ButtonPanel();
         setupTable();
 
-        addConcentrateBtn = new JButton("Dodaj aromat");
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        add(new JScrollPane(table));
+        add(btnPanel);
+        Dimension dim = new Dimension(500, 100);
+        this.setMinimumSize(dim);
 
-        setLayout(new BorderLayout());
-        add(new JScrollPane(table), BorderLayout.CENTER);
-        add(addConcentrateBtn, BorderLayout.LINE_START);
 
-        addConcentrateBtn.addActionListener(e -> refresh());
     }
 
     void refresh() {
@@ -34,7 +34,6 @@ class ConcentrateTablePanel extends JPanel {
         tableModel = new ConcentrateTableModel();
         table = new JTable(tableModel);
         table.setRowHeight(30);
-        //table.putClientProperty("terminateEditOnFocusLost", true);
 
         TableColumnModel tcm = table.getColumnModel();
         TableColumn column = tcm.getColumn(1);
@@ -65,4 +64,19 @@ class ConcentrateTablePanel extends JPanel {
         tableModel.setListener(listener);
     }
 
+    void requestConcentrates() {
+        tableModel.requestConcentrates();
+    }
+
+}
+
+class ButtonPanel extends JPanel {
+    JButton addBtn = new JButton("Dodaj");
+    JButton removeBtn = new JButton("Usuń");
+
+    ButtonPanel() {
+        setLayout(new FlowLayout());
+        add(addBtn);
+        add(removeBtn);
+    }
 }

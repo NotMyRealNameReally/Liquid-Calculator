@@ -1,7 +1,5 @@
 package gui;
 
-import com.bulenkov.darcula.DarculaLaf;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -20,6 +18,7 @@ public class MainFrame extends JFrame {
         recipeCatalogPanel = new RecipeCatalogPanel();
 
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, recipeCatalogPanel, recipeCreationPanel);
+        splitPane.setDividerLocation(250);
 
         add(splitPane, BorderLayout.CENTER);
 

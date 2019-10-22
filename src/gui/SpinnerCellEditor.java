@@ -17,11 +17,10 @@ public class SpinnerCellEditor extends AbstractCellEditor implements TableCellEd
 
     @Override
     public Object getCellEditorValue() {
-       double value = (double)spinner.getValue();
            try {
                spinner.commitEdit();
            } catch (ParseException e) {
-               fireEditingCanceled();
+              fireEditingCanceled();
        }
         return spinner.getValue();
     }

@@ -11,7 +11,6 @@ public class RecipeCreationPanel extends JPanel {
     private ConcentrateTablePanel concentrateTablePanel;
     private SummaryPanel summaryPanel;
 
-    private JLabel nameLabel;
     private JLabel volumeLabel;
     private JLabel desiredStrengthLabel;
     private JLabel desiredGlycolLabel;
@@ -33,6 +32,8 @@ public class RecipeCreationPanel extends JPanel {
     private JCheckBox maxGlycerineCheckBox;
     private JTextField nameField;
 
+    private JButton saveBtn;
+
     private RecipeCreationListener listener;
 
     RecipeCreationPanel() {
@@ -47,6 +48,7 @@ public class RecipeCreationPanel extends JPanel {
         concentrateTablePanel.setConcentrates(concentrates);
         addSpinnerListeners();
 
+        saveBtn.addActionListener(e -> concentrateTablePanel.requestConcentrates());
         layoutComponents();
         concentrateTablePanel.refresh();
 
@@ -56,11 +58,10 @@ public class RecipeCreationPanel extends JPanel {
         concentrateTablePanel = new ConcentrateTablePanel();
         summaryPanel = new SummaryPanel();
 
-        nameLabel = new JLabel("Nazwa:");
         volumeLabel = new JLabel("Docelowa objętość:");
         desiredStrengthLabel = new JLabel("Docelowa moc:");
-        desiredGlycolLabel = new JLabel("Zawartość PG:");
-        desiredGlycerineLabel = new JLabel("Zawartość VG:");
+        desiredGlycolLabel = new JLabel("Docelowa zawartość PG:");
+        desiredGlycerineLabel = new JLabel("Docelowa zawartość VG:");
         nicStrengthLabel = new JLabel("Moc bazy:");
         nicGlycolLabel = new JLabel("Zawartość PG w bazie:");
         nicGlycerineLabel = new JLabel("Zawartość VG w bazie:");
@@ -77,6 +78,8 @@ public class RecipeCreationPanel extends JPanel {
 
         maxGlycerineCheckBox = new JCheckBox("Max VG");
         nameField = new JTextField(20);
+
+        saveBtn = new JButton("Zapisz");
     }
 
     private SpinnerNumberModel setPercentModel() {
@@ -119,8 +122,8 @@ public class RecipeCreationPanel extends JPanel {
 
         gc.gridy = 1;
         gc.fill = GridBagConstraints.NONE;
-        gc.anchor = GridBagConstraints.EAST;
-        gc.insets = rightPadding;
+        gc.anchor = GridBagConstraints.LINE_END;
+        //gc.insets = rightPadding;
         gc.ipady = 0;
 
         add(volumeLabel, gc);
@@ -135,7 +138,7 @@ public class RecipeCreationPanel extends JPanel {
         add(desiredGlycerineLabel, gc);
 
         gc.gridy++;
-        //empty row
+        //empty cell
 
         gc.gridy++;
         add(nicStrengthLabel, gc);
@@ -151,18 +154,19 @@ public class RecipeCreationPanel extends JPanel {
 
         gc.gridy++;
         gc.gridwidth = 3;
+        gc.anchor = GridBagConstraints.CENTER;
         add(concentrateTablePanel, gc);
 
         gc.gridy++;
-        gc.gridwidth = 2;
+        gc.gridwidth = 3;
         add(summaryPanel, gc);
         gc.gridwidth = 1;
 
         ///////Second column////////
 
         gc.gridx = 1;
-        gc.weightx = 1;
-        gc.weighty = 1;
+        gc.weightx = 0.1;
+        gc.weighty = 0.1;
         gc.fill = GridBagConstraints.NONE;
 
         gc.gridy = 0;
@@ -200,18 +204,23 @@ public class RecipeCreationPanel extends JPanel {
         gc.gridy++;
         add(steepTimeSpinner, gc);
 
+        gc.gridy++;
+        gc.gridy++;
+        //2 empty cells
+
+        gc.gridy++;
+        add(saveBtn, gc);
+
         ///////Third column////////
 
         gc.gridx = 2;
         gc.weightx = 1;
         gc.weighty = 1;
         gc.fill = GridBagConstraints.NONE;
-        gc.anchor = GridBagConstraints.WEST;
+        gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = noPadding;
         //Top row is empty
 
-        //gc.weightx = 1;
-        //gc.weighty = 0.2;
 
         gc.gridy = 1;
         add(new JLabel("ml"), gc);
@@ -300,6 +309,15 @@ public class RecipeCreationPanel extends JPanel {
         });
     }
 
+    public void setSpinnerValues(double volume, double strength, double pgVgRatio, double nicStrength, double nicPgVgRatio, double steepTime){
+        volumeSpinner.setValue(volume);
+        desiredStrengthSpinner.setValue(strength);
+        desiredGlycolSpinner.setValue(pgVgRatio);
+        nicStrengthSpinner.setValue(nicStrength);
+        nicGlycolSpinner.setValue(nicPgVgRatio);
+        steepTimeSpinner.setValue(steepTime);
+    }
+
     public void setListener(RecipeCreationListener listener) {
         this.listener = listener;
     }
@@ -325,5 +343,8 @@ public class RecipeCreationPanel extends JPanel {
     }
    public void setConcentrateTableListener(ConcentrateTableListener listener){
 concentrateTablePanel.setTableListener(listener);
+    }
+    public String getRecipeName(){
+        return nameField.getText();
     }
 }

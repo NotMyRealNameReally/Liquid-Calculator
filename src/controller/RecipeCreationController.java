@@ -1,8 +1,10 @@
 package controller;
 
+import gui.ConcentrateTableListener;
 import gui.RecipeCreationPanel;
 import gui.SpinnerType;
 import model.ConcentrateInRecipe;
+import model.Recipe;
 
 import javax.swing.*;
 import java.text.DecimalFormat;
@@ -11,23 +13,26 @@ import java.util.ArrayList;
 public class RecipeCreationController {
     private RecipeCreationPanel recipeCreationPanel;
 
-    private double volume = 10;
-    private double desiredStrength = 0;
-    private double realStrength;
-    private double nicStrength = 18;
-    private double totalConcentratePercentage = 0;
-    private double desiredPgVgRatio = 50;
-    private double realPgVgRatio;
-    private double nicPgVgRatio = 50;
+    private double volume;
+    private double desiredStrength;
+    private double realStrength = desiredStrength;
+    private double nicStrength;
+    private double totalConcentratePercentage;
+    private double desiredPgVgRatio;
+    private double realPgVgRatio = desiredPgVgRatio;
+    private double nicPgVgRatio;
+    private int steepTime;
     private ArrayList<ConcentrateInRecipe> concentrates;
+    private saveListener listener;
 
     public RecipeCreationController(RecipeCreationPanel recipeCreationPanel) {
         this.recipeCreationPanel = recipeCreationPanel;
-        setRecipePanelListener();
+        setRecipePanelListeners();
         setConcentrateTableListener();
+        recipeCreationPanel.setSpinnerValues(10, 3, 50, 18, 50, 0);
     }
 
-    private void setRecipePanelListener() {
+    private void setRecipePanelListeners() {
         recipeCreationPanel.setListener(e -> {
             SpinnerType spinnerType = e.getSpinnerType();
             JSpinner sourceSpinner = (JSpinner) e.getSource();
@@ -63,10 +68,26 @@ public class RecipeCreationController {
     }
 
     private void setConcentrateTableListener() {
-        recipeCreationPanel.setConcentrateTableListener(percentage -> {
-            totalConcentratePercentage = percentage;
-            calculateSummary();
+        recipeCreationPanel.setConcentrateTableListener(new ConcentrateTableListener() {
+            @Override
+            public void percentageChanged(double percentage) {
+                totalConcentratePercentage = percentage;
+                calculateSummary();
+            }
+
+            @Override
+            public void concentratesRequested(ArrayList<ConcentrateInRecipe> concentrates) {
+                save();
+            }
         });
+    }
+
+    public void save() {
+        String name = recipeCreationPanel.getRecipeName();
+        Recipe recipe = new Recipe(name, realStrength, realPgVgRatio, volume, steepTime);
+        if (listener != null){
+            listener.save(recipe);
+        }
     }
 
     private void volumeChanged(double value) {
@@ -94,6 +115,7 @@ public class RecipeCreationController {
     }
 
     private void steepTimeChanged(double value) {
+        steepTime = (int) value;
     }
 
     private void calculateSummary() {
@@ -102,14 +124,18 @@ public class RecipeCreationController {
         double concentrateVolume = (volume * totalConcentratePercentage) / 100; // concentrate treated as 100% glycol
         double nicAmount = (volume * desiredStrength) / nicStrength;
 
-        if (nicAmount >= (volume - concentrateVolume)){
+        if (Double.isNaN(nicAmount)) {
+            nicAmount = 0;
+        }
+        if (nicAmount >= (volume - concentrateVolume)) {
             nicAmount = volume - concentrateVolume;
             realStrength = (nicAmount * nicStrength) / volume;
             double glycolFromNic = (nicAmount * nicPgVgRatio) / 100;
             double totalGlycol = glycolFromNic + concentrateVolume;
             realPgVgRatio = (totalGlycol / volume) * 100;
-            setSummaryValues(nicAmount, 0, 0);
-        }else {
+
+            setSummaryValues(nicAmount, 0, 0, concentrateVolume);
+        } else {
             double glycolFromNic = (nicAmount * nicPgVgRatio) / 100;
             double glycerineFromNic = (nicAmount * (100 - nicPgVgRatio)) / 100;
 
@@ -119,27 +145,27 @@ public class RecipeCreationController {
             double glycolToAdd = desiredGlycol - glycolFromNic - concentrateVolume;
             double glycerineToAdd = desiredGlycerine - glycerineFromNic;
 
-            if (glycolToAdd < 0){
+            if (glycolToAdd < 0) {
                 glycerineToAdd = volume - nicAmount - concentrateVolume;
                 glycolToAdd = 0;
                 double totalGlycol = glycolFromNic + concentrateVolume;
-                realPgVgRatio = (totalGlycol/volume) * 100;
+                realPgVgRatio = (totalGlycol / volume) * 100;
             }
-            if (glycerineToAdd < 0){
+            if (glycerineToAdd < 0) {
                 glycolToAdd = volume - nicAmount - concentrateVolume;
                 glycerineToAdd = 0;
                 double totalGlycol = glycolFromNic + concentrateVolume + glycolToAdd;
-                realPgVgRatio = (totalGlycol/volume) * 100;
+                realPgVgRatio = (totalGlycol / volume) * 100;
             }
-            setSummaryValues(nicAmount, glycolToAdd, glycerineToAdd);
+            setSummaryValues(nicAmount, glycolToAdd, glycerineToAdd, concentrateVolume);
         }
     }
 
-    private void setSummaryValues(double nicAmount, double glycolToAdd, double glycerineToAdd) {
+    private void setSummaryValues(double nicAmount, double glycolToAdd, double glycerineToAdd, double concentrateVolume) {
         DecimalFormat df = new DecimalFormat("###0.0");
         String strengthSummary = df.format(realStrength) + " mg";
-        String ratio = df.format(realPgVgRatio) + "/" + df.format(100 - realPgVgRatio);
-        String concentrateTotal = df.format(totalConcentratePercentage) + " %";
+        String ratio = df.format(realPgVgRatio) + " / " + df.format(100 - realPgVgRatio);
+        String concentrateTotal = df.format(totalConcentratePercentage) + "%  /  " + df.format(concentrateVolume) + "ml";
 
         String nicAmountSummary = df.format(nicAmount) + " ml";
         String glycolToAddSummary = df.format(glycolToAdd) + " ml";
@@ -148,4 +174,7 @@ public class RecipeCreationController {
         recipeCreationPanel.setSummaryValues(strengthSummary, ratio, concentrateTotal, nicAmountSummary, glycolToAddSummary, glycerineToAddSummary);
     }
 
+    public void setListener(saveListener listener) {
+        this.listener = listener;
+    }
 }

@@ -107,4 +107,8 @@ public class ConcentrateTableModel extends AbstractTableModel {
      void setListener(ConcentrateTableListener listener) {
         this.listener = listener;
     }
+
+    void requestConcentrates(){
+        listener.concentratesRequested(concentrates);
+    }
 }

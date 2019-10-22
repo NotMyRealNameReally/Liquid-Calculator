@@ -7,14 +7,17 @@ public class SummaryPanel extends JPanel {
     private JTextField strengthField;
     private JTextField ratioField;
     private JTextField concentrateTotalField;
-    private JTextField nicVolume;
-    private JTextField glycolVolume;
-    private JTextField glycerineVolume;
+    private JTextField nicVolumeField;
+    private JTextField glycolVolumeField;
+    private JTextField glycerineVolumeField;
 
     public SummaryPanel() {
         setupComponents();
         setLayout(new GridLayout(3, 4));
         layoutComponents();
+        Dimension dim = new Dimension(455, 80);
+        this.setPreferredSize(dim);
+        setBorder(BorderFactory.createEtchedBorder());
 
     }
 
@@ -23,37 +26,37 @@ public class SummaryPanel extends JPanel {
         ratioField = new JTextField(5);
         concentrateTotalField = new JTextField(5);
 
-        nicVolume = new JTextField(5);
-        glycolVolume = new JTextField(5);
-        glycerineVolume = new JTextField(5);
+        nicVolumeField = new JTextField(5);
+        glycolVolumeField = new JTextField(5);
+        glycerineVolumeField = new JTextField(5);
 
         strengthField.setEditable(false);
         ratioField.setEditable(false);
         concentrateTotalField.setEditable(false);
 
-        nicVolume.setEditable(false);
-        glycolVolume.setEditable(false);
-        glycerineVolume.setEditable(false);
+        nicVolumeField.setEditable(false);
+        glycolVolumeField.setEditable(false);
+        glycerineVolumeField.setEditable(false);
     }
 
     private void layoutComponents() {
-        add(new JLabel("                           Moc:"));
+        add(new JLabel("                         Moc:"));
         add(strengthField);
 
-        add(new JLabel("                 Ilość bazy: "));
-        add(nicVolume);
+        add(new JLabel("               Ilość bazy: "));
+        add(nicVolumeField);
 
-        add(new JLabel("                       PG/VG:"));
+        add(new JLabel("                    PG/VG:"));
         add(ratioField);
 
-        add(new JLabel("                   Ilość PG:"));
-        add(glycolVolume);
+        add(new JLabel("                  Ilość PG:"));
+        add(glycolVolumeField);
 
-        add(new JLabel("                   Objętość:"));
+        add(new JLabel("         Ilość aromatu:"));
         add(concentrateTotalField);
 
-        add(new JLabel("                   Ilość VG:"));
-        add(glycerineVolume);
+        add(new JLabel("                  Ilość VG:"));
+        add(glycerineVolumeField);
     }
 
     void setSummaryValues(String strength, String ratio, String concentrate, String nicVolume, String glycolVolume, String glycerineVolume) {
@@ -61,8 +64,8 @@ public class SummaryPanel extends JPanel {
         ratioField.setText(ratio);
         concentrateTotalField.setText(concentrate);
 
-        this.nicVolume.setText(nicVolume);
-        this.glycolVolume.setText(glycolVolume);
-        this.glycerineVolume.setText(glycerineVolume);
+        nicVolumeField.setText(nicVolume);
+        glycolVolumeField.setText(glycolVolume);
+        glycerineVolumeField.setText(glycerineVolume);
     }
 }
