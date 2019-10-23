@@ -18,14 +18,14 @@ public class MainFrame extends JFrame {
         recipeCatalogPanel = new RecipeCatalogPanel();
 
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, recipeCatalogPanel, recipeCreationPanel);
-        splitPane.setDividerLocation(250);
+        splitPane.setDividerLocation(255);
 
         add(splitPane, BorderLayout.CENTER);
 
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(800, 1000);
-        setMinimumSize(new Dimension(400, 500));
+        setSize(700, 800);
+        setMinimumSize(new Dimension(650, 750));
         setVisible(true);
     }
 

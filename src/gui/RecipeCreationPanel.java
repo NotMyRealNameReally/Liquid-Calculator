@@ -50,6 +50,7 @@ public class RecipeCreationPanel extends JPanel {
 
         saveBtn.addActionListener(e -> concentrateTablePanel.requestConcentrates());
         layoutComponents();
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         concentrateTablePanel.refresh();
 
     }
@@ -104,27 +105,28 @@ public class RecipeCreationPanel extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
 
-        Insets rightPadding = new Insets(0, 0, 0, 10);
-        Insets leftPadding = new Insets(0, 10, 0, 0);
+        Insets horizontalPadding = new Insets(0, 10, 0, 10);
         Insets noPadding = new Insets(0, 0, 0, 0);
 
         ///////First column(from the left)////////
         gc.gridx = 0;
         gc.gridy = 0;
         gc.weightx = 1;
-        gc.weighty = 1;
+        gc.weighty = 0.8;
         gc.fill = GridBagConstraints.HORIZONTAL;
-        gc.ipady = 20;
-        gc.gridwidth = 3;
 
+        gc.ipady = 10;
+        gc.insets = horizontalPadding;
+        gc.gridwidth = 3;
         add(nameField, gc);
+
+        gc.ipady = 0;
+        gc.insets = noPadding;
         gc.gridwidth = 1;
 
         gc.gridy = 1;
         gc.fill = GridBagConstraints.NONE;
         gc.anchor = GridBagConstraints.LINE_END;
-        //gc.insets = rightPadding;
-        gc.ipady = 0;
 
         add(volumeLabel, gc);
 
@@ -153,6 +155,7 @@ public class RecipeCreationPanel extends JPanel {
         add(steepTimeLabel, gc);
 
         gc.gridy++;
+        gc.weighty = 1;
         gc.gridwidth = 3;
         gc.anchor = GridBagConstraints.CENTER;
         add(concentrateTablePanel, gc);
@@ -160,6 +163,10 @@ public class RecipeCreationPanel extends JPanel {
         gc.gridy++;
         gc.gridwidth = 3;
         add(summaryPanel, gc);
+
+        gc.gridy++;
+        add(saveBtn, gc);
+
         gc.gridwidth = 1;
 
         ///////Second column////////
@@ -173,9 +180,6 @@ public class RecipeCreationPanel extends JPanel {
         gc.anchor = GridBagConstraints.CENTER;
         gc.insets = noPadding;
         //First row is empty
-
-        //gc.weightx = 0.001;
-        //gc.weighty = 0.2;
 
         gc.gridy++;
         add(volumeSpinner, gc);
@@ -204,18 +208,11 @@ public class RecipeCreationPanel extends JPanel {
         gc.gridy++;
         add(steepTimeSpinner, gc);
 
-        gc.gridy++;
-        gc.gridy++;
-        //2 empty cells
-
-        gc.gridy++;
-        add(saveBtn, gc);
-
         ///////Third column////////
 
         gc.gridx = 2;
         gc.weightx = 1;
-        gc.weighty = 1;
+        gc.weighty = 0.8;
         gc.fill = GridBagConstraints.NONE;
         gc.anchor = GridBagConstraints.LINE_START;
         gc.insets = noPadding;

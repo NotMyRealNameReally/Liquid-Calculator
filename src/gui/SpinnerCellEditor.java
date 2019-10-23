@@ -36,6 +36,6 @@ public class SpinnerCellEditor extends AbstractCellEditor implements TableCellEd
 
     @Override
     public void stateChanged(ChangeEvent e) {
-        this.fireEditingStopped();
+        fireEditingStopped();
     }
 }

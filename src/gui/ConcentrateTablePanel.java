@@ -20,8 +20,11 @@ class ConcentrateTablePanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         add(new JScrollPane(table));
         add(btnPanel);
-        Dimension dim = new Dimension(500, 100);
-        this.setMinimumSize(dim);
+
+        Dimension dimPref = new Dimension(400, 200);
+        this.setPreferredSize(dimPref);
+        Dimension dimMin = new Dimension(400, 150);
+        this.setMinimumSize(dimMin);
 
 
     }
@@ -34,9 +37,17 @@ class ConcentrateTablePanel extends JPanel {
         tableModel = new ConcentrateTableModel();
         table = new JTable(tableModel);
         table.setRowHeight(30);
+        table.setFillsViewportHeight(true);
 
         TableColumnModel tcm = table.getColumnModel();
         TableColumn column = tcm.getColumn(1);
+
+        tcm.getColumn(0).setPreferredWidth(200);
+        column.setPreferredWidth(30);
+        tcm.getColumn(2).setPreferredWidth(20);
+        tcm.getColumn(3).setPreferredWidth(20);
+
+
         SpinnerCellEditor percentEditor = new SpinnerCellEditor();
         percentEditor.setPercentModel();
 
