@@ -1,6 +1,5 @@
 package gui;
 
-import model.Concentrate;
 import model.ConcentrateInRecipe;
 
 import javax.swing.*;
@@ -40,17 +39,14 @@ public class RecipeCreationPanel extends JPanel {
         setupComponents();
         setNameFieldFont();
 
-        ArrayList<ConcentrateInRecipe> concentrates = new ArrayList<>();
-        ConcentrateInRecipe truskawka = new ConcentrateInRecipe(new Concentrate("Truskawka", "Inawera", "Truskawka"));
-        ConcentrateInRecipe malina = new ConcentrateInRecipe(new Concentrate("Malina", "Inawera", "Malina"));
-        concentrates.add(truskawka);
-        concentrates.add(malina);
-        concentrateTablePanel.setConcentrates(concentrates);
         addSpinnerListeners();
+        setConcentrateTableListener();
 
         saveBtn.addActionListener(e -> {
             if (!nameField.getText().matches(" *")) {
-                concentrateTablePanel.requestConcentrates();
+                if (listener != null){
+                    listener.saveRecipe();
+                }
 
             } else {
                 JOptionPane.showMessageDialog(this, "Nazwa nie może być pusta.", "Błąd", JOptionPane.ERROR_MESSAGE);
@@ -59,7 +55,6 @@ public class RecipeCreationPanel extends JPanel {
 
         layoutComponents();
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        //concentrateTablePanel.refresh();
     }
 
     private void setupComponents() {
@@ -259,55 +254,55 @@ public class RecipeCreationPanel extends JPanel {
         volumeSpinner.addChangeListener(e -> {
             if (listener != null) {
                 RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.volume);
-                listener.eventOccurred(recipeEvent);
+                listener.spinnerChanged(recipeEvent);
             }
         });
         desiredStrengthSpinner.addChangeListener(e -> {
             if (listener != null) {
                 RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.desiredStrength);
-                listener.eventOccurred(recipeEvent);
+                listener.spinnerChanged(recipeEvent);
             }
 
         });
         desiredGlycolSpinner.addChangeListener(e -> {
             if (listener != null) {
                 RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.desiredGlycol);
-                listener.eventOccurred(recipeEvent);
+                listener.spinnerChanged(recipeEvent);
             }
 
         });
         desiredGlycerineSpinner.addChangeListener(e -> {
             if (listener != null) {
                 RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.desiredGlycerine);
-                listener.eventOccurred(recipeEvent);
+                listener.spinnerChanged(recipeEvent);
             }
 
         });
         nicStrengthSpinner.addChangeListener(e -> {
             if (listener != null) {
                 RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.nicStrength);
-                listener.eventOccurred(recipeEvent);
+                listener.spinnerChanged(recipeEvent);
             }
 
         });
         nicGlycolSpinner.addChangeListener(e -> {
             if (listener != null) {
                 RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.nicGlycol);
-                listener.eventOccurred(recipeEvent);
+                listener.spinnerChanged(recipeEvent);
             }
 
         });
         nicGlycerineSpinner.addChangeListener(e -> {
             if (listener != null) {
                 RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.nicGlycerine);
-                listener.eventOccurred(recipeEvent);
+                listener.spinnerChanged(recipeEvent);
             }
 
         });
         steepTimeSpinner.addChangeListener(e -> {
             if (listener != null) {
                 RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.steepTime);
-                listener.eventOccurred(recipeEvent);
+                listener.spinnerChanged(recipeEvent);
             }
 
         });
@@ -344,15 +339,19 @@ public class RecipeCreationPanel extends JPanel {
         nicGlycerineSpinner.setValue(100 - glycol);
     }
 
-    public ArrayList<ConcentrateInRecipe> getConcentrates() {
-        return concentrateTablePanel.getConcentrates();
-    }
-
-    public void setConcentrateTableListener(ConcentrateTableListener listener) {
-        concentrateTablePanel.setTableListener(listener);
+    private void setConcentrateTableListener() {
+        concentrateTablePanel.setTableListener(e -> {
+            if (listener != null){
+                listener.concentrateTotalChanged(concentrateTablePanel.getConcentrateTotal());
+            }
+        });
     }
 
     public String getRecipeName() {
         return nameField.getText();
+    }
+
+    public void setConcentrates(ArrayList<ConcentrateInRecipe> concentrates) {
+        concentrateTablePanel.setConcentrates(concentrates);
     }
 }

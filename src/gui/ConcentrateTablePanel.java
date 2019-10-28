@@ -3,6 +3,7 @@ package gui;
 import model.ConcentrateInRecipe;
 
 import javax.swing.*;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
@@ -81,14 +82,9 @@ class ConcentrateTablePanel extends JPanel {
         return tableModel.getConcentrateTotal();
     }
 
-    void setTableListener(ConcentrateTableListener listener) {
-        tableModel.setListener(listener);
+    void setTableListener(TableModelListener listener) {
+        tableModel.addTableModelListener(listener);
     }
-
-    void requestConcentrates() {
-        tableModel.requestConcentrates();
-    }
-
 }
 
 class ButtonPanel extends JPanel {

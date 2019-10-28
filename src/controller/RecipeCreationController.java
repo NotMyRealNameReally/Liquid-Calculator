@@ -1,6 +1,7 @@
 package controller;
 
-import gui.ConcentrateTableListener;
+import gui.RecipeCreationEvent;
+import gui.RecipeCreationListener;
 import gui.RecipeCreationPanel;
 import gui.SpinnerType;
 import model.ConcentrateInRecipe;
@@ -15,11 +16,11 @@ public class RecipeCreationController {
 
     private double volume;
     private double desiredStrength;
-    private double realStrength = desiredStrength;
+    private double realStrength;
     private double nicStrength;
     private double totalConcentratePercentage;
     private double desiredPgVgRatio;
-    private double realPgVgRatio = desiredPgVgRatio;
+    private double realPgVgRatio;
     private double nicPgVgRatio;
     private int steepTime;
     private ArrayList<ConcentrateInRecipe> concentrates;
@@ -28,68 +29,76 @@ public class RecipeCreationController {
     public RecipeCreationController(RecipeCreationPanel recipeCreationPanel) {
         this.recipeCreationPanel = recipeCreationPanel;
         setRecipePanelListeners();
-        setConcentrateTableListener();
-        recipeCreationPanel.setSpinnerValues(10, 3, 50, 18, 50, 0);
+        makeNewRecipe();
+
     }
 
     private void setRecipePanelListeners() {
-        recipeCreationPanel.setListener(e -> {
-            SpinnerType spinnerType = e.getSpinnerType();
-            JSpinner sourceSpinner = (JSpinner) e.getSource();
-            double value = (double) sourceSpinner.getValue();
+        recipeCreationPanel.setListener(new RecipeCreationListener() {
+            @Override
+            public void spinnerChanged(RecipeCreationEvent e) {
+                SpinnerType spinnerType = e.getSpinnerType();
+                JSpinner sourceSpinner = (JSpinner) e.getSource();
+                double value = (double) sourceSpinner.getValue();
 
-            switch (spinnerType) {
-                case volume:
-                    volumeChanged(value);
-                    break;
-                case desiredStrength:
-                    desiredStrengthChanged(value);
-                    break;
-                case desiredGlycol:
-                    ratioChanged(value);
-                    break;
-                case desiredGlycerine:
-                    ratioChanged(100 - value);
-                    break;
-                case nicStrength:
-                    nicStrengthChanged(value);
-                    break;
-                case nicGlycol:
-                    nicRatioChanged(value);
-                    break;
-                case nicGlycerine:
-                    nicRatioChanged(100 - value);
-                    break;
-                case steepTime:
-                    steepTimeChanged(value);
+                switch (spinnerType) {
+                    case volume:
+                        volumeChanged(value);
+                        break;
+                    case desiredStrength:
+                        desiredStrengthChanged(value);
+                        break;
+                    case desiredGlycol:
+                        ratioChanged(value);
+                        break;
+                    case desiredGlycerine:
+                        ratioChanged(100 - value);
+                        break;
+                    case nicStrength:
+                        nicStrengthChanged(value);
+                        break;
+                    case nicGlycol:
+                        nicRatioChanged(value);
+                        break;
+                    case nicGlycerine:
+                        nicRatioChanged(100 - value);
+                        break;
+                    case steepTime:
+                        steepTimeChanged(value);
+                }
+                calculateSummary();
             }
-            calculateSummary();
+
+            @Override
+            public void concentrateTotalChanged(double concentrateTotal) {
+                totalConcentratePercentage = concentrateTotal;
+                calculateSummary();
+            }
+
+            @Override
+            public void saveRecipe() {
+                save();
+            }
         });
     }
 
-    private void setConcentrateTableListener() {
-        recipeCreationPanel.setConcentrateTableListener(new ConcentrateTableListener() {
-            @Override
-            public void percentageChanged(double percentage) {
-                totalConcentratePercentage = percentage;
-                calculateSummary();
-            }
-            @Override
-            public void concentratesRequested(ArrayList<ConcentrateInRecipe> concentrates) {
-                save();
-            }
-
-            @Override
-            public void showConcentrateDialog() {
-
-            }
-        });
+    private void makeNewRecipe() {
+        recipeCreationPanel.setSpinnerValues(50, 3, 20, 18, 50, 0);
+        volume = 50;
+        desiredStrength = 3;
+        nicStrength = 18;
+        totalConcentratePercentage = 0;
+        desiredPgVgRatio = 20;
+        nicPgVgRatio = 50;
+        steepTime = 0;
+        concentrates = new ArrayList<>();
+        recipeCreationPanel.setConcentrates(concentrates);
     }
 
     public void save() {
         String name = recipeCreationPanel.getRecipeName();
         Recipe recipe = new Recipe(name, realStrength, realPgVgRatio, volume, steepTime, concentrates);
-        if (listener != null){
+        if (listener != null) {
             listener.save(recipe);
         }
     }

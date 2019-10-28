@@ -11,7 +11,6 @@ public class ConcentrateTableModel extends AbstractTableModel {
     private double volume = 10;
     private static final int dropsInMl = 20;
     private double concentrateTotal;
-    private ConcentrateTableListener listener;
     private DecimalFormat decimalFormat = new DecimalFormat("###0.00");
 
     private String[] colNames = {"Aromat", "%", "krople", "ml"};
@@ -28,7 +27,11 @@ public class ConcentrateTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return concentrates.size();
+        if (concentrates != null) {
+            return concentrates.size();
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -61,10 +64,6 @@ public class ConcentrateTableModel extends AbstractTableModel {
             concentrates.get(rowIndex).setPercentage((double) aValue);
             fireTableRowsUpdated(rowIndex, rowIndex);
             setConcentrateTotal();
-
-            if (listener != null) {
-                listener.percentageChanged(concentrateTotal);
-            }
         }
     }
 
@@ -81,12 +80,8 @@ public class ConcentrateTableModel extends AbstractTableModel {
         this.concentrates = concentrates;
     }
 
-    void setVolume(int volume) {
-        this.volume = (double) volume;
-        fireTableDataChanged();
-    }
 
-    public void setVolume(double volume) {
+    void setVolume(double volume) {
         this.volume = volume;
         fireTableDataChanged();
     }
@@ -106,14 +101,4 @@ public class ConcentrateTableModel extends AbstractTableModel {
     double getConcentrateTotal() {
         return concentrateTotal;
     }
-
-    void setListener(ConcentrateTableListener listener) {
-        this.listener = listener;
-    }
-
-    void requestConcentrates() {
-        listener.concentratesRequested(concentrates);
-    }
-
-
 }
