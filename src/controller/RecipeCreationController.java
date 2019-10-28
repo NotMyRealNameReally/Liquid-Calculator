@@ -79,6 +79,16 @@ public class RecipeCreationController {
             public void saveRecipe() {
                 save();
             }
+
+            @Override
+            public void removeConcentrate(int row) {
+                concentrates.remove(row);
+            }
+
+            @Override
+            public void requestConcentrateDialog() {
+
+            }
         });
     }
 

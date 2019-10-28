@@ -308,6 +308,23 @@ public class RecipeCreationPanel extends JPanel {
         });
     }
 
+    private void setConcentrateButtonsListener(){
+        ButtonPanel buttonPanel = concentrateTablePanel.getBtnPanel();
+        buttonPanel.removeBtn.addActionListener(e -> {
+            int row = concentrateTablePanel.getTable().getSelectedRow();
+            if (listener != null){
+                if (row <= 0) {
+                    listener.removeConcentrate(row);
+                }
+            }
+        });
+        buttonPanel.addBtn.addActionListener(e -> {
+            if (listener != null){
+                listener.requestConcentrateDialog();
+            }
+        });
+    }
+
     public void setSpinnerValues(double volume, double strength, double pgVgRatio, double nicStrength, double nicPgVgRatio, double steepTime) {
         volumeSpinner.setValue(volume);
         desiredStrengthSpinner.setValue(strength);

@@ -12,7 +12,7 @@ public class SupervisingController {
 
     public SupervisingController(MainFrame mainFrame){
         this.mainFrame = mainFrame;
-        recipeCatalogController = new RecipeCatalogController(mainFrame.getRecipeCatalogPanel(), database.getRecipes());
+        recipeCatalogController = new RecipeCatalogController(mainFrame.getRecipeCatalogPanel(), database.getRecipes(), mainFrame.getConcentrateDialog());
         recipeCreationController = new RecipeCreationController(mainFrame.getRecipeCreationPanel());
 
 

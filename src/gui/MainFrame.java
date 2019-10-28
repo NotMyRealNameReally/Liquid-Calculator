@@ -38,4 +38,8 @@ public class MainFrame extends JFrame {
     public RecipeCatalogPanel getRecipeCatalogPanel() {
         return recipeCatalogPanel;
     }
+
+    public ConcentrateDialog getConcentrateDialog(){
+        return concentrateDialog;
+    }
 }
