@@ -1,5 +1,5 @@
 package controller;
 
-public interface saveListener {
+public interface SaveListener {
     void save(Object object);
 }

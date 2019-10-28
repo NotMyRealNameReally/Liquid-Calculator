@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Database {
+public class Database{
     private ArrayList<Recipe> recipes;
     private ArrayList<Concentrate> concentrates;
     private Connection connection;

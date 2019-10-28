@@ -1,19 +1,22 @@
 package controller;
 
 import gui.RecipeCatalogPanel;
-import model.Database;
 import model.Recipe;
 
+import java.util.List;
+
 public class RecipeCatalogController {
-    private Database database = new Database();
+    private List<Recipe> recipes;
     private RecipeCatalogPanel recipeCatalogPanel;
 
-    public RecipeCatalogController(RecipeCatalogPanel panel){
+    public RecipeCatalogController(RecipeCatalogPanel panel, List<Recipe> recipes){
         this.recipeCatalogPanel = panel;
-        recipeCatalogPanel.setRecipes(database.getRecipes());
+        this.recipes = recipes;
+        recipeCatalogPanel.setRecipes(recipes);
+
     }
-    public void addRecipe(Recipe recipe){
-        database.addRecipe(recipe);
+    public void refreshTable(){
         recipeCatalogPanel.refresh();
     }
+
 }

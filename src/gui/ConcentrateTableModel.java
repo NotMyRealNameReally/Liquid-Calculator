@@ -23,7 +23,7 @@ public class ConcentrateTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex != 0;
+        return columnIndex == 1;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class ConcentrateTableModel extends AbstractTableModel {
             fireTableRowsUpdated(rowIndex, rowIndex);
             setConcentrateTotal();
 
-            if (listener != null){
+            if (listener != null) {
                 listener.percentageChanged(concentrateTotal);
             }
         }
@@ -90,25 +90,30 @@ public class ConcentrateTableModel extends AbstractTableModel {
         this.volume = volume;
         fireTableDataChanged();
     }
-    ArrayList<ConcentrateInRecipe> getConcentrates(){
+
+    ArrayList<ConcentrateInRecipe> getConcentrates() {
         return concentrates;
     }
-    private void setConcentrateTotal(){
+
+    private void setConcentrateTotal() {
         double total = 0;
-        for (ConcentrateInRecipe concentrate: concentrates) {
+        for (ConcentrateInRecipe concentrate : concentrates) {
             total += concentrate.getPercentage();
             this.concentrateTotal = total;
         }
     }
-    double getConcentrateTotal(){
+
+    double getConcentrateTotal() {
         return concentrateTotal;
     }
 
-     void setListener(ConcentrateTableListener listener) {
+    void setListener(ConcentrateTableListener listener) {
         this.listener = listener;
     }
 
-    void requestConcentrates(){
+    void requestConcentrates() {
         listener.concentratesRequested(concentrates);
     }
+
+
 }

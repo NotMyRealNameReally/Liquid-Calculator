@@ -14,9 +14,9 @@ class ConcentrateTablePanel extends JPanel {
     private ButtonPanel btnPanel;
 
     ConcentrateTablePanel() {
-        btnPanel = new ButtonPanel();
-        setupTable();
 
+        setupTable();
+        setupButtons();
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         add(new JScrollPane(table));
         add(btnPanel);
@@ -25,8 +25,6 @@ class ConcentrateTablePanel extends JPanel {
         this.setPreferredSize(dimPref);
         Dimension dimMin = new Dimension(400, 150);
         this.setMinimumSize(dimMin);
-
-
     }
 
     void refresh() {
@@ -53,6 +51,18 @@ class ConcentrateTablePanel extends JPanel {
 
         column.setCellEditor(percentEditor);
         column.setCellRenderer(new SpinnerCellRenderer());
+    }
+
+    private void setupButtons() {
+        btnPanel = new ButtonPanel();
+        btnPanel.removeBtn.addActionListener(e -> {
+            int row = table.getSelectedRow();
+            if (row >= 0){
+                getConcentrates().remove(row);
+                refresh();
+            }
+        });
+        //btnPanel.addBtn.addActionListener(e -> );
     }
 
     void updateVolume(double volume) {

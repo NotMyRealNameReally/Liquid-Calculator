@@ -8,20 +8,20 @@ import java.awt.*;
 import java.text.ParseException;
 
 public class SpinnerCellEditor extends AbstractCellEditor implements TableCellEditor, ChangeListener {
-   private SpinnerCellRenderer spinner;
+    private SpinnerCellRenderer spinner;
 
-    SpinnerCellEditor(){
+    SpinnerCellEditor() {
         spinner = new SpinnerCellRenderer();
         spinner.addChangeListener(this);
     }
 
     @Override
     public Object getCellEditorValue() {
-           try {
-               spinner.commitEdit();
-           } catch (ParseException e) {
-              fireEditingCanceled();
-       }
+        try {
+            spinner.commitEdit();
+        } catch (ParseException e) {
+            fireEditingCanceled();
+        }
         return spinner.getValue();
     }
 
@@ -30,7 +30,8 @@ public class SpinnerCellEditor extends AbstractCellEditor implements TableCellEd
         spinner.setValue(value);
         return spinner;
     }
-    void setPercentModel(){
+
+    void setPercentModel() {
         spinner.setModel(new SpinnerNumberModel(0, 0, 100, 0.1));
     }
 

@@ -14,13 +14,14 @@ public class Recipe implements Serializable {
     private int steepTime;
     private ArrayList<ConcentrateInRecipe> concentrates;
 
-    public Recipe(String name, double strength, double pgVgRatio, double volume, int steepTime) {
+    public Recipe(String name, double strength, double pgVgRatio, double volume, int steepTime, ArrayList<ConcentrateInRecipe> concentrates) {
         this.name = name;
         this.strength = strength;
         this.pgVgRatio = pgVgRatio;
         this.steepTime = steepTime;
         this.volume = volume;
         this.id = count++;
+        this.concentrates = concentrates;
     }
 
     public static int getCount() {

@@ -48,11 +48,18 @@ public class RecipeCreationPanel extends JPanel {
         concentrateTablePanel.setConcentrates(concentrates);
         addSpinnerListeners();
 
-        saveBtn.addActionListener(e -> concentrateTablePanel.requestConcentrates());
+        saveBtn.addActionListener(e -> {
+            if (!nameField.getText().matches(" *")) {
+                concentrateTablePanel.requestConcentrates();
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Nazwa nie może być pusta.", "Błąd", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
         layoutComponents();
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        concentrateTablePanel.refresh();
-
+        //concentrateTablePanel.refresh();
     }
 
     private void setupComponents() {
@@ -306,7 +313,7 @@ public class RecipeCreationPanel extends JPanel {
         });
     }
 
-    public void setSpinnerValues(double volume, double strength, double pgVgRatio, double nicStrength, double nicPgVgRatio, double steepTime){
+    public void setSpinnerValues(double volume, double strength, double pgVgRatio, double nicStrength, double nicPgVgRatio, double steepTime) {
         volumeSpinner.setValue(volume);
         desiredStrengthSpinner.setValue(strength);
         desiredGlycolSpinner.setValue(pgVgRatio);
@@ -327,21 +334,25 @@ public class RecipeCreationPanel extends JPanel {
         concentrateTablePanel.updateVolume(volume);
     }
 
-    public void setRatioSpinners(double glycol){
+    public void setRatioSpinners(double glycol) {
         desiredGlycolSpinner.setValue(glycol);
         desiredGlycerineSpinner.setValue(100 - glycol);
     }
-    public void setNicRatioSpinners(double glycol){
+
+    public void setNicRatioSpinners(double glycol) {
         nicGlycolSpinner.setValue(glycol);
         nicGlycerineSpinner.setValue(100 - glycol);
     }
-    public ArrayList<ConcentrateInRecipe> getConcentrates(){
+
+    public ArrayList<ConcentrateInRecipe> getConcentrates() {
         return concentrateTablePanel.getConcentrates();
     }
-   public void setConcentrateTableListener(ConcentrateTableListener listener){
-concentrateTablePanel.setTableListener(listener);
+
+    public void setConcentrateTableListener(ConcentrateTableListener listener) {
+        concentrateTablePanel.setTableListener(listener);
     }
-    public String getRecipeName(){
+
+    public String getRecipeName() {
         return nameField.getText();
     }
 }

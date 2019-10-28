@@ -8,6 +8,7 @@ public class MainFrame extends JFrame {
     private RecipeCreationPanel recipeCreationPanel;
     private RecipeCatalogPanel recipeCatalogPanel ;
     private JSplitPane splitPane;
+    private ConcentrateDialog concentrateDialog;
 
     public MainFrame() {
         super("Liquid Calculator");
@@ -16,6 +17,7 @@ public class MainFrame extends JFrame {
 
         recipeCreationPanel = new RecipeCreationPanel();
         recipeCatalogPanel = new RecipeCatalogPanel();
+        concentrateDialog = new ConcentrateDialog(this);
 
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, recipeCatalogPanel, recipeCreationPanel);
         splitPane.setDividerLocation(255);

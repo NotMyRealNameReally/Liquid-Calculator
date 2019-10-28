@@ -23,7 +23,7 @@ public class RecipeCreationController {
     private double nicPgVgRatio;
     private int steepTime;
     private ArrayList<ConcentrateInRecipe> concentrates;
-    private saveListener listener;
+    private SaveListener listener;
 
     public RecipeCreationController(RecipeCreationPanel recipeCreationPanel) {
         this.recipeCreationPanel = recipeCreationPanel;
@@ -74,17 +74,21 @@ public class RecipeCreationController {
                 totalConcentratePercentage = percentage;
                 calculateSummary();
             }
-
             @Override
             public void concentratesRequested(ArrayList<ConcentrateInRecipe> concentrates) {
                 save();
+            }
+
+            @Override
+            public void showConcentrateDialog() {
+
             }
         });
     }
 
     public void save() {
         String name = recipeCreationPanel.getRecipeName();
-        Recipe recipe = new Recipe(name, realStrength, realPgVgRatio, volume, steepTime);
+        Recipe recipe = new Recipe(name, realStrength, realPgVgRatio, volume, steepTime, concentrates);
         if (listener != null){
             listener.save(recipe);
         }
@@ -174,7 +178,7 @@ public class RecipeCreationController {
         recipeCreationPanel.setSummaryValues(strengthSummary, ratio, concentrateTotal, nicAmountSummary, glycolToAddSummary, glycerineToAddSummary);
     }
 
-    public void setListener(saveListener listener) {
+    public void setListener(SaveListener listener) {
         this.listener = listener;
     }
 }
