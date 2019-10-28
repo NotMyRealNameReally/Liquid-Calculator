@@ -4,7 +4,7 @@ import gui.MainFrame;
 import model.Database;
 import model.Recipe;
 
-public class SupervisingController {
+public class SupervisingController implements RecipeCreationControllerInterface{
      MainFrame mainFrame;
      RecipeCatalogController recipeCatalogController;
      RecipeCreationController recipeCreationController;
@@ -13,13 +13,18 @@ public class SupervisingController {
     public SupervisingController(MainFrame mainFrame){
         this.mainFrame = mainFrame;
         recipeCatalogController = new RecipeCatalogController(mainFrame.getRecipeCatalogPanel(), database.getRecipes(), mainFrame.getConcentrateDialog());
-        recipeCreationController = new RecipeCreationController(mainFrame.getRecipeCreationPanel());
+        recipeCreationController = new RecipeCreationController(mainFrame.getRecipeCreationPanel(), this);
+    }
 
+    @Override
+    public void saveRecipe(Recipe recipe) {
+        database.addRecipe(recipe);
+        recipeCatalogController.refreshTable();
+    }
 
-        recipeCreationController.setListener(object -> {
-            Recipe recipe = (Recipe)object;
-            database.addRecipe(recipe);
-            recipeCatalogController.refreshTable();
-        });
+    @Override
+    public void requestConcentrateDialog() {
+        recipeCatalogController.showConcentrateDialog();
+        System.out.println("sdg");
     }
 }

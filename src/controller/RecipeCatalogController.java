@@ -22,4 +22,7 @@ public class RecipeCatalogController {
         recipeCatalogPanel.refresh();
     }
 
+    void showConcentrateDialog(){
+        concentrateDialog.setVisible(true);
+    }
 }

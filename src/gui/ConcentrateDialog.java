@@ -12,5 +12,7 @@ public class ConcentrateDialog extends JDialog {
 
    public ConcentrateDialog(Frame parent){
        super(parent, "Dodaj aromat", false);
+       setSize(400, 400);
+       setLocationRelativeTo(parent);
    }
 }

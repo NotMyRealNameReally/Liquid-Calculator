@@ -41,6 +41,7 @@ public class RecipeCreationPanel extends JPanel {
 
         addSpinnerListeners();
         setConcentrateTableListener();
+        setConcentrateButtonsListener();
 
         saveBtn.addActionListener(e -> {
             if (!nameField.getText().matches(" *")) {

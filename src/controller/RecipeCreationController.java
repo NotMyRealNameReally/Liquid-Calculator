@@ -24,10 +24,11 @@ public class RecipeCreationController {
     private double nicPgVgRatio;
     private int steepTime;
     private ArrayList<ConcentrateInRecipe> concentrates;
-    private SaveListener listener;
+    private RecipeCreationControllerInterface listener;
 
-    public RecipeCreationController(RecipeCreationPanel recipeCreationPanel) {
+    public RecipeCreationController(RecipeCreationPanel recipeCreationPanel, RecipeCreationControllerInterface listener) {
         this.recipeCreationPanel = recipeCreationPanel;
+        this.listener = listener;
         setRecipePanelListeners();
         makeNewRecipe();
 
@@ -87,7 +88,7 @@ public class RecipeCreationController {
 
             @Override
             public void requestConcentrateDialog() {
-
+                listener.requestConcentrateDialog();
             }
         });
     }
@@ -109,7 +110,7 @@ public class RecipeCreationController {
         String name = recipeCreationPanel.getRecipeName();
         Recipe recipe = new Recipe(name, realStrength, realPgVgRatio, volume, steepTime, concentrates);
         if (listener != null) {
-            listener.save(recipe);
+            listener.saveRecipe(recipe);
         }
     }
 
@@ -195,9 +196,5 @@ public class RecipeCreationController {
         String glycerineToAddSummary = df.format(glycerineToAdd) + "ml";
 
         recipeCreationPanel.setSummaryValues(strengthSummary, ratio, concentrateTotal, nicAmountSummary, glycolToAddSummary, glycerineToAddSummary);
-    }
-
-    public void setListener(SaveListener listener) {
-        this.listener = listener;
     }
 }
