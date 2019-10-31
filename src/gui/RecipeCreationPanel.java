@@ -314,7 +314,7 @@ public class RecipeCreationPanel extends JPanel {
         buttonPanel.removeBtn.addActionListener(e -> {
             int row = concentrateTablePanel.getTable().getSelectedRow();
             if (listener != null){
-                if (row <= 0) {
+                if (row >= 0) {
                     listener.removeConcentrate(row);
                 }
             }
@@ -371,5 +371,9 @@ public class RecipeCreationPanel extends JPanel {
 
     public void setConcentrates(ArrayList<ConcentrateInRecipe> concentrates) {
         concentrateTablePanel.setConcentrates(concentrates);
+    }
+
+    public void refreshTable(){
+        concentrateTablePanel.refresh();
     }
 }

@@ -21,7 +21,12 @@ public class Recipe implements Serializable {
         this.steepTime = steepTime;
         this.volume = volume;
         this.id = count++;
-        this.concentrates = concentrates;
+
+        this.concentrates = new ArrayList<>();
+        for (ConcentrateInRecipe concentrate: concentrates){
+            ConcentrateInRecipe clonedConcentrate = new ConcentrateInRecipe(concentrate);
+            this.concentrates.add(clonedConcentrate);
+        }
     }
 
     public static int getCount() {
@@ -94,5 +99,15 @@ public class Recipe implements Serializable {
 
     public void setConcentrates(ArrayList<ConcentrateInRecipe> concentrates) {
         this.concentrates = concentrates;
+    }
+
+    public ArrayList<ConcentrateInRecipe> cloneConcentrates(){
+        ArrayList<ConcentrateInRecipe> clonedList = new ArrayList<>();
+
+        for (ConcentrateInRecipe concentrate: concentrates){
+            ConcentrateInRecipe clonedConcentrate = new ConcentrateInRecipe(concentrate);
+            clonedList.add(clonedConcentrate);
+        }
+        return clonedList;
     }
 }

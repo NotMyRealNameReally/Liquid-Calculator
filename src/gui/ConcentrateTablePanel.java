@@ -62,10 +62,6 @@ class ConcentrateTablePanel extends JPanel {
         tableModel.setConcentrates(concentrates);
     }
 
-    ArrayList<ConcentrateInRecipe> getConcentrates() {
-        return tableModel.getConcentrates();
-    }
-
     public double getConcentrateTotal() {
         return tableModel.getConcentrateTotal();
     }

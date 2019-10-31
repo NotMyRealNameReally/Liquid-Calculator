@@ -63,7 +63,6 @@ public class ConcentrateTableModel extends AbstractTableModel {
         if (columnIndex == 1) {
             concentrates.get(rowIndex).setPercentage((double) aValue);
             fireTableRowsUpdated(rowIndex, rowIndex);
-            setConcentrateTotal();
         }
     }
 
@@ -80,25 +79,25 @@ public class ConcentrateTableModel extends AbstractTableModel {
         this.concentrates = concentrates;
     }
 
-
     void setVolume(double volume) {
         this.volume = volume;
         fireTableDataChanged();
     }
 
-    ArrayList<ConcentrateInRecipe> getConcentrates() {
-        return concentrates;
-    }
-
-    private void setConcentrateTotal() {
+    private void updateConcentrateTotal() {
         double total = 0;
-        for (ConcentrateInRecipe concentrate : concentrates) {
-            total += concentrate.getPercentage();
-            this.concentrateTotal = total;
+        if (concentrates != null && concentrates.size() > 0) {
+            for (ConcentrateInRecipe concentrate : concentrates) {
+                total += concentrate.getPercentage();
+                this.concentrateTotal = total;
+            }
+        } else {
+            concentrateTotal = 0;
         }
     }
 
     double getConcentrateTotal() {
+        updateConcentrateTotal();
         return concentrateTotal;
     }
 }
