@@ -57,7 +57,7 @@ public class RecipeCatalogController implements ConcentrateDialogListener, Catal
     }
 
     private boolean isValidConcentrate(String name, String flavourProfile, String manufacturer) {
-        String regex = "\\w+[ \\w]*";
+        String regex = "\\S+.*";
         return (name.matches(regex) && flavourProfile.matches(regex) && manufacturer.matches(regex));
     }
 
