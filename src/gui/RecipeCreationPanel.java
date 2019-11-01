@@ -376,4 +376,8 @@ public class RecipeCreationPanel extends JPanel {
     public void refreshTable(){
         concentrateTablePanel.refresh();
     }
+
+    public void setRecipeName(String name) {
+        nameField.setText(name);
+    }
 }

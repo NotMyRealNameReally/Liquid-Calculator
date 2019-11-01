@@ -217,6 +217,7 @@ public class RecipeCreationController {
         desiredStrength = recipe.getStrength();
         desiredPgVgRatio = recipe.getPgVgRatio();
         steepTime = recipe.getSteepTime();
+        recipeCreationPanel.setRecipeName(recipe.getName());
         setSpinnerValues();
         concentrates.clear();
         concentrates = recipe.cloneConcentrates();
