@@ -75,7 +75,7 @@ public class RecipeCatalogController implements ConcentrateDialogListener, Catal
 
     @Override
     public void concentrateCreated(String name, String flavourProfile, String manufacturer) {
-        if (isValidConcentrate(name, flavourProfile, manufacturer)) {
+        if (name != null && flavourProfile != null && manufacturer != null && isValidConcentrate(name, flavourProfile, manufacturer)) {
             Concentrate concentrate = new Concentrate(name, manufacturer, flavourProfile);
             listener.concentrateCreated(concentrate);
             concentrateDialog.hideConcentrateCreationDialog();
