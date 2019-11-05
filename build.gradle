@@ -8,7 +8,7 @@ tasks.withType(JavaCompile) {
 group 'Liquid_Calculator'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 12
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -17,6 +17,10 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    
     compile 'com.bulenkov:darcula:2018.2'
-    //compile fileTree(dir: 'libs', include: ['*.jar'])
+    
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
+
 }
