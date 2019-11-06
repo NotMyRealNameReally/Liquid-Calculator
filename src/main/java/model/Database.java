@@ -21,13 +21,13 @@ public class Database {
         flavourProfiles = new ArrayList<>();
     }
 
-    public void connect() throws Exception {
+    public void connect() {
         if (connection != null) return;
         String host = "jdbc:mysql://remotemysql.com:3306/21fy2jgBuZ";
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            throw new Exception("Driver not found");
+            System.out.println("Driver not found");
         }
         try {
             connection = DriverManager.getConnection(host, "21fy2jgBuZ", "SrIhNt0kfM");

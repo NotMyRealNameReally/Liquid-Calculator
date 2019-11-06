@@ -8,5 +8,6 @@ public class TestDatabase {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("done");
     }
 }
