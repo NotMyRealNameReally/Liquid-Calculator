@@ -64,6 +64,7 @@ public class SupervisingController implements RecipeCreationControllerInterface,
                 recipeCatalogController.showConcentrateAlreadyExistsMessage();
             } else {
                 database.pushConcentrateToServer(concentrate);
+                database.addConcentrate(concentrate);
             }
         } catch (SQLException e) {
             e.printStackTrace();
