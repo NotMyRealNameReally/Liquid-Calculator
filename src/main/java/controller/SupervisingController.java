@@ -122,5 +122,6 @@ public class SupervisingController implements RecipeCreationControllerInterface,
         MainFrame frame = (MainFrame)loginDialog.getParent();
         loginDialog.dispose();
         frame.dispose();
+        database.disconnect();
     }
 }
