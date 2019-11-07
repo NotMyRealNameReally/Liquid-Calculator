@@ -96,6 +96,10 @@ public class Database {
         return userName;
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     private void checkForNewFlavourProfile(Concentrate concentrate) {
         String flavourProfile = concentrate.getFlavourProfile();
         boolean isOnList = false;

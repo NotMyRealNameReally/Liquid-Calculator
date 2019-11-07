@@ -6,7 +6,7 @@ import java.awt.*;
 public class MainFrame extends JFrame {
 
     private RecipeCreationPanel recipeCreationPanel;
-    private RecipeCatalogPanel recipeCatalogPanel ;
+    private RecipeCatalogPanel recipeCatalogPanel;
     private JSplitPane splitPane;
     private ConcentrateDialog concentrateDialog;
 
@@ -25,7 +25,7 @@ public class MainFrame extends JFrame {
         add(splitPane, BorderLayout.CENTER);
 
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(700, 800);
         setMinimumSize(new Dimension(650, 750));
         setVisible(true);
@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
         return recipeCatalogPanel;
     }
 
-    public ConcentrateDialog getConcentrateDialog(){
+    public ConcentrateDialog getConcentrateDialog() {
         return concentrateDialog;
     }
 

@@ -1,25 +1,32 @@
 package controller;
 
+import gui.LoginDialog;
+import gui.LoginDialogInterface;
 import gui.MainFrame;
 import model.Concentrate;
 import model.Database;
 import model.Recipe;
 
+import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
-public class SupervisingController implements RecipeCreationControllerInterface, CatalogControllerInterface {
+public class SupervisingController implements RecipeCreationControllerInterface, CatalogControllerInterface, LoginDialogInterface {
     private MainFrame mainFrame;
     private RecipeCatalogController recipeCatalogController;
     private RecipeCreationController recipeCreationController;
     private Database database = new Database();
+    private LoginDialog loginDialog;
 
     public SupervisingController(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         recipeCatalogController = new RecipeCatalogController(mainFrame.getRecipeCatalogPanel(), database.getRecipes(),
                 database.getConcentrates(), database.getflavourProfiles(), database.getManufacturers(), mainFrame.getConcentrateDialog());
         recipeCreationController = new RecipeCreationController(mainFrame.getRecipeCreationPanel(), this);
+
+        loginDialog = new LoginDialog(mainFrame);
+        loginDialog.setListener(this);
 
         recipeCatalogController.setListener(this);
         try {
@@ -93,5 +100,23 @@ public class SupervisingController implements RecipeCreationControllerInterface,
     public void loadRecipe(int row) {
         Recipe recipe = database.getRecipes().get(row);
         recipeCreationController.loadRecipe(recipe);
+    }
+
+    /////LoginDialog methods
+
+    @Override
+    public void userNameEntered(String username) {
+        if (username != null){
+            database.setUserName(username);
+            loginDialog.setVisible(false);
+        }else {
+            JOptionPane.showMessageDialog(loginDialog, "Zła nazwa użytkownika", "Błąd", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void loginCancelled() {
+        MainFrame frame = (MainFrame)loginDialog.getParent();
+        frame.dispose();
     }
 }
