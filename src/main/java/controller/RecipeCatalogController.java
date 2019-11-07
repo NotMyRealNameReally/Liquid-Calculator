@@ -45,6 +45,7 @@ public class RecipeCatalogController implements ConcentrateDialogListener, Catal
     }
 
     void showConcentrateDialog() {
+        concentrateDialog.refresh();
         concentrateDialog.setVisible(true);
     }
 
