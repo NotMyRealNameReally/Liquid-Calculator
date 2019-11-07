@@ -27,10 +27,12 @@ public class SupervisingController implements RecipeCreationControllerInterface,
             database.getConcentratesFromServer();
             database.getManufacturersFromServer();
             database.getFlavourProfilesFromServer();
+            database.getRecipesFromDatabase();
         } catch (SQLException e) {
             mainFrame.showDatabaseConnectionErrorDialog();
         }
         setOnProgramClose();
+        recipeCatalogController.refreshRecipeTable();
     }
 
     private void setOnProgramClose() {
@@ -46,6 +48,16 @@ public class SupervisingController implements RecipeCreationControllerInterface,
 
     @Override
     public void saveRecipe(Recipe recipe) {
+        recipe.setAuthor(database.getUserName());
+        try{
+            if (database.isRecipeInDatabase(recipe)){
+                database.updateRecipeInDatabase(recipe);
+            }else {
+                database.insertRecipeToDatabase(recipe);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
         database.addRecipe(recipe);
         recipeCatalogController.refreshRecipeTable();
     }
@@ -63,7 +75,7 @@ public class SupervisingController implements RecipeCreationControllerInterface,
             if (database.isConcentrateInDatabase(concentrate)) {
                 recipeCatalogController.showConcentrateAlreadyExistsMessage();
             } else {
-                database.pushConcentrateToServer(concentrate);
+                database.insertConcentrateToDatabase(concentrate);
                 database.addConcentrate(concentrate);
             }
         } catch (SQLException e) {
