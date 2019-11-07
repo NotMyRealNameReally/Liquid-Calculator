@@ -10,7 +10,7 @@ public class LoginDialog extends JDialog {
     private LoginDialogInterface listener;
 
     public LoginDialog(Frame parent) {
-        super(parent, "Zaloguj się", false);
+        super(parent, "Zaloguj się", true);
         setupComponents();
         layoutComponents();
 
@@ -21,10 +21,13 @@ public class LoginDialog extends JDialog {
             }
         });
         cancelBtn.addActionListener(e -> {
-            if (listener != null){
+            if (listener != null) {
                 listener.loginCancelled();
             }
         });
+        setLocationRelativeTo(parent);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setSize(290, 100);
     }
 
     private void setupComponents() {
@@ -37,6 +40,8 @@ public class LoginDialog extends JDialog {
         setLayout(new FlowLayout());
         add(new JLabel("Nazwa użytkownika: "));
         add(userField);
+        add(okBtn);
+        add(cancelBtn);
     }
 
     public void setListener(LoginDialogInterface listener) {

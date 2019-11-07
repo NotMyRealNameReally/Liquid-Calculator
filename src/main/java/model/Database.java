@@ -15,7 +15,7 @@ public class Database {
     private ArrayList<String> manufacturers;
     private ArrayList<String> flavourProfiles;
     private Connection connection;
-    private String userName = "Konon";
+    private String userName;
     private Type concentrateInRecipeListType;
 
     public Database() {
@@ -246,7 +246,7 @@ public class Database {
 
     }
 
-    public void getRecipesFromDatabase() throws SQLException{
+    public void updateRecipes() throws SQLException{
         recipes.clear();
 
         String selectSql = "SELECT name, author, strength, pg_vg_ratio, volume, steep_time, concentrates FROM recipes ORDER BY author";
@@ -274,6 +274,8 @@ public class Database {
     public void updateRecipeInDatabase(Recipe recipe) throws SQLException{
         String updateSql = "UPDATE recipes set strength = ?, pg_vg_ratio = ?, volume = ?, steep_time = ?, concentrates = ? WHERE name = ? AND author = ?";
         PreparedStatement updateStatement = connection.prepareStatement(updateSql);
+        String name = recipe.getName();
+        String author = recipe.getAuthor();
         double strength = recipe.getStrength();
         double pgVGRatio = recipe.getPgVgRatio();
         double volume = recipe.getVolume();
@@ -285,6 +287,8 @@ public class Database {
         updateStatement.setDouble(3, volume);
         updateStatement.setInt(4, steepTime);
         updateStatement.setString(5, concentratesJson);
+        updateStatement.setString(6, name);
+        updateStatement.setString(7, author);
 
         updateStatement.executeUpdate();
         updateStatement.close();

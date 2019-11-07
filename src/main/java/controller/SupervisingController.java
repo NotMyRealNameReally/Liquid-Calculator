@@ -27,6 +27,7 @@ public class SupervisingController implements RecipeCreationControllerInterface,
 
         loginDialog = new LoginDialog(mainFrame);
         loginDialog.setListener(this);
+        loginDialog.setVisible(true);
 
         recipeCatalogController.setListener(this);
         try {
@@ -34,7 +35,7 @@ public class SupervisingController implements RecipeCreationControllerInterface,
             database.getConcentratesFromServer();
             database.getManufacturersFromServer();
             database.getFlavourProfilesFromServer();
-            database.getRecipesFromDatabase();
+            database.updateRecipes();
         } catch (SQLException e) {
             mainFrame.showDatabaseConnectionErrorDialog();
         }
@@ -59,13 +60,15 @@ public class SupervisingController implements RecipeCreationControllerInterface,
         try{
             if (database.isRecipeInDatabase(recipe)){
                 database.updateRecipeInDatabase(recipe);
+                database.updateRecipes();
             }else {
                 database.insertRecipeToDatabase(recipe);
+                database.addRecipe(recipe);
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
-        database.addRecipe(recipe);
+
         recipeCatalogController.refreshRecipeTable();
     }
 
@@ -106,7 +109,7 @@ public class SupervisingController implements RecipeCreationControllerInterface,
 
     @Override
     public void userNameEntered(String username) {
-        if (username != null){
+        if (!username.matches(" *")){
             database.setUserName(username);
             loginDialog.setVisible(false);
         }else {
@@ -117,6 +120,7 @@ public class SupervisingController implements RecipeCreationControllerInterface,
     @Override
     public void loginCancelled() {
         MainFrame frame = (MainFrame)loginDialog.getParent();
+        loginDialog.dispose();
         frame.dispose();
     }
 }

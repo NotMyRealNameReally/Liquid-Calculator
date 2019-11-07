@@ -24,10 +24,10 @@ public class MainFrame extends JFrame {
 
         add(splitPane, BorderLayout.CENTER);
 
-
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(700, 800);
         setMinimumSize(new Dimension(650, 750));
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 

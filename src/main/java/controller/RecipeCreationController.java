@@ -36,7 +36,7 @@ public class RecipeCreationController {
     }
     private void save() {
         String name = recipeCreationPanel.getRecipeName();
-        Recipe recipe = new Recipe(name, realStrength, realPgVgRatio, volume, steepTime, concentrates);
+        Recipe recipe = new Recipe(name, desiredStrength, desiredPgVgRatio, volume, steepTime, concentrates);
         if (listener != null) {
             listener.saveRecipe(recipe);
         }
