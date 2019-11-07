@@ -3,6 +3,7 @@ package gui;
 import model.Recipe;
 
 import javax.swing.*;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -16,6 +17,7 @@ public class RecipeCatalogPanel extends JPanel {
     RecipeCatalogPanel() {
         setupComponents();
         layoutComponents();
+        setTableFont();
 
         setTableMouseListener();
     }
@@ -23,6 +25,16 @@ public class RecipeCatalogPanel extends JPanel {
     private void setupComponents(){
         tableModel = new RecipeTableModel();
         table = new JTable(tableModel);
+        table.setRowHeight(30);
+        TableColumnModel tcm = table.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(150);
+        tcm.getColumn(1).setPreferredWidth(60);
+        tcm.getColumn(2).setPreferredWidth(5);
+    }
+    private void setTableFont(){
+        Font oldFont = table.getFont();
+        Font newFont = oldFont.deriveFont(Font.BOLD, 15);
+        table.setFont(newFont);
     }
 
     private void layoutComponents(){

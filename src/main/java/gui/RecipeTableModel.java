@@ -6,8 +6,8 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class RecipeTableModel extends AbstractTableModel {
-   private List<Recipe> recipes;
-   private String[] colNames = new String[]{"Nazwa", "Moc"};
+    private List<Recipe> recipes;
+    private String[] colNames = new String[]{"Nazwa", "Autor", "Moc"};
 
     @Override
     public String getColumnName(int column) {
@@ -16,11 +16,11 @@ public class RecipeTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-       if (recipes != null){
-           return recipes.size();
-       }else {
-           return 0;
-       }
+        if (recipes != null) {
+            return recipes.size();
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -30,10 +30,19 @@ public class RecipeTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        if (columnIndex == 0) return recipes.get(rowIndex).getName();
-        return recipes.get(rowIndex).getStrength();
+        switch (columnIndex) {
+            case 0:
+                return recipes.get(rowIndex).getName();
+            case 1:
+                return recipes.get(rowIndex).getAuthor();
+            case 2:
+                return recipes.get(rowIndex).getStrength();
+            default:
+                return null;
+        }
     }
-    public void setRecipes(List<Recipe> recipes){
+
+    public void setRecipes(List<Recipe> recipes) {
         this.recipes = recipes;
     }
 }

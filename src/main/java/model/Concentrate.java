@@ -14,7 +14,7 @@ public class Concentrate {
 
     @Override
     public String toString() {
-        return name;
+        return manufacturer + "  " + name;
     }
 
     public String getName() {

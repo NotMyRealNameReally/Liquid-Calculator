@@ -20,12 +20,12 @@ public class MainFrame extends JFrame {
         concentrateDialog = new ConcentrateDialog(this);
 
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, recipeCatalogPanel, recipeCreationPanel);
-        splitPane.setDividerLocation(255);
+        splitPane.setDividerLocation(355);
 
         add(splitPane, BorderLayout.CENTER);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(700, 800);
+        setSize(800, 800);
         setMinimumSize(new Dimension(650, 750));
         setLocationRelativeTo(null);
         setVisible(true);

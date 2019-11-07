@@ -4,6 +4,7 @@ import model.Concentrate;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.List;
 
@@ -35,6 +36,9 @@ public class ConcentrateDialog extends JDialog {
         tableModel = new ConcentrateCatalogTableModel();
         table = new JTable(tableModel);
         table.setRowHeight(30);
+        TableColumnModel tcm = table.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(10);
+        tcm.getColumn(1).setPreferredWidth(170);
 
         addBtn = new JButton("Dodaj");
         newConcentrateBtn = new JButton("Nowy aromat");
