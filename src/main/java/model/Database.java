@@ -159,7 +159,7 @@ public class Database {
         return isIn;
     }
 
-    public void getConcentratesFromServer() throws SQLException {
+    public void getConcentratesFromDatabase() throws SQLException {
         concentrates.clear();
 
         String selectSql = "SELECT name, manufacturer, flavour_profile FROM concentrates ORDER BY manufacturer";
@@ -177,7 +177,7 @@ public class Database {
         selectStatement.close();
     }
 
-    public void getManufacturersFromServer() throws SQLException {
+    public void getManufacturersFromDatabase() throws SQLException {
         manufacturers.clear();
 
         String selectSql = "SELECT DISTINCT manufacturer FROM concentrates";
@@ -192,7 +192,7 @@ public class Database {
         selectStatement.close();
     }
 
-    public void getFlavourProfilesFromServer() throws SQLException {
+    public void getFlavourProfilesFromDatabase() throws SQLException {
         flavourProfiles.clear();
 
         String selectSql = "SELECT DISTINCT flavour_profile FROM concentrates";

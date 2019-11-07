@@ -32,9 +32,9 @@ public class SupervisingController implements RecipeCreationControllerInterface,
         recipeCatalogController.setListener(this);
         try {
             database.connect();
-            database.getConcentratesFromServer();
-            database.getManufacturersFromServer();
-            database.getFlavourProfilesFromServer();
+            database.getConcentratesFromDatabase();
+            database.getManufacturersFromDatabase();
+            database.getFlavourProfilesFromDatabase();
             database.updateRecipes();
         } catch (SQLException e) {
             mainFrame.showDatabaseConnectionErrorDialog();
