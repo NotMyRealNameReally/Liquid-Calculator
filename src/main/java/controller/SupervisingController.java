@@ -21,10 +21,12 @@ public class SupervisingController implements RecipeCreationControllerInterface,
                 database.getConcentrates(), database.getflavourProfiles(), database.getManufacturers(), mainFrame.getConcentrateDialog());
         recipeCreationController = new RecipeCreationController(mainFrame.getRecipeCreationPanel(), this);
 
-
         recipeCatalogController.setListener(this);
         try {
             database.connect();
+            database.getConcentratesFromServer();
+            database.getManufacturersFromServer();
+            database.getFlavourProfilesFromServer();
         } catch (SQLException e) {
             mainFrame.showDatabaseConnectionErrorDialog();
         }

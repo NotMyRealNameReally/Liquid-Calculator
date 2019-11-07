@@ -141,4 +141,52 @@ public class Database {
 
 
     }
+
+    public void getConcentratesFromServer() throws SQLException{
+        concentrates.clear();
+
+        String selectSql = "SELECT name, manufacturer, flavour_profile FROM concentrates ORDER BY manufacturer";
+        PreparedStatement selectStatement = connection.prepareStatement(selectSql);
+        ResultSet results = selectStatement.executeQuery();
+
+        while(results.next()){
+            String name = results.getString("name");
+            String manufacturer = results.getString("manufacturer");
+            String flavourProfile = results.getString("flavour_profile");
+            Concentrate concentrate = new Concentrate(name, manufacturer, flavourProfile);
+            concentrates.add(concentrate);
+        }
+        results.close();
+        selectStatement.close();
+    }
+
+    public void getManufacturersFromServer() throws SQLException{
+        manufacturers.clear();
+
+        String selectSql = "SELECT DISTINCT manufacturer FROM concentrates";
+        PreparedStatement selectStatement = connection.prepareStatement(selectSql);
+        ResultSet results = selectStatement.executeQuery();
+
+        while (results.next()){
+            String manufacturer = results.getString("manufacturer");
+            manufacturers.add(manufacturer);
+        }
+        results.close();
+        selectStatement.close();
+    }
+
+    public void getFlavourProfilesFromServer() throws SQLException{
+        flavourProfiles.clear();
+
+        String selectSql = "SELECT DISTINCT flavour_profile FROM concentrates";
+        PreparedStatement selectStatement = connection.prepareStatement(selectSql);
+        ResultSet results = selectStatement.executeQuery();
+
+        while (results.next()){
+            String flavourProfile = results.getString("flavour_profile");
+            flavourProfiles.add(flavourProfile);
+        }
+        results.close();
+        selectStatement.close();
+    }
 }
