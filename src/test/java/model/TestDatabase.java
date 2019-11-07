@@ -8,6 +8,9 @@ public class TestDatabase {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("done");
+        System.out.println("connected");
+        Concentrate concentrate = new Concentrate("Malina Koncentrat", "TPA", "Malina");
+        db.addConcentrate(concentrate);
+        System.out.println("dodano koncentrat");
     }
 }

@@ -113,4 +113,7 @@ public class ConcentrateCreationDialog extends JDialog {
     void showErrorDialog(){
         JOptionPane.showMessageDialog(this, "Wypełnij wszystkie pola.", "Błąd", JOptionPane.ERROR_MESSAGE);
     }
+    void showAlreadyExistsDialog(){
+        JOptionPane.showMessageDialog(this, "Aromat już istnieje w bazie danych.", "Błąd", JOptionPane.ERROR_MESSAGE);
+    }
 }

@@ -5,6 +5,10 @@ import model.Concentrate;
 import model.Database;
 import model.Recipe;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+
 public class SupervisingController implements RecipeCreationControllerInterface, CatalogControllerInterface {
     private MainFrame mainFrame;
     private RecipeCatalogController recipeCatalogController;
@@ -17,7 +21,24 @@ public class SupervisingController implements RecipeCreationControllerInterface,
                 database.getConcentrates(), database.getflavourProfiles(), database.getManufacturers(), mainFrame.getConcentrateDialog());
         recipeCreationController = new RecipeCreationController(mainFrame.getRecipeCreationPanel(), this);
 
+
         recipeCatalogController.setListener(this);
+        try {
+            database.connect();
+        } catch (SQLException e) {
+            mainFrame.showDatabaseConnectionErrorDialog();
+        }
+        setOnProgramClose();
+    }
+
+    private void setOnProgramClose() {
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                database.disconnect();
+                super.windowClosing(e);
+            }
+        });
     }
     ////////Recipe creation controller methods
 
@@ -36,7 +57,15 @@ public class SupervisingController implements RecipeCreationControllerInterface,
 
     @Override
     public void concentrateCreated(Concentrate concentrate) {
-        database.addConcentrate(concentrate);
+        try {
+            if (database.isConcentrateInDatabase(concentrate)) {
+                recipeCatalogController.showConcentrateAlreadyExistsMessage();
+            } else {
+                database.pushConcentrateToServer(concentrate);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         recipeCatalogController.refreshConcentrateTable();
     }
 

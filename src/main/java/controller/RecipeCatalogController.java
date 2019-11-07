@@ -48,6 +48,10 @@ public class RecipeCatalogController implements ConcentrateDialogListener, Catal
         concentrateDialog.setVisible(true);
     }
 
+    void showConcentrateAlreadyExistsMessage() {
+concentrateDialog.showConcentrateAlreadyExistsMessage();
+    }
+
     private void setConcentrateDialogListener() {
         concentrateDialog.setListener(this);
     }
@@ -90,4 +94,6 @@ public class RecipeCatalogController implements ConcentrateDialogListener, Catal
     public void recipeChosen(int row) {
         listener.loadRecipe(row);
     }
+
+
 }

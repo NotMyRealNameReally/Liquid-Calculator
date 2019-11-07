@@ -42,4 +42,8 @@ public class MainFrame extends JFrame {
     public ConcentrateDialog getConcentrateDialog(){
         return concentrateDialog;
     }
+
+    public void showDatabaseConnectionErrorDialog() {
+        JOptionPane.showMessageDialog(this, "Nie udało połączyć się z bazą danych.", "Błąd", JOptionPane.ERROR_MESSAGE);
+    }
 }

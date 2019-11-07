@@ -110,6 +110,10 @@ public class ConcentrateDialog extends JDialog {
     public void hideConcentrateCreationDialog() {
         concentrateCreationDialog.setVisible(false);
     }
+
+    public void showConcentrateAlreadyExistsMessage() {
+        concentrateCreationDialog.showAlreadyExistsDialog();
+    }
 }
 
 class ConcentrateCatalogTableModel extends AbstractTableModel {
