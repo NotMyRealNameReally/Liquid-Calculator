@@ -38,7 +38,7 @@ public class Database {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        connection = DriverManager.getConnection(host, "21fy2jgBuZ", "KAjeAfw2T6");
+        connection = DriverManager.getConnection(host, "21fy2jgBuZ", "Dx0Hdzf6nC");
     }
 
     public void disconnect() {
