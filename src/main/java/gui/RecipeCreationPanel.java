@@ -380,4 +380,12 @@ public class RecipeCreationPanel extends JPanel {
     public void setRecipeName(String name) {
         nameField.setText(name);
     }
+
+    public boolean getRecipeOverwriteConfirmation(){
+        Object[] options = {"Tak", "Nie"};
+        String message = "Stworzyłeś już przepis o tej samej nazwie, chcesz go nadpisać?";
+        int choice = JOptionPane.showOptionDialog(this, message, "", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+        return choice == 0;
+    }
 }

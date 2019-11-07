@@ -224,4 +224,8 @@ public class RecipeCreationController {
         recipeCreationPanel.setConcentrates(concentrates);
         recipeCreationPanel.refreshTable();
     }
+
+    boolean getRecipeOverwriteConfirmation(){
+        return recipeCreationPanel.getRecipeOverwriteConfirmation();
+    }
 }

@@ -57,15 +57,17 @@ public class SupervisingController implements RecipeCreationControllerInterface,
     @Override
     public void saveRecipe(Recipe recipe) {
         recipe.setAuthor(database.getUserName());
-        try{
-            if (database.isRecipeInDatabase(recipe)){
-                database.updateRecipeInDatabase(recipe);
-                database.updateRecipes();
-            }else {
+        try {
+            if (database.isRecipeInDatabase(recipe)) {
+                if (recipeCreationController.getRecipeOverwriteConfirmation()) {
+                    database.updateRecipeInDatabase(recipe);
+                    database.updateRecipes();
+                }
+            } else {
                 database.insertRecipeToDatabase(recipe);
                 database.addRecipe(recipe);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -109,17 +111,17 @@ public class SupervisingController implements RecipeCreationControllerInterface,
 
     @Override
     public void userNameEntered(String username) {
-        if (!username.matches(" *")){
+        if (!username.matches(" *")) {
             database.setUserName(username);
             loginDialog.setVisible(false);
-        }else {
+        } else {
             JOptionPane.showMessageDialog(loginDialog, "Zła nazwa użytkownika", "Błąd", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     @Override
     public void loginCancelled() {
-        MainFrame frame = (MainFrame)loginDialog.getParent();
+        MainFrame frame = (MainFrame) loginDialog.getParent();
         loginDialog.dispose();
         frame.dispose();
         database.disconnect();
