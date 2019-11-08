@@ -9,7 +9,7 @@ import model.Recipe;
 
 import java.util.List;
 
-public class RecipeCatalogController implements ConcentrateDialogListener, CatalogListener {
+public class CatalogController implements ConcentrateDialogListener, CatalogListener {
     private List<Recipe> recipes;
     private List<Concentrate> concentrates;
     private List<String> flavourProfiles;
@@ -18,8 +18,8 @@ public class RecipeCatalogController implements ConcentrateDialogListener, Catal
     private ConcentrateDialog concentrateDialog;
     private CatalogControllerInterface listener;
 
-    public RecipeCatalogController(RecipeCatalogPanel panel, List<Recipe> recipes, List<Concentrate> concentrates,
-                                   List<String> flavourProfiles, List<String> manufacturers, ConcentrateDialog concentrateDialog) {
+    public CatalogController(RecipeCatalogPanel panel, List<Recipe> recipes, List<Concentrate> concentrates,
+                             List<String> flavourProfiles, List<String> manufacturers, ConcentrateDialog concentrateDialog) {
         this.recipeCatalogPanel = panel;
         this.recipes = recipes;
         this.concentrates = concentrates;

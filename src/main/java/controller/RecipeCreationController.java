@@ -27,9 +27,9 @@ public class RecipeCreationController {
     private ArrayList<ConcentrateInRecipe> concentrates;
     private RecipeCreationControllerInterface listener;
 
-    public RecipeCreationController(RecipeCreationPanel recipeCreationPanel, RecipeCreationControllerInterface listener) {
+    public RecipeCreationController(RecipeCreationPanel recipeCreationPanel) {
         this.recipeCreationPanel = recipeCreationPanel;
-        this.listener = listener;
+
         setRecipePanelListeners();
         makeNewRecipe();
 
@@ -227,5 +227,9 @@ public class RecipeCreationController {
 
     boolean getRecipeOverwriteConfirmation(){
         return recipeCreationPanel.getRecipeOverwriteConfirmation();
+    }
+
+    public void setListener(RecipeCreationControllerInterface listener) {
+        this.listener = listener;
     }
 }

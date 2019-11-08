@@ -16,7 +16,7 @@ import java.util.TimerTask;
 
 public class SupervisingController extends TimerTask implements RecipeCreationControllerInterface, CatalogControllerInterface, LoginDialogInterface {
     private MainFrame mainFrame;
-    private RecipeCatalogController recipeCatalogController;
+    private CatalogController catalogController;
     private RecipeCreationController recipeCreationController;
     private Database database = new Database();
     private LoginDialog loginDialog;
@@ -24,23 +24,29 @@ public class SupervisingController extends TimerTask implements RecipeCreationCo
 
     public SupervisingController(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
-        recipeCatalogController = new RecipeCatalogController(mainFrame.getRecipeCatalogPanel(), database.getRecipes(),
+        catalogController = new CatalogController(mainFrame.getRecipeCatalogPanel(), database.getRecipes(),
                 database.getConcentrates(), database.getflavourProfiles(), database.getManufacturers(), mainFrame.getConcentrateDialog());
-        recipeCreationController = new RecipeCreationController(mainFrame.getRecipeCreationPanel(), this);
+        recipeCreationController = new RecipeCreationController(mainFrame.getRecipeCreationPanel());
 
         interceptMainFrameClosing();
-        loginDialog = new LoginDialog(mainFrame);
-        loginDialog.setListener(this);
-        loginDialog.setVisible(true);
+        setupLoginDialog();
 
-        recipeCatalogController.setListener(this);
+        catalogController.setListener(this);
+        recipeCreationController.setListener(this);
+
         try {
             database.connect();
         } catch (SQLException e) {
             mainFrame.showDatabaseConnectionErrorDialog();
         }
         scheduleDatabaseUpdates();
-        recipeCatalogController.refreshRecipeTable();
+        catalogController.refreshRecipeTable();
+    }
+
+    private void setupLoginDialog(){
+        loginDialog = new LoginDialog(mainFrame);
+        loginDialog.setListener(this);
+        loginDialog.setVisible(true);
     }
 
     private void onCloseOperations(){
@@ -61,7 +67,7 @@ public class SupervisingController extends TimerTask implements RecipeCreationCo
     }
 
     private void scheduleDatabaseUpdates(){
-        databaseUpdateTimer = new Timer();
+        databaseUpdateTimer = new Timer(true);
         databaseUpdateTimer.scheduleAtFixedRate(this, 0, 600000);
     }
 
@@ -84,12 +90,12 @@ public class SupervisingController extends TimerTask implements RecipeCreationCo
             e.printStackTrace();
         }
 
-        recipeCatalogController.refreshRecipeTable();
+        catalogController.refreshRecipeTable();
     }
 
     @Override
     public void requestConcentrateDialog() {
-        recipeCatalogController.showConcentrateDialog();
+        catalogController.showConcentrateDialog();
     }
 
     ////////Catalog controller methods
@@ -98,7 +104,7 @@ public class SupervisingController extends TimerTask implements RecipeCreationCo
     public void concentrateCreated(Concentrate concentrate) {
         try {
             if (database.isConcentrateInDatabase(concentrate)) {
-                recipeCatalogController.showConcentrateAlreadyExistsMessage();
+                catalogController.showConcentrateAlreadyExistsMessage();
             } else {
                 database.insertConcentrateToDatabase(concentrate);
                 database.addConcentrate(concentrate);
@@ -106,7 +112,7 @@ public class SupervisingController extends TimerTask implements RecipeCreationCo
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        recipeCatalogController.refreshConcentrateTable();
+        catalogController.refreshConcentrateTable();
     }
 
     @Override
@@ -147,8 +153,8 @@ public class SupervisingController extends TimerTask implements RecipeCreationCo
             database.getFlavourProfilesFromDatabase();
             database.updateRecipes();
 
-            recipeCatalogController.refreshRecipeTable();
-            recipeCatalogController.refreshConcentrateTable();
+            catalogController.refreshRecipeTable();
+            catalogController.refreshConcentrateTable();
         } catch (SQLException e) {
             mainFrame.showDatabaseConnectionErrorDialog();
         }
