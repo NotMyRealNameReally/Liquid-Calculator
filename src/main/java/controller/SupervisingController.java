@@ -11,13 +11,16 @@ import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class SupervisingController implements RecipeCreationControllerInterface, CatalogControllerInterface, LoginDialogInterface {
+public class SupervisingController extends TimerTask implements RecipeCreationControllerInterface, CatalogControllerInterface, LoginDialogInterface {
     private MainFrame mainFrame;
     private RecipeCatalogController recipeCatalogController;
     private RecipeCreationController recipeCreationController;
     private Database database = new Database();
     private LoginDialog loginDialog;
+    private Timer databaseUpdateTimer;
 
     public SupervisingController(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -25,6 +28,7 @@ public class SupervisingController implements RecipeCreationControllerInterface,
                 database.getConcentrates(), database.getflavourProfiles(), database.getManufacturers(), mainFrame.getConcentrateDialog());
         recipeCreationController = new RecipeCreationController(mainFrame.getRecipeCreationPanel(), this);
 
+        interceptMainFrameClosing();
         loginDialog = new LoginDialog(mainFrame);
         loginDialog.setListener(this);
         loginDialog.setVisible(true);
@@ -32,26 +36,35 @@ public class SupervisingController implements RecipeCreationControllerInterface,
         recipeCatalogController.setListener(this);
         try {
             database.connect();
-            database.getConcentratesFromDatabase();
-            database.getManufacturersFromDatabase();
-            database.getFlavourProfilesFromDatabase();
-            database.updateRecipes();
         } catch (SQLException e) {
             mainFrame.showDatabaseConnectionErrorDialog();
         }
-        setOnProgramClose();
+        scheduleDatabaseUpdates();
         recipeCatalogController.refreshRecipeTable();
     }
 
-    private void setOnProgramClose() {
+    private void onCloseOperations(){
+        if (databaseUpdateTimer != null){
+            databaseUpdateTimer.cancel();
+        }
+        database.disconnect();
+    }
+
+    private void interceptMainFrameClosing() {
         mainFrame.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
-                database.disconnect();
+            public void windowClosed(WindowEvent e) {
+                onCloseOperations();
                 super.windowClosing(e);
             }
         });
     }
+
+    private void scheduleDatabaseUpdates(){
+        databaseUpdateTimer = new Timer();
+        databaseUpdateTimer.scheduleAtFixedRate(this, 0, 600000);
+    }
+
     ////////Recipe creation controller methods
 
     @Override
@@ -121,9 +134,23 @@ public class SupervisingController implements RecipeCreationControllerInterface,
 
     @Override
     public void loginCancelled() {
-        MainFrame frame = (MainFrame) loginDialog.getParent();
-        loginDialog.dispose();
-        frame.dispose();
-        database.disconnect();
+        mainFrame.dispose();
+    }
+
+    //////TimerTask
+
+    @Override
+    public void run() {
+        try {
+            database.getConcentratesFromDatabase();
+            database.getManufacturersFromDatabase();
+            database.getFlavourProfilesFromDatabase();
+            database.updateRecipes();
+
+            recipeCatalogController.refreshRecipeTable();
+            recipeCatalogController.refreshConcentrateTable();
+        } catch (SQLException e) {
+            mainFrame.showDatabaseConnectionErrorDialog();
+        }
     }
 }

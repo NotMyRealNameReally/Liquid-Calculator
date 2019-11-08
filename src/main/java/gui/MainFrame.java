@@ -44,6 +44,6 @@ public class MainFrame extends JFrame {
     }
 
     public void showDatabaseConnectionErrorDialog() {
-        JOptionPane.showMessageDialog(this, "Nie udało połączyć się z bazą danych.", "Błąd", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Problem z połączeniem z bazą danych", "Błąd", JOptionPane.ERROR_MESSAGE);
     }
 }
