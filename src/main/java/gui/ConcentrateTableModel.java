@@ -75,15 +75,6 @@ public class ConcentrateTableModel extends AbstractTableModel {
         return (int) Math.round(ml * dropsInMl);
     }
 
-    void setConcentrates(ArrayList<ConcentrateInRecipe> concentrates) {
-        this.concentrates = concentrates;
-    }
-
-    void setVolume(double volume) {
-        this.volume = volume;
-        fireTableDataChanged();
-    }
-
     private void updateConcentrateTotal() {
         double total = 0;
         if (concentrates != null && concentrates.size() > 0) {
@@ -96,8 +87,17 @@ public class ConcentrateTableModel extends AbstractTableModel {
         }
     }
 
+    void setVolume(double volume) {
+        this.volume = volume;
+        fireTableDataChanged();
+    }
+
     double getConcentrateTotal() {
         updateConcentrateTotal();
         return concentrateTotal;
+    }
+
+    void setConcentrates(ArrayList<ConcentrateInRecipe> concentrates) {
+        this.concentrates = concentrates;
     }
 }

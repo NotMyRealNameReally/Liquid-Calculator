@@ -26,10 +26,6 @@ public class Database {
         setConcentrateInRecipeListType();
     }
 
-    private void setConcentrateInRecipeListType(){
-        concentrateInRecipeListType = new TypeToken<ArrayList<ConcentrateInRecipe>>(){}.getType();
-    }
-
     public void connect() throws SQLException {
         if (connection != null) return;
         String host = "jdbc:mysql://remotemysql.com:3306/21fy2jgBuZ";
@@ -56,48 +52,14 @@ public class Database {
         recipes.add(recipe);
     }
 
-    public void addConcentrate(Concentrate concentrate) {
-        concentrates.add(concentrate);
-        checkForNewFlavourProfile(concentrate);
-        checkForNewManufacturer(concentrate);
-    }
-
-    public void addManufacturer(String manufacturer) {
-        manufacturers.add(manufacturer);
-    }
-
-    public void addFlavourProfile(String flavourProfile) {
-        flavourProfiles.add(flavourProfile);
-    }
-
     public void removeRecipe(int index) {
         recipes.remove(index);
     }
 
-    public List<Recipe> getRecipes() {
-        return Collections.unmodifiableList(recipes);
-        //return recipes;
-    }
-
-    public List<String> getflavourProfiles() {
-        return Collections.unmodifiableList(flavourProfiles);
-    }
-
-    public List<String> getManufacturers() {
-        return Collections.unmodifiableList(manufacturers);
-    }
-
-
-    public List<Concentrate> getConcentrates() {
-        return Collections.unmodifiableList(concentrates);
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void addConcentrate(Concentrate concentrate) {
+        concentrates.add(concentrate);
+        checkForNewFlavourProfile(concentrate);
+        checkForNewManufacturer(concentrate);
     }
 
     private void checkForNewFlavourProfile(Concentrate concentrate) {
@@ -130,6 +92,34 @@ public class Database {
         }
     }
 
+    public boolean isConcentrateInDatabase(Concentrate concentrate) throws SQLException {
+        String checkSql = "SELECT id FROM concentrates WHERE name = ? AND manufacturer = ?";
+
+        PreparedStatement checkStatement = connection.prepareStatement(checkSql);
+        checkStatement.setString(1, concentrate.getName());
+        checkStatement.setString(2, concentrate.getManufacturer());
+        ResultSet checkResult = checkStatement.executeQuery();
+
+        boolean isIn = checkResult.next();
+        checkResult.close();
+        checkStatement.close();
+        return isIn;
+    }
+
+    public boolean isRecipeInDatabase(Recipe recipe) throws SQLException {
+        String checkSql = "SELECT id FROM recipes WHERE name = ? AND author = ?";
+
+        PreparedStatement checkStatement = connection.prepareStatement(checkSql);
+        checkStatement.setString(1, recipe.getName());
+        checkStatement.setString(2, recipe.getAuthor());
+        ResultSet checkResult = checkStatement.executeQuery();
+
+        boolean isIn = checkResult.next();
+        checkResult.close();
+        checkStatement.close();
+        return isIn;
+    }
+
     public void insertConcentrateToDatabase(Concentrate concentrate) throws SQLException {
         String insertSql = "INSERT INTO concentrates(name, manufacturer, flavour_profile) VALUES (?, ?, ?)";
         PreparedStatement insertStatement = connection.prepareStatement(insertSql);
@@ -145,18 +135,29 @@ public class Database {
         insertStatement.close();
     }
 
-    public boolean isConcentrateInDatabase(Concentrate concentrate) throws SQLException {
-        String checkSql = "SELECT id FROM concentrates WHERE name = ? AND manufacturer = ?";
+    public void insertRecipeToDatabase(Recipe recipe) throws SQLException {
+        String insertSql = "INSERT INTO recipes (name, author, strength, pg_vg_ratio, volume, steep_time, concentrates) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement insertStatement = connection.prepareStatement(insertSql);
 
-        PreparedStatement checkStatement = connection.prepareStatement(checkSql);
-        checkStatement.setString(1, concentrate.getName());
-        checkStatement.setString(2, concentrate.getManufacturer());
-        ResultSet checkResult = checkStatement.executeQuery();
+        String name = recipe.getName();
+        String author = recipe.getAuthor();
+        double strength = recipe.getStrength();
+        double pgVgRatio = recipe.getPgVgRatio();
+        double volume = recipe.getVolume();
+        int steepTime = recipe.getSteepTime();
+        String concentratesJson = new Gson().toJson(recipe.getConcentrates(), concentrateInRecipeListType);
 
-        boolean isIn = checkResult.next();
-        checkResult.close();
-        checkStatement.close();
-        return isIn;
+        insertStatement.setString(1, name);
+        insertStatement.setString(2, author);
+        insertStatement.setDouble(3, strength);
+        insertStatement.setDouble(4, pgVgRatio);
+        insertStatement.setDouble(5, volume);
+        insertStatement.setInt(6, steepTime);
+        insertStatement.setString(7, concentratesJson);
+
+        insertStatement.executeUpdate();
+        insertStatement.close();
+
     }
 
     public void getConcentratesFromDatabase() throws SQLException {
@@ -207,53 +208,14 @@ public class Database {
         selectStatement.close();
     }
 
-    public boolean isRecipeInDatabase(Recipe recipe) throws SQLException {
-        String checkSql = "SELECT id FROM recipes WHERE name = ? AND author = ?";
-
-        PreparedStatement checkStatement = connection.prepareStatement(checkSql);
-        checkStatement.setString(1, recipe.getName());
-        checkStatement.setString(2, recipe.getAuthor());
-        ResultSet checkResult = checkStatement.executeQuery();
-
-        boolean isIn = checkResult.next();
-        checkResult.close();
-        checkStatement.close();
-        return isIn;
-    }
-
-    public void insertRecipeToDatabase(Recipe recipe)throws SQLException{
-        String insertSql = "INSERT INTO recipes (name, author, strength, pg_vg_ratio, volume, steep_time, concentrates) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement insertStatement = connection.prepareStatement(insertSql);
-
-        String name = recipe.getName();
-        String author = recipe.getAuthor();
-        double strength = recipe.getStrength();
-        double pgVgRatio = recipe.getPgVgRatio();
-        double volume = recipe.getVolume();
-        int steepTime = recipe.getSteepTime();
-        String concentratesJson = new Gson().toJson(recipe.getConcentrates(), concentrateInRecipeListType);
-
-        insertStatement.setString(1, name);
-        insertStatement.setString(2, author);
-        insertStatement.setDouble(3, strength);
-        insertStatement.setDouble(4, pgVgRatio);
-        insertStatement.setDouble(5, volume);
-        insertStatement.setInt(6, steepTime);
-        insertStatement.setString(7, concentratesJson);
-
-        insertStatement.executeUpdate();
-        insertStatement.close();
-
-    }
-
-    public void updateRecipes() throws SQLException{
+    public void getRecipesFromDatabase() throws SQLException {
         recipes.clear();
 
         String selectSql = "SELECT name, author, strength, pg_vg_ratio, volume, steep_time, concentrates FROM recipes ORDER BY author";
         PreparedStatement selectStatement = connection.prepareStatement(selectSql);
         ResultSet results = selectStatement.executeQuery();
 
-        while (results.next()){
+        while (results.next()) {
             String name = results.getString("name");
             String author = results.getString("author");
             double strength = results.getDouble("strength");
@@ -271,7 +233,7 @@ public class Database {
         selectStatement.close();
     }
 
-    public void updateRecipeInDatabase(Recipe recipe) throws SQLException{
+    public void updateRecipeInDatabase(Recipe recipe) throws SQLException {
         String updateSql = "UPDATE recipes set strength = ?, pg_vg_ratio = ?, volume = ?, steep_time = ?, concentrates = ? WHERE name = ? AND author = ?";
         PreparedStatement updateStatement = connection.prepareStatement(updateSql);
         String name = recipe.getName();
@@ -292,5 +254,35 @@ public class Database {
 
         updateStatement.executeUpdate();
         updateStatement.close();
+    }
+
+    private void setConcentrateInRecipeListType() {
+        concentrateInRecipeListType = new TypeToken<ArrayList<ConcentrateInRecipe>>() {
+        }.getType();
+    }
+
+    public List<Recipe> getRecipes() {
+        return Collections.unmodifiableList(recipes);
+        //return recipes;
+    }
+
+    public List<String> getflavourProfiles() {
+        return Collections.unmodifiableList(flavourProfiles);
+    }
+
+    public List<String> getManufacturers() {
+        return Collections.unmodifiableList(manufacturers);
+    }
+
+    public List<Concentrate> getConcentrates() {
+        return Collections.unmodifiableList(concentrates);
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

@@ -1,7 +1,9 @@
-package gui;
+package main;
+
 import com.bulenkov.darcula.DarculaLaf;
 
 import controller.SupervisingController;
+import gui.MainFrame;
 
 import javax.swing.*;
 
@@ -12,6 +14,6 @@ public class Main {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        SupervisingController superController = new SupervisingController(new MainFrame());
+        new SupervisingController(new MainFrame());
     }
 }

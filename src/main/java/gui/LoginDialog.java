@@ -13,18 +13,8 @@ public class LoginDialog extends JDialog {
         super(parent, "Zaloguj się", true);
         setupComponents();
         layoutComponents();
+        setButtonsListeners();
 
-        okBtn.addActionListener(e -> {
-            String username = userField.getText();
-            if (listener != null) {
-                listener.userNameEntered(username);
-            }
-        });
-        cancelBtn.addActionListener(e -> {
-            if (listener != null) {
-                listener.loginCancelled();
-            }
-        });
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setSize(290, 100);
@@ -42,6 +32,21 @@ public class LoginDialog extends JDialog {
         add(userField);
         add(okBtn);
         add(cancelBtn);
+    }
+
+    private void setButtonsListeners() {
+        okBtn.addActionListener(e -> {
+            String username = userField.getText();
+            if (listener != null) {
+                listener.userNameEntered(username);
+            }
+        });
+
+        cancelBtn.addActionListener(e -> {
+            if (listener != null) {
+                listener.loginCancelled();
+            }
+        });
     }
 
     public void setListener(LoginDialogInterface listener) {

@@ -18,9 +18,7 @@ class ConcentrateTablePanel extends JPanel {
 
         setupTable();
         btnPanel = new ButtonPanel();
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        add(new JScrollPane(table));
-        add(btnPanel);
+        layoutComponents();
 
         Dimension dimPref = new Dimension(400, 200);
         this.setPreferredSize(dimPref);
@@ -30,6 +28,10 @@ class ConcentrateTablePanel extends JPanel {
 
     void refresh() {
         tableModel.fireTableDataChanged();
+    }
+
+    void updateVolume(double volume) {
+        tableModel.setVolume(volume);
     }
 
     private void setupTable() {
@@ -54,27 +56,29 @@ class ConcentrateTablePanel extends JPanel {
         column.setCellRenderer(new SpinnerCellRenderer());
     }
 
-    void updateVolume(double volume) {
-        tableModel.setVolume(volume);
-    }
-
-    void setConcentrates(ArrayList<ConcentrateInRecipe> concentrates) {
-        tableModel.setConcentrates(concentrates);
-    }
-
-    public double getConcentrateTotal() {
-        return tableModel.getConcentrateTotal();
+    private void layoutComponents() {
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        add(new JScrollPane(table));
+        add(btnPanel);
     }
 
     void setTableListener(TableModelListener listener) {
         tableModel.addTableModelListener(listener);
     }
 
-    public ButtonPanel getBtnPanel() {
+    void setConcentrates(ArrayList<ConcentrateInRecipe> concentrates) {
+        tableModel.setConcentrates(concentrates);
+    }
+
+    double getConcentrateTotal() {
+        return tableModel.getConcentrateTotal();
+    }
+
+    ButtonPanel getBtnPanel() {
         return btnPanel;
     }
 
-    public JTable getTable() {
+    JTable getTable() {
         return table;
     }
 }

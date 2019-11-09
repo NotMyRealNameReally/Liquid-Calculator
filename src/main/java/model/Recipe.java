@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Recipe implements Serializable {
-    private static int count = 1;
-    private int id;
     private String author;
     private String name;
     private double strength;
@@ -20,29 +18,12 @@ public class Recipe implements Serializable {
         this.pgVgRatio = pgVgRatio;
         this.steepTime = steepTime;
         this.volume = volume;
-        this.id = count++;
 
         this.concentrates = new ArrayList<>();
         for (ConcentrateInRecipe concentrate: concentrates){
             ConcentrateInRecipe clonedConcentrate = new ConcentrateInRecipe(concentrate);
             this.concentrates.add(clonedConcentrate);
         }
-    }
-
-    public static int getCount() {
-        return count;
-    }
-
-    public static void setCount(int count) {
-        Recipe.count = count;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getAuthor() {

@@ -19,7 +19,7 @@ public class ConcentrateDialog extends JDialog {
 
     private ConcentrateCreationDialog concentrateCreationDialog;
 
-    public ConcentrateDialog(Frame parent) {
+    ConcentrateDialog(Frame parent) {
         super(parent, "Dodaj aromat", true);
         setupComponents();
         layoutComponents();
@@ -30,6 +30,22 @@ public class ConcentrateDialog extends JDialog {
 
         setSize(400, 400);
         setLocationRelativeTo(parent);
+    }
+
+    public void showConcentrateCreationError() {
+        concentrateCreationDialog.showErrorDialog();
+    }
+
+    public void hideConcentrateCreationDialog() {
+        concentrateCreationDialog.setVisible(false);
+    }
+
+    public void showConcentrateAlreadyExistsMessage() {
+        concentrateCreationDialog.showAlreadyExistsDialog();
+    }
+
+    public void refresh() {
+        tableModel.fireTableDataChanged();
     }
 
     private void setupComponents() {
@@ -46,7 +62,18 @@ public class ConcentrateDialog extends JDialog {
         concentrateCreationDialog = new ConcentrateCreationDialog(this);
     }
 
-    private void setupButtonsListeners(){
+    private void layoutComponents() {
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
+        add(new JScrollPane(table));
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.add(addBtn);
+        buttonPanel.add(newConcentrateBtn);
+        add(buttonPanel);
+    }
+
+    private void setupButtonsListeners() {
         newConcentrateBtn.addActionListener(e -> {
             concentrateCreationDialog.setBoxItems(flavourProfiles, manufacturers);
             concentrateCreationDialog.setVisible(true);
@@ -63,6 +90,20 @@ public class ConcentrateDialog extends JDialog {
         table.setFont(newFont);
     }
 
+    private void setConcentrateCreationDialogListener() {
+        concentrateCreationDialog.getCreateBtn().addActionListener(e -> {
+            if (listener != null) {
+                String name = concentrateCreationDialog.getConcentrateName();
+                String manufacturer = concentrateCreationDialog.getManufacturer();
+                String flavourProfile = concentrateCreationDialog.getFlavourProfile();
+
+                listener.concentrateCreated(name, flavourProfile, manufacturer);
+
+
+            }
+        });
+    }
+
     public void setConcentrates(List<Concentrate> concentrates) {
         tableModel.setConcentrates(concentrates);
     }
@@ -75,48 +116,8 @@ public class ConcentrateDialog extends JDialog {
         this.manufacturers = manufacturers;
     }
 
-    public void refresh() {
-        tableModel.fireTableDataChanged();
-    }
-
-    private void layoutComponents() {
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
-        add(new JScrollPane(table));
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        buttonPanel.add(addBtn);
-        buttonPanel.add(newConcentrateBtn);
-        add(buttonPanel);
-    }
-
     public void setListener(ConcentrateDialogListener listener) {
         this.listener = listener;
-    }
-
-    private void setConcentrateCreationDialogListener() {
-        concentrateCreationDialog.getCreateBtn().addActionListener(e -> {
-            if (listener != null) {
-                String name = concentrateCreationDialog.getConcentrateName();
-                String manufacturer = concentrateCreationDialog.getManufacturer();
-                String flavourProfile = concentrateCreationDialog.getFlavourProfile();
-
-                    listener.concentrateCreated(name, flavourProfile, manufacturer);
-
-
-            }
-        });
-    }
-    public void showConcentrateCreationError(){
-        concentrateCreationDialog.showErrorDialog();
-    }
-
-    public void hideConcentrateCreationDialog() {
-        concentrateCreationDialog.setVisible(false);
-    }
-
-    public void showConcentrateAlreadyExistsMessage() {
-        concentrateCreationDialog.showAlreadyExistsDialog();
     }
 }
 
@@ -161,7 +162,7 @@ class ConcentrateCatalogTableModel extends AbstractTableModel {
         return false;
     }
 
-    public void setConcentrates(List<Concentrate> concentrates) {
+    void setConcentrates(List<Concentrate> concentrates) {
         this.concentrates = concentrates;
     }
 }

@@ -58,6 +58,18 @@ public class RecipeCreationPanel extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
 
+    public void refreshTable(){
+        concentrateTablePanel.refresh();
+    }
+
+    public boolean showRecipeOverwriteConfirmation(){
+        Object[] options = {"Tak", "Nie"};
+        String message = "Stworzyłeś już przepis o tej samej nazwie, chcesz go nadpisać?";
+        int choice = JOptionPane.showOptionDialog(this, message, "", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+        return choice == 0;
+    }
+
     private void setupComponents() {
         concentrateTablePanel = new ConcentrateTablePanel();
         summaryPanel = new SummaryPanel();
@@ -84,24 +96,6 @@ public class RecipeCreationPanel extends JPanel {
         nameField = new JTextField(20);
 
         saveBtn = new JButton("Zapisz");
-    }
-
-    private SpinnerNumberModel setPercentModel() {
-        return new SpinnerNumberModel(50, 0, 100, 1.0);
-    }
-
-    private SpinnerNumberModel setDefaultModel() {
-        return new SpinnerNumberModel(0, 0, 999, 1.0);
-    }
-
-    private SpinnerNumberModel setDecimalModel() {
-        return new SpinnerNumberModel(0, 0, 999, 0.1);
-    }
-
-    private void setNameFieldFont() {
-        Font defaultFont = nameField.getFont();
-        Font newFont = defaultFont.deriveFont(Font.BOLD, (float) 20.0);
-        nameField.setFont(newFont);
     }
 
     private void layoutComponents() {
@@ -251,6 +245,24 @@ public class RecipeCreationPanel extends JPanel {
 
     }
 
+    private void setNameFieldFont() {
+        Font defaultFont = nameField.getFont();
+        Font newFont = defaultFont.deriveFont(Font.BOLD, (float) 20.0);
+        nameField.setFont(newFont);
+    }
+
+    private SpinnerNumberModel setPercentModel() {
+        return new SpinnerNumberModel(50, 0, 100, 1.0);
+    }
+
+    private SpinnerNumberModel setDefaultModel() {
+        return new SpinnerNumberModel(0, 0, 999, 1.0);
+    }
+
+    private SpinnerNumberModel setDecimalModel() {
+        return new SpinnerNumberModel(0, 0, 999, 0.1);
+    }
+
     private void addSpinnerListeners() {
         volumeSpinner.addChangeListener(e -> {
             if (listener != null) {
@@ -301,6 +313,14 @@ public class RecipeCreationPanel extends JPanel {
         });
     }
 
+    private void setConcentrateTableListener() {
+        concentrateTablePanel.setTableListener(e -> {
+            if (listener != null){
+                listener.concentrateTotalChanged(concentrateTablePanel.getConcentrateTotal());
+            }
+        });
+    }
+
     private void setConcentrateButtonsListener(){
         ButtonPanel buttonPanel = concentrateTablePanel.getBtnPanel();
         buttonPanel.removeBtn.addActionListener(e -> {
@@ -327,15 +347,11 @@ public class RecipeCreationPanel extends JPanel {
         steepTimeSpinner.setValue(steepTime);
     }
 
-    public void setListener(RecipeCreationListener listener) {
-        this.listener = listener;
-    }
-
     public void setSummaryValues(String strength, String ratio, String concentrate, String nicVolume, String glycolVolume, String glycerineVolume) {
         summaryPanel.setSummaryValues(strength, ratio, concentrate, nicVolume, glycolVolume, glycerineVolume);
     }
 
-    public void updateVolume(double volume) {
+    public void setVolume(double volume) {
         concentrateTablePanel.updateVolume(volume);
     }
 
@@ -349,35 +365,19 @@ public class RecipeCreationPanel extends JPanel {
         nicGlycerineSpinner.setValue(100 - glycol);
     }
 
-    private void setConcentrateTableListener() {
-        concentrateTablePanel.setTableListener(e -> {
-            if (listener != null){
-                listener.concentrateTotalChanged(concentrateTablePanel.getConcentrateTotal());
-            }
-        });
-    }
-
     public String getRecipeName() {
         return nameField.getText();
-    }
-
-    public void setConcentrates(ArrayList<ConcentrateInRecipe> concentrates) {
-        concentrateTablePanel.setConcentrates(concentrates);
-    }
-
-    public void refreshTable(){
-        concentrateTablePanel.refresh();
     }
 
     public void setRecipeName(String name) {
         nameField.setText(name);
     }
 
-    public boolean getRecipeOverwriteConfirmation(){
-        Object[] options = {"Tak", "Nie"};
-        String message = "Stworzyłeś już przepis o tej samej nazwie, chcesz go nadpisać?";
-        int choice = JOptionPane.showOptionDialog(this, message, "", JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-        return choice == 0;
+    public void setConcentrates(ArrayList<ConcentrateInRecipe> concentrates) {
+        concentrateTablePanel.setConcentrates(concentrates);
+    }
+
+    public void setListener(RecipeCreationListener listener) {
+        this.listener = listener;
     }
 }

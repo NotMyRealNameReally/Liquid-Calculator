@@ -13,15 +13,9 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         super("Liquid Calculator");
 
+        setupComponents();
+
         setLayout(new BorderLayout());
-
-        recipeCreationPanel = new RecipeCreationPanel();
-        recipeCatalogPanel = new RecipeCatalogPanel();
-        concentrateDialog = new ConcentrateDialog(this);
-
-        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, recipeCatalogPanel, recipeCreationPanel);
-        splitPane.setDividerLocation(355);
-
         add(splitPane, BorderLayout.CENTER);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -29,6 +23,19 @@ public class MainFrame extends JFrame {
         setMinimumSize(new Dimension(650, 750));
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public void showDatabaseConnectionErrorDialog() {
+        JOptionPane.showMessageDialog(this, "Problem z połączeniem z bazą danych", "Błąd", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void setupComponents() {
+        recipeCreationPanel = new RecipeCreationPanel();
+        recipeCatalogPanel = new RecipeCatalogPanel();
+        concentrateDialog = new ConcentrateDialog(this);
+
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, recipeCatalogPanel, recipeCreationPanel);
+        splitPane.setDividerLocation(355);
     }
 
     public RecipeCreationPanel getRecipeCreationPanel() {
@@ -41,9 +48,5 @@ public class MainFrame extends JFrame {
 
     public ConcentrateDialog getConcentrateDialog() {
         return concentrateDialog;
-    }
-
-    public void showDatabaseConnectionErrorDialog() {
-        JOptionPane.showMessageDialog(this, "Problem z połączeniem z bazą danych", "Błąd", JOptionPane.ERROR_MESSAGE);
     }
 }

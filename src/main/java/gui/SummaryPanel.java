@@ -15,6 +15,7 @@ class SummaryPanel extends JPanel {
     SummaryPanel() {
         setupComponents();
         layoutComponents();
+
         Dimension dim = new Dimension(370, 105);
         setPreferredSize(dim);
         setMinimumSize(dim);

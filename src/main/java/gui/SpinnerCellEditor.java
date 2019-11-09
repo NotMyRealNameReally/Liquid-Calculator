@@ -31,12 +31,12 @@ public class SpinnerCellEditor extends AbstractCellEditor implements TableCellEd
         return spinner;
     }
 
-    void setPercentModel() {
-        spinner.setModel(new SpinnerNumberModel(0, 0, 100, 0.1));
-    }
-
     @Override
     public void stateChanged(ChangeEvent e) {
         fireEditingStopped();
+    }
+
+    void setPercentModel() {
+        spinner.setModel(new SpinnerNumberModel(0, 0, 100, 0.1));
     }
 }

@@ -42,7 +42,7 @@ public class RecipeTableModel extends AbstractTableModel {
         }
     }
 
-    public void setRecipes(List<Recipe> recipes) {
+    void setRecipes(List<Recipe> recipes) {
         this.recipes = recipes;
     }
 }

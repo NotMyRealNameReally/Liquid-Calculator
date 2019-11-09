@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class ConcentrateCreationDialog extends JDialog {
+class ConcentrateCreationDialog extends JDialog {
     private JTextField nameField;
     private JComboBox<String> flavourProfileBox;
     private JComboBox<String> manufacturerBox;
@@ -22,6 +22,26 @@ public class ConcentrateCreationDialog extends JDialog {
         setSize(300, 200);
     }
 
+    void setBoxItems(List<String> flavourProfileList, List<String> manufacturersList) {
+        flavourProfileBox.removeAllItems();
+        manufacturerBox.removeAllItems();
+
+        for (String flavourProfile : flavourProfileList) {
+            flavourProfileBox.addItem(flavourProfile);
+        }
+        for (String manufacturer : manufacturersList) {
+            manufacturerBox.addItem(manufacturer);
+        }
+    }
+
+    void showErrorDialog() {
+        JOptionPane.showMessageDialog(this, "Wypełnij wszystkie pola.", "Błąd", JOptionPane.ERROR_MESSAGE);
+    }
+
+    void showAlreadyExistsDialog() {
+        JOptionPane.showMessageDialog(this, "Aromat już istnieje w bazie danych.", "Błąd", JOptionPane.ERROR_MESSAGE);
+    }
+
     private void setupComponents() {
         nameField = new JTextField(30);
         flavourProfileBox = new JComboBox<>();
@@ -34,12 +54,6 @@ public class ConcentrateCreationDialog extends JDialog {
         manufacturerBox.setEditable(true);
     }
 
-    private void setNameFieldFont() {
-        Font defaultFont = nameField.getFont();
-        Font newFont = defaultFont.deriveFont(Font.BOLD, (float) 14.0);
-        nameField.setFont(newFont);
-    }
-
     private void layoutComponents() {
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
@@ -50,7 +64,7 @@ public class ConcentrateCreationDialog extends JDialog {
         gc.weighty = 0;
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.anchor = GridBagConstraints.CENTER;
-        gc.insets = new Insets(0, 8, 0 ,8);
+        gc.insets = new Insets(0, 8, 0, 8);
 
         //First column
         gc.gridwidth = 2;
@@ -82,38 +96,27 @@ public class ConcentrateCreationDialog extends JDialog {
         add(flavourProfileBox, gc);
     }
 
-    void setBoxItems(List<String> flavourProfileList, List<String> manufacturersList){
-        flavourProfileBox.removeAllItems();
-        manufacturerBox.removeAllItems();
-
-        for (String flavourProfile: flavourProfileList){
-            flavourProfileBox.addItem(flavourProfile);
-        }
-        for (String manufacturer: manufacturersList){
-            manufacturerBox.addItem(manufacturer);
-        }
+    private void setNameFieldFont() {
+        Font defaultFont = nameField.getFont();
+        Font newFont = defaultFont.deriveFont(Font.BOLD, (float) 14.0);
+        nameField.setFont(newFont);
     }
 
-    JButton getCreateBtn(){
+    JButton getCreateBtn() {
         return createBtn;
     }
-    String getConcentrateName(){
+
+    String getConcentrateName() {
         String name = nameField.getText();
         nameField.setText("");
         return name;
     }
-    String getManufacturer(){
+
+    String getManufacturer() {
         return (String) manufacturerBox.getSelectedItem();
     }
 
-    String getFlavourProfile(){
+    String getFlavourProfile() {
         return (String) flavourProfileBox.getSelectedItem();
-    }
-
-    void showErrorDialog(){
-        JOptionPane.showMessageDialog(this, "Wypełnij wszystkie pola.", "Błąd", JOptionPane.ERROR_MESSAGE);
-    }
-    void showAlreadyExistsDialog(){
-        JOptionPane.showMessageDialog(this, "Aromat już istnieje w bazie danych.", "Błąd", JOptionPane.ERROR_MESSAGE);
     }
 }

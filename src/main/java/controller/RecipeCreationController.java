@@ -50,7 +50,7 @@ public class RecipeCreationController implements RecipeCreationListener {
     }
 
     boolean getRecipeOverwriteConfirmation() {
-        return recipeCreationPanel.getRecipeOverwriteConfirmation();
+        return recipeCreationPanel.showRecipeOverwriteConfirmation();
     }
 
     void setListener(RecipeCreationControllerInterface listener) {
@@ -83,7 +83,7 @@ public class RecipeCreationController implements RecipeCreationListener {
     public void volumeChanged(double volume) {
         this.volume = volume;
         calculateSummary();
-        recipeCreationPanel.updateVolume(volume);
+        recipeCreationPanel.setVolume(volume);
     }
 
     @Override

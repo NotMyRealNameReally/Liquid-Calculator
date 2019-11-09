@@ -38,36 +38,8 @@ public class SupervisingController extends TimerTask implements RecipeCreationCo
         } catch (SQLException e) {
             mainFrame.showDatabaseConnectionErrorDialog();
         }
+
         scheduleDatabaseUpdates();
-        catalogController.refreshRecipeTable();
-    }
-
-    private void setupLoginDialog(){
-        loginDialog = new LoginDialog(mainFrame);
-        loginDialog.setListener(this);
-        loginDialog.setVisible(true);
-    }
-
-    private void onCloseOperations(){
-        if (databaseUpdateTimer != null){
-            databaseUpdateTimer.cancel();
-        }
-        database.disconnect();
-    }
-
-    private void interceptMainFrameClosing() {
-        mainFrame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                onCloseOperations();
-                super.windowClosing(e);
-            }
-        });
-    }
-
-    private void scheduleDatabaseUpdates(){
-        databaseUpdateTimer = new Timer(true);
-        databaseUpdateTimer.scheduleAtFixedRate(this, 0, 600000);
     }
 
     ////////Recipe creation controller methods
@@ -79,7 +51,7 @@ public class SupervisingController extends TimerTask implements RecipeCreationCo
             if (database.isRecipeInDatabase(recipe)) {
                 if (recipeCreationController.getRecipeOverwriteConfirmation()) {
                     database.updateRecipeInDatabase(recipe);
-                    database.updateRecipes();
+                    database.getRecipesFromDatabase();
                 }
             } else {
                 database.insertRecipeToDatabase(recipe);
@@ -150,12 +122,42 @@ public class SupervisingController extends TimerTask implements RecipeCreationCo
             database.getConcentratesFromDatabase();
             database.getManufacturersFromDatabase();
             database.getFlavourProfilesFromDatabase();
-            database.updateRecipes();
+            database.getRecipesFromDatabase();
 
             catalogController.refreshRecipeTable();
             catalogController.refreshConcentrateTable();
         } catch (SQLException e) {
             mainFrame.showDatabaseConnectionErrorDialog();
         }
+    }
+
+    ////////
+
+    private void setupLoginDialog() {
+        loginDialog = new LoginDialog(mainFrame);
+        loginDialog.setListener(this);
+        loginDialog.setVisible(true);
+    }
+
+    private void onCloseOperations() {
+        if (databaseUpdateTimer != null) {
+            databaseUpdateTimer.cancel();
+        }
+        database.disconnect();
+    }
+
+    private void interceptMainFrameClosing() {
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                onCloseOperations();
+                super.windowClosing(e);
+            }
+        });
+    }
+
+    private void scheduleDatabaseUpdates() {
+        databaseUpdateTimer = new Timer(true);
+        databaseUpdateTimer.scheduleAtFixedRate(this, 0, 600000);
     }
 }
