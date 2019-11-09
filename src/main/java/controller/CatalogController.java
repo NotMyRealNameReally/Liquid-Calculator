@@ -15,7 +15,7 @@ public class CatalogController implements ConcentrateDialogListener, CatalogList
 
         recipeCatalogPanel.setRecipes(database.getRecipes());
         concentrateDialog.setConcentrates(database.getConcentrates());
-        concentrateDialog.setFlavourProfiles(database.getflavourProfiles());
+        concentrateDialog.setFlavourProfiles(database.getFlavourProfiles());
         concentrateDialog.setManufacturers(database.getManufacturers());
 
         setConcentrateDialogListener();

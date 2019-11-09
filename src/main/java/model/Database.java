@@ -107,11 +107,12 @@ public class Database {
     }
 
     public boolean isRecipeInDatabase(Recipe recipe) throws SQLException {
-        String checkSql = "SELECT id FROM recipes WHERE name = ? AND author = ?";
+        String checkSql = "SELECT id FROM recipes WHERE name = ? AND author = ? AND strength = ?";
 
         PreparedStatement checkStatement = connection.prepareStatement(checkSql);
         checkStatement.setString(1, recipe.getName());
         checkStatement.setString(2, recipe.getAuthor());
+        checkStatement.setDouble(3, recipe.getStrength());
         ResultSet checkResult = checkStatement.executeQuery();
 
         boolean isIn = checkResult.next();
@@ -234,7 +235,7 @@ public class Database {
     }
 
     public void updateRecipeInDatabase(Recipe recipe) throws SQLException {
-        String updateSql = "UPDATE recipes set strength = ?, pg_vg_ratio = ?, volume = ?, steep_time = ?, concentrates = ? WHERE name = ? AND author = ?";
+        String updateSql = "UPDATE recipes set strength = ?, pg_vg_ratio = ?, volume = ?, steep_time = ?, concentrates = ? WHERE name = ? AND author = ? AND strength = ?";
         PreparedStatement updateStatement = connection.prepareStatement(updateSql);
         String name = recipe.getName();
         String author = recipe.getAuthor();
@@ -251,6 +252,7 @@ public class Database {
         updateStatement.setString(5, concentratesJson);
         updateStatement.setString(6, name);
         updateStatement.setString(7, author);
+        updateStatement.setDouble(8, strength);
 
         updateStatement.executeUpdate();
         updateStatement.close();
@@ -266,7 +268,7 @@ public class Database {
         //return recipes;
     }
 
-    public List<String> getflavourProfiles() {
+    public List<String> getFlavourProfiles() {
         return Collections.unmodifiableList(flavourProfiles);
     }
 
