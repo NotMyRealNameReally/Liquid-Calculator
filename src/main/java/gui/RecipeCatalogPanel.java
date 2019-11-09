@@ -28,7 +28,7 @@ public class RecipeCatalogPanel extends JPanel {
         tableModel.fireTableDataChanged();
     }
 
-    public void showRemoveForbiddenMessage(){
+    public void showRemoveForbiddenMessage() {
         JOptionPane.showMessageDialog(this, "Nie możesz usuwać czyichś przepisów.", "Błąd", JOptionPane.ERROR_MESSAGE);
     }
 
@@ -66,7 +66,7 @@ public class RecipeCatalogPanel extends JPanel {
                 if (e.getClickCount() == 2 && row != -1 && listener != null) {
                     listener.recipeChosen(row);
                 }
-                if (e.getButton() == 3){
+                if (e.getButton() == 3) {
                     popupMenu.show(table, e.getX(), e.getY());
                     removeItem.addActionListener(actionEvent -> listener.removeRecipe(row));
                 }

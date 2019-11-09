@@ -53,10 +53,6 @@ public class RecipeCreationController implements RecipeCreationListener {
         return recipeCreationPanel.showRecipeOverwriteConfirmation();
     }
 
-    void setListener(RecipeCreationControllerInterface listener) {
-        this.listener = listener;
-    }
-
     /////RecipeCreationListener
 
     @Override
@@ -197,5 +193,9 @@ public class RecipeCreationController implements RecipeCreationListener {
         concentrates = new ArrayList<>();
         recipeCreationPanel.setConcentrates(concentrates);
         recipeCreationPanel.refreshTable();
+    }
+
+    void setListener(RecipeCreationControllerInterface listener) {
+        this.listener = listener;
     }
 }

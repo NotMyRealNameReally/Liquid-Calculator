@@ -39,25 +39,8 @@ public class CatalogController implements ConcentrateDialogListener, CatalogList
         concentrateDialog.showConcentrateAlreadyExistsMessage();
     }
 
-    void showNotAllowedToRemoveRecipeMessage(){
+    void showNotAllowedToRemoveRecipeMessage() {
         recipeCatalogPanel.showRemoveForbiddenMessage();
-    }
-
-    private void setConcentrateDialogListener() {
-        concentrateDialog.setListener(this);
-    }
-
-    private void setCatalogListener() {
-        recipeCatalogPanel.setListener(this);
-    }
-
-    private boolean isValidConcentrate(String name, String flavourProfile, String manufacturer) {
-        String regex = "\\S+.*";
-        return (name.matches(regex) && flavourProfile.matches(regex) && manufacturer.matches(regex));
-    }
-
-    void setListener(CatalogControllerInterface listener) {
-        this.listener = listener;
     }
 
 //////////////ConcentrateDialogListener methods
@@ -89,5 +72,24 @@ public class CatalogController implements ConcentrateDialogListener, CatalogList
     @Override
     public void removeRecipe(int row) {
         listener.removeRecipe(row);
+    }
+
+    ///////
+
+    private boolean isValidConcentrate(String name, String flavourProfile, String manufacturer) {
+        String regex = "\\S+.*";
+        return (name.matches(regex) && flavourProfile.matches(regex) && manufacturer.matches(regex));
+    }
+
+    private void setConcentrateDialogListener() {
+        concentrateDialog.setListener(this);
+    }
+
+    private void setCatalogListener() {
+        recipeCatalogPanel.setListener(this);
+    }
+
+    void setListener(CatalogControllerInterface listener) {
+        this.listener = listener;
     }
 }
