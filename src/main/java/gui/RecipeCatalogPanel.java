@@ -13,6 +13,8 @@ public class RecipeCatalogPanel extends JPanel {
     private JTable table;
     private RecipeTableModel tableModel;
     private CatalogListener listener;
+    private JPopupMenu popupMenu;
+    private JMenuItem removeItem;
 
     RecipeCatalogPanel() {
         setupComponents();
@@ -26,6 +28,10 @@ public class RecipeCatalogPanel extends JPanel {
         tableModel.fireTableDataChanged();
     }
 
+    public void showRemoveForbiddenMessage(){
+        JOptionPane.showMessageDialog(this, "Nie możesz usuwać czyichś przepisów.", "Błąd", JOptionPane.ERROR_MESSAGE);
+    }
+
     private void setupComponents() {
         tableModel = new RecipeTableModel();
         table = new JTable(tableModel);
@@ -34,6 +40,10 @@ public class RecipeCatalogPanel extends JPanel {
         tcm.getColumn(0).setPreferredWidth(150);
         tcm.getColumn(1).setPreferredWidth(60);
         tcm.getColumn(2).setPreferredWidth(5);
+
+        popupMenu = new JPopupMenu();
+        removeItem = new JMenuItem("Usuń");
+        popupMenu.add(removeItem);
     }
 
     private void setTableFont() {
@@ -55,6 +65,10 @@ public class RecipeCatalogPanel extends JPanel {
                 int row = table.rowAtPoint(point);
                 if (e.getClickCount() == 2 && row != -1 && listener != null) {
                     listener.recipeChosen(row);
+                }
+                if (e.getButton() == 3){
+                    popupMenu.show(table, e.getX(), e.getY());
+                    removeItem.addActionListener(actionEvent -> listener.removeRecipe(row));
                 }
             }
         });

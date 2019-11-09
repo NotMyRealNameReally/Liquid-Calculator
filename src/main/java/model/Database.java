@@ -258,6 +258,22 @@ public class Database {
         updateStatement.close();
     }
 
+    public void removeRecipeFromDatabase(Recipe recipe) throws SQLException {
+        String removeSql = "DELETE FROM recipes WHERE name = ? AND author = ? AND strength = ?";
+        PreparedStatement removeStatement = connection.prepareStatement(removeSql);
+
+        String name = recipe.getName();
+        String author = recipe.getAuthor();
+        double strength = recipe.getStrength();
+
+        removeStatement.setString(1, name);
+        removeStatement.setString(2, author);
+        removeStatement.setDouble(3, strength);
+
+        removeStatement.executeUpdate();
+        removeStatement.close();
+    }
+
     private void setConcentrateInRecipeListType() {
         concentrateInRecipeListType = new TypeToken<ArrayList<ConcentrateInRecipe>>() {
         }.getType();

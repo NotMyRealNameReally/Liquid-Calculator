@@ -39,6 +39,10 @@ public class CatalogController implements ConcentrateDialogListener, CatalogList
         concentrateDialog.showConcentrateAlreadyExistsMessage();
     }
 
+    void showNotAllowedToRemoveRecipeMessage(){
+        recipeCatalogPanel.showRemoveForbiddenMessage();
+    }
+
     private void setConcentrateDialogListener() {
         concentrateDialog.setListener(this);
     }
@@ -82,5 +86,8 @@ public class CatalogController implements ConcentrateDialogListener, CatalogList
         listener.loadRecipe(row);
     }
 
-
+    @Override
+    public void removeRecipe(int row) {
+        listener.removeRecipe(row);
+    }
 }

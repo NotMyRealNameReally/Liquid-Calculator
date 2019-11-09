@@ -97,6 +97,22 @@ public class SupervisingController extends TimerTask implements RecipeCreationCo
         recipeCreationController.loadRecipe(recipe);
     }
 
+    @Override
+    public void removeRecipe(int row) {
+        Recipe recipe = database.getRecipes().get(row);
+        if (recipe.getAuthor().equals(database.getUserName())) {
+            try {
+                database.removeRecipeFromDatabase(recipe);
+                database.removeRecipe(row);
+                catalogController.refreshRecipeTable();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            catalogController.showNotAllowedToRemoveRecipeMessage();
+        }
+    }
+
     /////LoginDialog methods
 
     @Override
