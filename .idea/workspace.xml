@@ -4,6 +4,8 @@
     <list default="true" id="8bfd1af3-6a2c-4198-8096-3cfeb2c07efe" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/RecipeCreationListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/RecipeCreationListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/RecipeCreationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/RecipeCreationPanel.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="C:\Programowanie\Java\workspace\Liquid-Calculator\.idea\shelf/" />
@@ -50,62 +52,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gui/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/controller/CatalogController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/controller/SupervisingController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1857">
-              <caret line="228" column="5" selection-start-line="228" selection-start-column="5" selection-end-line="228" selection-end-column="5" />
+            <state relative-caret-position="-635">
+              <caret line="60" column="4" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="4" />
               <folding>
                 <element signature="method#loadRecipe#0;class#RecipeCreationController#0" />
                 <element signature="e#1864#1865#0" expanded="true" />
                 <element signature="e#1939#1940#0" expanded="true" />
                 <element signature="e#2007#2008#0" expanded="true" />
                 <element signature="e#2047#2048#0" expanded="true" />
-                <element signature="e#7861#7862#0" expanded="true" />
-                <element signature="e#7912#7913#0" expanded="true" />
-                <element signature="method#setSpinnerValues#0;class#RecipeCreationController#0" />
-                <element signature="method#makeNewRecipe#0;class#RecipeCreationController#0" />
-                <element signature="method#volumeChanged#0;class#RecipeCreationController#0" />
-                <element signature="e#4666#4667#0" expanded="true" />
-                <element signature="e#4710#4711#0" expanded="true" />
-                <element signature="method#ratioChanged#0;class#RecipeCreationController#0" />
-                <element signature="e#4911#4912#0" expanded="true" />
-                <element signature="e#4951#4952#0" expanded="true" />
-                <element signature="method#nicRatioChanged#0;class#RecipeCreationController#0" />
-                <element signature="e#5153#5154#0" expanded="true" />
-                <element signature="e#5192#5193#0" expanded="true" />
+                <element signature="e#3543#3544#0" expanded="true" />
+                <element signature="e#3594#3595#0" expanded="true" />
+                <element signature="e#4861#4862#0" expanded="true" />
+                <element signature="e#4900#4901#0" expanded="true" />
                 <element signature="method#calculateSummary#0;class#RecipeCreationController#0" />
                 <element signature="method#setSummaryValues#0;class#RecipeCreationController#0" />
+                <element signature="method#setSpinnerValues#0;class#RecipeCreationController#0" />
+                <element signature="method#makeNewRecipe#0;class#RecipeCreationController#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/gui/RecipeCreationListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/gui/RecipeCreationPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1479">
+              <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+              <folding>
+                <element signature="method#setupComponents#0;class#RecipeCreationPanel#0" />
+                <element signature="method#layoutComponents#0;class#RecipeCreationPanel#0" />
               </folding>
             </state>
           </provider>
@@ -124,6 +111,8 @@
         <option value="$PROJECT_DIR$/src/controller/RecipeCatalogController.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/SupervisingController.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/CatalogController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gui/RecipeCreationListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gui/RecipeCreationPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java" />
       </list>
     </option>
@@ -260,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573312240473</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Refactored RecipeCreationController.">
+      <created>1573313401555</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1573313401555</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -277,7 +273,7 @@
       <window_info anchor="bottom" id="Build" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.10887097" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.0577957" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.27553764" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -300,7 +296,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added checking for null values in concentrate creation." />
     <MESSAGE value="Refactored CatalogController constructor and changed access modifiers." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored CatalogController constructor and changed access modifiers." />
+    <MESSAGE value="Refactored RecipeCreationController." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored RecipeCreationController." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
@@ -355,31 +352,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/RecipeCreationPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1479">
+          <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+          <folding>
+            <element signature="method#setupComponents#0;class#RecipeCreationPanel#0" />
+            <element signature="method#layoutComponents#0;class#RecipeCreationPanel#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/RecipeCreationListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1857">
-          <caret line="228" column="5" selection-start-line="228" selection-start-column="5" selection-end-line="228" selection-end-column="5" />
+        <state relative-caret-position="-635">
+          <caret line="60" column="4" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="4" />
           <folding>
             <element signature="method#loadRecipe#0;class#RecipeCreationController#0" />
             <element signature="e#1864#1865#0" expanded="true" />
             <element signature="e#1939#1940#0" expanded="true" />
             <element signature="e#2007#2008#0" expanded="true" />
             <element signature="e#2047#2048#0" expanded="true" />
-            <element signature="e#7861#7862#0" expanded="true" />
-            <element signature="e#7912#7913#0" expanded="true" />
-            <element signature="method#setSpinnerValues#0;class#RecipeCreationController#0" />
-            <element signature="method#makeNewRecipe#0;class#RecipeCreationController#0" />
-            <element signature="method#volumeChanged#0;class#RecipeCreationController#0" />
-            <element signature="e#4666#4667#0" expanded="true" />
-            <element signature="e#4710#4711#0" expanded="true" />
-            <element signature="method#ratioChanged#0;class#RecipeCreationController#0" />
-            <element signature="e#4911#4912#0" expanded="true" />
-            <element signature="e#4951#4952#0" expanded="true" />
-            <element signature="method#nicRatioChanged#0;class#RecipeCreationController#0" />
-            <element signature="e#5153#5154#0" expanded="true" />
-            <element signature="e#5192#5193#0" expanded="true" />
+            <element signature="e#3543#3544#0" expanded="true" />
+            <element signature="e#3594#3595#0" expanded="true" />
+            <element signature="e#4861#4862#0" expanded="true" />
+            <element signature="e#4900#4901#0" expanded="true" />
             <element signature="method#calculateSummary#0;class#RecipeCreationController#0" />
             <element signature="method#setSummaryValues#0;class#RecipeCreationController#0" />
+            <element signature="method#setSpinnerValues#0;class#RecipeCreationController#0" />
+            <element signature="method#makeNewRecipe#0;class#RecipeCreationController#0" />
           </folding>
         </state>
       </provider>

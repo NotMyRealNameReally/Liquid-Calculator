@@ -254,58 +254,50 @@ public class RecipeCreationPanel extends JPanel {
     private void addSpinnerListeners() {
         volumeSpinner.addChangeListener(e -> {
             if (listener != null) {
-                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.volume);
-                listener.spinnerChanged(recipeEvent);
+                listener.volumeChanged((double)volumeSpinner.getValue());
             }
         });
+
         desiredStrengthSpinner.addChangeListener(e -> {
             if (listener != null) {
-                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.desiredStrength);
-                listener.spinnerChanged(recipeEvent);
+                listener.desiredStrengthChanged((double)desiredStrengthSpinner.getValue());
             }
-
         });
+
         desiredGlycolSpinner.addChangeListener(e -> {
-            if (listener != null) {
-                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.desiredGlycol);
-                listener.spinnerChanged(recipeEvent);
+            if (listener != null){
+                listener.ratioChanged((double)desiredGlycolSpinner.getValue());
             }
-
         });
+
         desiredGlycerineSpinner.addChangeListener(e -> {
             if (listener != null) {
-                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.desiredGlycerine);
-                listener.spinnerChanged(recipeEvent);
+                listener.ratioChanged(100 - (double)desiredGlycerineSpinner.getValue());
             }
-
         });
+
         nicStrengthSpinner.addChangeListener(e -> {
             if (listener != null) {
-                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.nicStrength);
-                listener.spinnerChanged(recipeEvent);
+                listener.nicStrengthChanged((double)nicStrengthSpinner.getValue());
             }
-
         });
+
         nicGlycolSpinner.addChangeListener(e -> {
             if (listener != null) {
-                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.nicGlycol);
-                listener.spinnerChanged(recipeEvent);
+                listener.nicRatioChanged((double)nicGlycolSpinner.getValue());
             }
-
         });
+
         nicGlycerineSpinner.addChangeListener(e -> {
             if (listener != null) {
-                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.nicGlycerine);
-                listener.spinnerChanged(recipeEvent);
+                listener.nicRatioChanged(100 - (double)nicGlycerineSpinner.getValue());
             }
-
         });
+
         steepTimeSpinner.addChangeListener(e -> {
             if (listener != null) {
-                RecipeCreationEvent recipeEvent = new RecipeCreationEvent(e.getSource(), SpinnerType.steepTime);
-                listener.spinnerChanged(recipeEvent);
+                listener.steepTimeChanged((int)steepTimeSpinner.getValue());
             }
-
         });
     }
 
