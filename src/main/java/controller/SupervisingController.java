@@ -24,8 +24,7 @@ public class SupervisingController extends TimerTask implements RecipeCreationCo
 
     public SupervisingController(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
-        catalogController = new CatalogController(mainFrame.getRecipeCatalogPanel(), database.getRecipes(),
-                database.getConcentrates(), database.getflavourProfiles(), database.getManufacturers(), mainFrame.getConcentrateDialog());
+        catalogController = new CatalogController(mainFrame, database);
         recipeCreationController = new RecipeCreationController(mainFrame.getRecipeCreationPanel());
 
         interceptMainFrameClosing();

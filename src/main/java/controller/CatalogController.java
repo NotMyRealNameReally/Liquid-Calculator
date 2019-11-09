@@ -1,46 +1,32 @@
 package controller;
 
-import gui.CatalogListener;
-import gui.ConcentrateDialog;
-import gui.ConcentrateDialogListener;
-import gui.RecipeCatalogPanel;
+import gui.*;
 import model.Concentrate;
-import model.Recipe;
-
-import java.util.List;
+import model.Database;
 
 public class CatalogController implements ConcentrateDialogListener, CatalogListener {
-    private List<Recipe> recipes;
-    private List<Concentrate> concentrates;
-    private List<String> flavourProfiles;
-    private List<String> manufacturers;
     private RecipeCatalogPanel recipeCatalogPanel;
     private ConcentrateDialog concentrateDialog;
     private CatalogControllerInterface listener;
 
-    public CatalogController(RecipeCatalogPanel panel, List<Recipe> recipes, List<Concentrate> concentrates,
-                             List<String> flavourProfiles, List<String> manufacturers, ConcentrateDialog concentrateDialog) {
-        this.recipeCatalogPanel = panel;
-        this.recipes = recipes;
-        this.concentrates = concentrates;
-        this.flavourProfiles = flavourProfiles;
-        this.manufacturers = manufacturers;
-        this.concentrateDialog = concentrateDialog;
+    CatalogController(MainFrame mainFrame, Database database) {
+        this.recipeCatalogPanel = mainFrame.getRecipeCatalogPanel();
+        this.concentrateDialog = mainFrame.getConcentrateDialog();
 
-        recipeCatalogPanel.setRecipes(recipes);
-        concentrateDialog.setConcentrates(concentrates);
-        concentrateDialog.setFlavourProfiles(flavourProfiles);
-        concentrateDialog.setManufacturers(manufacturers);
+        recipeCatalogPanel.setRecipes(database.getRecipes());
+        concentrateDialog.setConcentrates(database.getConcentrates());
+        concentrateDialog.setFlavourProfiles(database.getflavourProfiles());
+        concentrateDialog.setManufacturers(database.getManufacturers());
 
         setConcentrateDialogListener();
         setCatalogListener();
     }
 
-    public void refreshRecipeTable() {
+    void refreshRecipeTable() {
         recipeCatalogPanel.refresh();
     }
 
-    public void refreshConcentrateTable() {
+    void refreshConcentrateTable() {
         concentrateDialog.refresh();
     }
 
@@ -50,7 +36,7 @@ public class CatalogController implements ConcentrateDialogListener, CatalogList
     }
 
     void showConcentrateAlreadyExistsMessage() {
-concentrateDialog.showConcentrateAlreadyExistsMessage();
+        concentrateDialog.showConcentrateAlreadyExistsMessage();
     }
 
     private void setConcentrateDialogListener() {
