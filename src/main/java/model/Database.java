@@ -62,36 +62,6 @@ public class Database {
         checkForNewManufacturer(concentrate);
     }
 
-    private void checkForNewFlavourProfile(Concentrate concentrate) {
-        String flavourProfile = concentrate.getFlavourProfile();
-        boolean isOnList = false;
-
-        for (String flavourProfileOnList : flavourProfiles) {
-            if (flavourProfile.equals(flavourProfileOnList)) {
-                isOnList = true;
-                break;
-            }
-        }
-        if (!isOnList) {
-            flavourProfiles.add(flavourProfile);
-        }
-    }
-
-    private void checkForNewManufacturer(Concentrate concentrate) {
-        String manufacturer = concentrate.getManufacturer();
-        boolean isOnList = false;
-
-        for (String manufacturerOnList : manufacturers) {
-            if (manufacturer.equals(manufacturerOnList)) {
-                isOnList = true;
-                break;
-            }
-        }
-        if (!isOnList) {
-            manufacturers.add(manufacturer);
-        }
-    }
-
     public boolean isConcentrateInDatabase(Concentrate concentrate) throws SQLException {
         String checkSql = "SELECT id FROM concentrates WHERE name = ? AND manufacturer = ?";
 
@@ -272,6 +242,36 @@ public class Database {
 
         removeStatement.executeUpdate();
         removeStatement.close();
+    }
+
+    private void checkForNewFlavourProfile(Concentrate concentrate) {
+        String flavourProfile = concentrate.getFlavourProfile();
+        boolean isOnList = false;
+
+        for (String flavourProfileOnList : flavourProfiles) {
+            if (flavourProfile.equals(flavourProfileOnList)) {
+                isOnList = true;
+                break;
+            }
+        }
+        if (!isOnList) {
+            flavourProfiles.add(flavourProfile);
+        }
+    }
+
+    private void checkForNewManufacturer(Concentrate concentrate) {
+        String manufacturer = concentrate.getManufacturer();
+        boolean isOnList = false;
+
+        for (String manufacturerOnList : manufacturers) {
+            if (manufacturer.equals(manufacturerOnList)) {
+                isOnList = true;
+                break;
+            }
+        }
+        if (!isOnList) {
+            manufacturers.add(manufacturer);
+        }
     }
 
     private void setConcentrateInRecipeListType() {
