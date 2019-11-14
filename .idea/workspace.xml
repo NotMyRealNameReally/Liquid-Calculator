@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8bfd1af3-6a2c-4198-8096-3cfeb2c07efe" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Calculator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="C:\Programowanie\Java\workspace\Liquid-Calculator\.idea\shelf/" />
@@ -59,6 +59,7 @@
               <caret line="27" selection-start-line="27" selection-end-line="27" />
               <folding>
                 <element signature="e#659#660#0" expanded="true" />
+                <element signature="method#showRemoveForbiddenMessage#0;class#RecipeCatalogPanel#0" />
                 <element signature="method#setupComponents#0;class#RecipeCatalogPanel#0" />
                 <element signature="method#setTableFont#0;class#RecipeCatalogPanel#0" />
                 <element signature="method#layoutComponents#0;class#RecipeCatalogPanel#0" />
@@ -68,11 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/model/Database.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="16" column="34" lean-forward="true" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+              <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
               <folding>
                 <element signature="method#Database#0;class#Database#0" />
                 <element signature="method#connect#0;class#Database#0" />
@@ -85,6 +86,7 @@
                 <element signature="method#getConcentratesFromDatabase#0;class#Database#0" />
                 <element signature="method#getManufacturersFromDatabase#0;class#Database#0" />
                 <element signature="method#getFlavourProfilesFromDatabase#0;class#Database#0" />
+                <element signature="method#getRecipesFromDatabase#0;class#Database#0" />
                 <element signature="method#updateRecipeInDatabase#0;class#Database#0" />
                 <element signature="method#removeRecipeFromDatabase#0;class#Database#0" />
                 <element signature="method#checkForNewFlavourProfile#0;class#Database#0" />
@@ -96,16 +98,52 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-544">
-              <caret line="60" selection-start-line="60" selection-end-line="60" />
+            <state relative-caret-position="1547">
+              <caret line="118" column="27" selection-start-line="118" selection-start-column="27" selection-end-line="118" selection-end-column="27" />
               <folding>
-                <element signature="method#loadRecipe#0;class#RecipeCreationController#0" />
-                <element signature="method#setSummaryValues#0;class#RecipeCreationController#0" />
-                <element signature="method#setSpinnerValues#0;class#RecipeCreationController#0" />
-                <element signature="method#makeNewRecipe#0;class#RecipeCreationController#0" />
+                <element signature="e#3408#3409#0" expanded="true" />
+                <element signature="e#3450#3451#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/model/Calculator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1252">
+              <caret line="137" column="5" selection-start-line="137" selection-start-column="5" selection-end-line="137" selection-end-column="5" />
+              <folding>
+                <element signature="method#Calculator#0;class#Calculator#0" />
+                <element signature="e#868#869#0" expanded="true" />
+                <element signature="e#954#955#0" expanded="true" />
+                <element signature="method#calculateNicAmount#0;class#Calculator#0" />
+                <element signature="method#calculateForNotEnoughGlycol#0;class#Calculator#0" />
+                <element signature="method#calculateForNotEnoughGlycerine#0;class#Calculator#0" />
+                <element signature="e#2968#2969#0" expanded="true" />
+                <element signature="e#3048#3049#0" expanded="true" />
+                <element signature="e#3128#3129#0" expanded="true" />
+                <element signature="e#3244#3245#0" expanded="true" />
+                <element signature="e#3318#3319#0" expanded="true" />
+                <element signature="e#3390#3391#0" expanded="true" />
+                <element signature="e#3490#3491#0" expanded="true" />
+                <element signature="e#3592#3593#0" expanded="true" />
+                <element signature="e#3834#3835#0" expanded="true" />
+                <element signature="e#3954#3955#0" expanded="true" />
+                <element signature="e#4030#4031#0" expanded="true" />
+                <element signature="e#4104#4105#0" expanded="true" />
+                <element signature="e#4208#4209#0" expanded="true" />
+                <element signature="e#4273#4274#0" expanded="true" />
+                <element signature="e#4362#4363#0" expanded="true" />
+                <element signature="e#4430#4431#0" expanded="true" />
+                <element signature="e#4514#4515#0" expanded="true" />
+                <element signature="e#4586#4587#0" expanded="true" />
+                <element signature="e#4664#4665#0" expanded="true" />
+                <element signature="e#4790#4791#0" expanded="true" />
+                <element signature="e#4837#4838#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -114,17 +152,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/controller/SupervisingController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="41" column="34" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
+            <state>
+              <caret column="19" selection-start-column="19" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="UPDATE_CHANGES_POLICY" value="SHELVE" />
-    <option name="UPDATE_TYPE" value="REBASE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -133,7 +177,6 @@
         <option value="$PROJECT_DIR$/src/controller/RecipeCatalogController.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/CatalogController.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/RecipeCreationListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/RecipeCreationPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/ConcentrateCreationDialog.java" />
         <option value="$PROJECT_DIR$/src/main/java/controller/SupervisingController.java" />
@@ -151,6 +194,8 @@
         <option value="$PROJECT_DIR$/src/main/java/model/ConcentrateInRecipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/Recipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/Database.java" />
+        <option value="$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/model/Calculator.java" />
       </list>
     </option>
   </component>
@@ -161,10 +206,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="573" />
-    <option name="y" value="71" />
+    <option name="x" value="572" />
+    <option name="y" value="70" />
     <option name="width" value="800" />
-    <option name="height" value="827" />
+    <option name="height" value="828" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -172,9 +217,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Course" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Course" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -199,6 +244,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Liquid-Calculator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Liquid-Calculator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Liquid-Calculator" type="b2602c69:ProjectViewProjectNode" />
@@ -323,26 +376,32 @@
       <option name="project" value="LOCAL" />
       <updated>1573658727824</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Refactoring">
+      <created>1573658918632</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1573658918632</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="2062" height="1126" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Learn" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2689621" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14471059" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Educational.CheckDetails" />
+      <window_info id="Learn" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.20833333" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2753769" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.22110553" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.20804021" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.06934673" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.049246233" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -351,6 +410,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4993573" weight="0.3293011" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3293011" />
       <window_info anchor="bottom" id="Build" order="11" />
+      <window_info anchor="bottom" id="Educational.CheckDetails" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -371,34 +431,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Refactoring" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/gui/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/SupervisingController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/ConcentrateDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="105" column="23" selection-start-line="105" selection-start-column="23" selection-end-line="105" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/RecipeCatalogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="60" column="78" selection-start-line="60" selection-start-column="77" selection-end-line="60" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Main.java" />
+    <entry file="file://$PROJECT_DIR$/src/controller/SupervisingController.java" />
+    <entry file="file://$PROJECT_DIR$/src/gui/ConcentrateDialog.java" />
+    <entry file="file://$PROJECT_DIR$/src/controller/RecipeCatalogController.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/CatalogController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -550,13 +586,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/Recipe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-445">
-          <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gui/SpinnerCellRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -575,19 +604,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/SupervisingController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="41" column="34" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gui/RecipeCatalogPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="27" selection-start-line="27" selection-end-line="27" />
           <folding>
             <element signature="e#659#660#0" expanded="true" />
+            <element signature="method#showRemoveForbiddenMessage#0;class#RecipeCatalogPanel#0" />
             <element signature="method#setupComponents#0;class#RecipeCatalogPanel#0" />
             <element signature="method#setTableFont#0;class#RecipeCatalogPanel#0" />
             <element signature="method#layoutComponents#0;class#RecipeCatalogPanel#0" />
@@ -596,23 +619,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-544">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
-          <folding>
-            <element signature="method#loadRecipe#0;class#RecipeCreationController#0" />
-            <element signature="method#setSummaryValues#0;class#RecipeCreationController#0" />
-            <element signature="method#setSpinnerValues#0;class#RecipeCreationController#0" />
-            <element signature="method#makeNewRecipe#0;class#RecipeCreationController#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/Database.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="16" column="34" lean-forward="true" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
           <folding>
             <element signature="method#Database#0;class#Database#0" />
             <element signature="method#connect#0;class#Database#0" />
@@ -625,12 +635,74 @@
             <element signature="method#getConcentratesFromDatabase#0;class#Database#0" />
             <element signature="method#getManufacturersFromDatabase#0;class#Database#0" />
             <element signature="method#getFlavourProfilesFromDatabase#0;class#Database#0" />
+            <element signature="method#getRecipesFromDatabase#0;class#Database#0" />
             <element signature="method#updateRecipeInDatabase#0;class#Database#0" />
             <element signature="method#removeRecipeFromDatabase#0;class#Database#0" />
             <element signature="method#checkForNewFlavourProfile#0;class#Database#0" />
             <element signature="method#checkForNewManufacturer#0;class#Database#0" />
             <element signature="method#setConcentrateInRecipeListType#0;class#Database#0" />
             <element signature="method#getRecipes#0;class#Database#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/SupervisingController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/Recipe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/Calculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1252">
+          <caret line="137" column="5" selection-start-line="137" selection-start-column="5" selection-end-line="137" selection-end-column="5" />
+          <folding>
+            <element signature="method#Calculator#0;class#Calculator#0" />
+            <element signature="e#868#869#0" expanded="true" />
+            <element signature="e#954#955#0" expanded="true" />
+            <element signature="method#calculateNicAmount#0;class#Calculator#0" />
+            <element signature="method#calculateForNotEnoughGlycol#0;class#Calculator#0" />
+            <element signature="method#calculateForNotEnoughGlycerine#0;class#Calculator#0" />
+            <element signature="e#2968#2969#0" expanded="true" />
+            <element signature="e#3048#3049#0" expanded="true" />
+            <element signature="e#3128#3129#0" expanded="true" />
+            <element signature="e#3244#3245#0" expanded="true" />
+            <element signature="e#3318#3319#0" expanded="true" />
+            <element signature="e#3390#3391#0" expanded="true" />
+            <element signature="e#3490#3491#0" expanded="true" />
+            <element signature="e#3592#3593#0" expanded="true" />
+            <element signature="e#3834#3835#0" expanded="true" />
+            <element signature="e#3954#3955#0" expanded="true" />
+            <element signature="e#4030#4031#0" expanded="true" />
+            <element signature="e#4104#4105#0" expanded="true" />
+            <element signature="e#4208#4209#0" expanded="true" />
+            <element signature="e#4273#4274#0" expanded="true" />
+            <element signature="e#4362#4363#0" expanded="true" />
+            <element signature="e#4430#4431#0" expanded="true" />
+            <element signature="e#4514#4515#0" expanded="true" />
+            <element signature="e#4586#4587#0" expanded="true" />
+            <element signature="e#4664#4665#0" expanded="true" />
+            <element signature="e#4790#4791#0" expanded="true" />
+            <element signature="e#4837#4838#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1547">
+          <caret line="118" column="27" selection-start-line="118" selection-start-column="27" selection-end-line="118" selection-end-column="27" />
+          <folding>
+            <element signature="e#3408#3409#0" expanded="true" />
+            <element signature="e#3450#3451#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -652,6 +724,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -674,6 +747,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
+          <last-edited>12</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -685,10 +759,12 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
+          <last-edited>DIY_eLiquid_Calculator</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -696,7 +772,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>mysql-connector-java-8.0.17</last-edited>
+          <last-edited>Gradle: com.bulenkov:darcula:2018.2</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
