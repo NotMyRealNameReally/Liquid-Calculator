@@ -21,7 +21,7 @@ task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'Liquid Calculator',
                 'Implementation-Version': version,
-                'Main-Class': 'gui.Main'
+                'Main-Class': 'main.Main'
     }
     baseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
