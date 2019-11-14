@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8bfd1af3-6a2c-4198-8096-3cfeb2c07efe" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SupervisingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SupervisingController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="C:\Programowanie\Java\workspace\Liquid-Calculator\.idea\shelf/" />
@@ -100,7 +100,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
+            <state relative-caret-position="96">
               <caret line="118" column="27" selection-start-line="118" selection-start-column="27" selection-end-line="118" selection-end-column="27" />
               <folding>
                 <element signature="e#3408#3409#0" expanded="true" />
@@ -110,10 +110,68 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/gui/MainFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="method#showDatabaseConnectionErrorDialog#0;class#MainFrame#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/gui/RecipeCreationPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="323" column="48" selection-start-line="323" selection-start-column="48" selection-end-line="323" selection-end-column="48" />
+              <folding>
+                <element signature="method#RecipeCreationPanel#0;class#RecipeCreationPanel#0" />
+                <element signature="method#setupComponents#0;class#RecipeCreationPanel#0" />
+                <element signature="method#layoutComponents#0;class#RecipeCreationPanel#0" />
+                <element signature="method#setNameFieldFont#0;class#RecipeCreationPanel#0" />
+                <element signature="method#addSpinnerListeners#0;class#RecipeCreationPanel#0" />
+                <element signature="method#setConcentrateTableListener#0;class#RecipeCreationPanel#0" />
+                <element signature="method#setConcentrateButtonsListener#0;class#RecipeCreationPanel#0" />
+                <element signature="method#setSpinnerValues#0;class#RecipeCreationPanel#0" />
+                <element signature="method#setRatioSpinners#0;class#RecipeCreationPanel#0" />
+                <element signature="method#setNicRatioSpinners#0;class#RecipeCreationPanel#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/gui/SummaryPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
+              <folding>
+                <element signature="method#setupComponents#0;class#SummaryPanel#0" />
+                <element signature="method#layoutComponents#0;class#SummaryPanel#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/model/Calculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-517">
+            <state relative-caret-position="612">
               <caret line="38" selection-start-line="38" selection-end-line="38" />
               <folding>
                 <element signature="method#Calculator#0;class#Calculator#0" />
@@ -154,11 +212,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/controller/SupervisingController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="19" selection-start-column="19" selection-end-column="19" />
+            <state relative-caret-position="442">
+              <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -184,7 +242,6 @@
         <option value="$PROJECT_DIR$/src/main/java/gui/RecipeCreationListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/RecipeCreationPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/ConcentrateCreationDialog.java" />
-        <option value="$PROJECT_DIR$/src/main/java/controller/SupervisingController.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/ConcentrateDialog.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/LoginDialog.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/ConcentrateTablePanel.java" />
@@ -201,6 +258,7 @@
         <option value="$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/Calculator.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/ConcentrateTableModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/controller/SupervisingController.java" />
       </list>
     </option>
   </component>
@@ -395,7 +453,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573743880965</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Changed methods names.">
+      <created>1573750902864</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1573750902864</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -441,7 +506,8 @@
     <MESSAGE value="Refactored listening for input from creation panel" />
     <MESSAGE value="Refactoring" />
     <MESSAGE value="Moved the logic of calculating summary values to the new Calculator class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved the logic of calculating summary values to the new Calculator class." />
+    <MESSAGE value="Changed methods names." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed methods names." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/gui/Main.java" />
@@ -519,42 +585,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gui/MainFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-104">
-          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
-          <folding>
-            <element signature="method#showDatabaseConnectionErrorDialog#0;class#MainFrame#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gui/RecipeCreationEvent.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/gui/RecipeCreationPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="324" column="20" selection-start-line="324" selection-start-column="20" selection-end-line="324" selection-end-column="20" />
-          <folding>
-            <element signature="method#RecipeCreationPanel#0;class#RecipeCreationPanel#0" />
-            <element signature="method#setupComponents#0;class#RecipeCreationPanel#0" />
-            <element signature="method#layoutComponents#0;class#RecipeCreationPanel#0" />
-            <element signature="method#setNameFieldFont#0;class#RecipeCreationPanel#0" />
-            <element signature="method#addSpinnerListeners#0;class#RecipeCreationPanel#0" />
-            <element signature="method#setConcentrateTableListener#0;class#RecipeCreationPanel#0" />
-            <element signature="method#setSpinnerValues#0;class#RecipeCreationPanel#0" />
-            <element signature="method#setRatioSpinners#0;class#RecipeCreationPanel#0" />
-            <element signature="method#setNicRatioSpinners#0;class#RecipeCreationPanel#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gui/SpinnerCellEditor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -567,17 +598,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gui/SpinnerType.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/gui/SummaryPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="method#setupComponents#0;class#SummaryPanel#0" />
-            <element signature="method#layoutComponents#0;class#SummaryPanel#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/Concentrate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -652,28 +672,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/SupervisingController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/Recipe.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="118" column="27" selection-start-line="118" selection-start-column="27" selection-end-line="118" selection-end-column="27" />
-          <folding>
-            <element signature="e#3408#3409#0" expanded="true" />
-            <element signature="e#3450#3451#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -686,7 +688,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/Calculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-517">
+        <state relative-caret-position="612">
           <caret line="38" selection-start-line="38" selection-end-line="38" />
           <folding>
             <element signature="method#Calculator#0;class#Calculator#0" />
@@ -714,6 +716,74 @@
             <element signature="e#4790#4791#0" expanded="true" />
             <element signature="e#4837#4838#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/SummaryPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="method#setupComponents#0;class#SummaryPanel#0" />
+            <element signature="method#layoutComponents#0;class#SummaryPanel#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/RecipeCreationPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="323" column="48" selection-start-line="323" selection-start-column="48" selection-end-line="323" selection-end-column="48" />
+          <folding>
+            <element signature="method#RecipeCreationPanel#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setupComponents#0;class#RecipeCreationPanel#0" />
+            <element signature="method#layoutComponents#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setNameFieldFont#0;class#RecipeCreationPanel#0" />
+            <element signature="method#addSpinnerListeners#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setConcentrateTableListener#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setConcentrateButtonsListener#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setSpinnerValues#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setRatioSpinners#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setNicRatioSpinners#0;class#RecipeCreationPanel#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/RecipeCreationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="118" column="27" selection-start-line="118" selection-start-column="27" selection-end-line="118" selection-end-column="27" />
+          <folding>
+            <element signature="e#3408#3409#0" expanded="true" />
+            <element signature="e#3450#3451#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/MainFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="method#showDatabaseConnectionErrorDialog#0;class#MainFrame#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/SupervisingController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
         </state>
       </provider>
     </entry>
