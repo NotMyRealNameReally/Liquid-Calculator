@@ -48,9 +48,11 @@ public class SupervisingController extends TimerTask implements RecipeCreationCo
     public void saveRecipe(Recipe recipe) {
         recipe.setAuthor(database.getUserName());
         try {
-            if (database.isRecipeInDatabase(recipe) && recipeCreationController.getRecipeOverwriteConfirmation()) {
+            if (database.isRecipeInDatabase(recipe)) {
+                if (recipeCreationController.getRecipeOverwriteConfirmation()) {
                     database.updateRecipeInDatabase(recipe);
                     database.getRecipesFromDatabase();
+                }
             } else {
                 database.insertRecipeToDatabase(recipe);
                 database.addRecipe(recipe);
