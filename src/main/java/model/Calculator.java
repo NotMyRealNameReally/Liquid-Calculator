@@ -66,14 +66,14 @@ public class Calculator {
         glycerineToAdd = desiredGlycerine - glycerineFromNic;
 
         if (glycolToAdd < 0) {
-            calculateRatioForNotEnoughGlycol(glycolFromNic);
+            calculateRatioForTooMuchGlycol(glycolFromNic);
         }
         if (glycerineToAdd < 0) {
-            calculateRatioForNotEnoughGlycerine(glycolFromNic);
+            calculateRatioForTooMuchGlycerine(glycolFromNic);
         }
     }
 
-    private void calculateRatioForNotEnoughGlycol(double glycolFromNic) {
+    private void calculateRatioForTooMuchGlycol(double glycolFromNic) {
         glycolToAdd = 0;
         glycerineToAdd = volume - nicAmount - concentrateVolume;
 
@@ -81,7 +81,7 @@ public class Calculator {
         realPgVgRatio = (totalGlycol / volume) * 100;
     }
 
-    private void calculateRatioForNotEnoughGlycerine(double glycolFromNic) {
+    private void calculateRatioForTooMuchGlycerine(double glycolFromNic) {
         glycerineToAdd = 0;
         glycolToAdd = volume - nicAmount - concentrateVolume;
 
