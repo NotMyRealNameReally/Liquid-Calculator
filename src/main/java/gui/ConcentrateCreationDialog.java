@@ -19,7 +19,8 @@ class ConcentrateCreationDialog extends JDialog {
         layoutComponents();
 
         setLocationRelativeTo(parent);
-        setSize(300, 200);
+        setSize(450, 200);
+        setResizable(false);
     }
 
     void setBoxItems(List<String> flavourProfileList, List<String> manufacturersList) {
