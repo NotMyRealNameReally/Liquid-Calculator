@@ -191,7 +191,8 @@ public class RecipeCreationPanel extends JPanel {
         add(desiredGlycerineSpinner, gc);
 
         gc.gridy++;
-        add(maxGlycerineCheckBox, gc);
+        //TODO make this functional
+        //add(maxGlycerineCheckBox, gc);
 
         gc.gridy++;
         add(nicStrengthSpinner, gc);
