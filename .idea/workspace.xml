@@ -848,6 +848,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+          <folding>
+            <element signature="method#Database#0;class#Database#0" />
+            <element signature="method#disconnect#0;class#Database#0" />
+            <element signature="method#addConcentrate#0;class#Database#0" />
+            <element signature="method#isConcentrateInDatabase#0;class#Database#0" />
+            <element signature="method#isRecipeInDatabase#0;class#Database#0" />
+            <element signature="method#insertConcentrateToDatabase#0;class#Database#0" />
+            <element signature="method#insertRecipeToDatabase#0;class#Database#0" />
+            <element signature="method#getConcentratesFromDatabase#0;class#Database#0" />
+            <element signature="method#getManufacturersFromDatabase#0;class#Database#0" />
+            <element signature="method#getFlavourProfilesFromDatabase#0;class#Database#0" />
+            <element signature="method#getRecipesFromDatabase#0;class#Database#0" />
+            <element signature="method#updateRecipeInDatabase#0;class#Database#0" />
+            <element signature="method#removeRecipeFromDatabase#0;class#Database#0" />
+            <element signature="method#checkForNewFlavourProfile#0;class#Database#0" />
+            <element signature="method#checkForNewManufacturer#0;class#Database#0" />
+            <element signature="method#setConcentrateInRecipeListType#0;class#Database#0" />
+            <element signature="method#getRecipes#0;class#Database#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/RecipeCreationPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="193" column="35" selection-start-line="193" selection-start-column="35" selection-end-line="193" selection-end-column="35" />
+          <folding>
+            <element signature="method#RecipeCreationPanel#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setupComponents#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setNameFieldFont#0;class#RecipeCreationPanel#0" />
+            <element signature="method#addSpinnerListeners#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setConcentrateTableListener#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setConcentrateButtonsListener#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setSpinnerValues#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setRatioSpinners#0;class#RecipeCreationPanel#0" />
+            <element signature="method#setNicRatioSpinners#0;class#RecipeCreationPanel#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
